@@ -1,0 +1,20 @@
+[
+  {
+    "Auth id" : "XYZ123",
+    "Username" : "jQueryFan42069",
+    "Email" : "ihatemylife@yahoo.com",
+    "Bio" : "I love jQuery and I don't care who knows it!",
+    "Recordings" : [8675309, 4],
+    "Following" : "JortsMaster",
+    "Tags" : "jquery, react"
+  },
+  {
+    "Auth id" : "ZYX321",
+    "Username" : "JortsMaster",
+    "Email" : "ilovemyjorts@yahoo.com",
+    "Bio" : "I'm here to share all there is about the cutting edge of jort-tech!",
+    "Recordings" : [],
+    "Following" : "jQueryFan42069",
+    "Tags" : "jquery, react, jort-tech"
+  }
+]

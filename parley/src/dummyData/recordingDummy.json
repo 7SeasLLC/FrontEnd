@@ -1,0 +1,60 @@
+[
+  {
+    "recording_id": 1,
+    "isStreaming": false,
+    "title": "React is amazing!",
+    "username": "h4cker7ingyu",
+    "tags" : [
+      "Javascript",
+      "React",
+      "Front-End"
+    ],
+    "start": 1519211809934,
+    "length": 123476,
+    "views": 0,
+    "listeners": 0
+  },
+  {
+    "recording_id": 2,
+    "isStreaming": false,
+    "title": "Games and Web Design",
+    "username": "packbenpack",
+    "tags" : [
+      "Typescript",
+      "Angular",
+      "Algorithms"
+    ],
+    "start": 1519211810362,
+    "length": 938249,
+    "views": 0,
+    "listeners": 0
+  },
+  {
+    "recording_id": 3,
+    "isStreaming": true,
+    "title": "jQuery SUXXXS!",
+    "username": "h4cker7ingyu",
+    "tags" : [
+      "jQuery",
+      "CSS"
+    ],
+    "start": 1619211809934,
+    "length": null,
+    "views": 0,
+    "listeners": 984
+  },
+  {
+    "recording_id": 4,
+    "isStreaming": true,
+    "title": "Games and Web Design",
+    "username": "emmi",
+    "tags" : [
+      "Vue",
+      "Fastify"
+    ],
+    "start": 1639211810362,
+    "length": null,
+    "views": 0,
+    "listeners": 203
+  }
+]

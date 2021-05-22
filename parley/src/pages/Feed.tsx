@@ -1,6 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import LiveStreams from './../components/LiveStreams/LiveStreams';
+import Recordings from './../components/Recordings/Recordings';
+import UserProfile from './../components/UserProfile/UserProfile'
 import './Feed.css';
+
+//dummy data
+import recordingDummy from './../dummyData/recordingDummy.json';
+
 
 const Feed = () => {
   return (
@@ -15,11 +21,12 @@ const Feed = () => {
           <IonToolbar>
             <IonTitle size="large">Now Live</IonTitle>
           </IonToolbar>
-          <IonToolbar>
-            <IonTitle size="large">Recordings</IonTitle>
-          </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
+        <LiveStreams
+          streams={recordingDummy}/>
+        <Recordings
+          recordings={recordingDummy}/>
+        {/* <UserProfile /> */}
       </IonContent>
     </IonPage>
   );
