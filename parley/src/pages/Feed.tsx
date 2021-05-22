@@ -1,19 +1,22 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import './Feed.css';
 
-const Home = () => {
+const Feed = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonTitle>Main Feed</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
+            <IonTitle size="large">Now Live</IonTitle>
+          </IonToolbar>
+          <IonToolbar>
+            <IonTitle size="large">Recordings</IonTitle>
           </IonToolbar>
         </IonHeader>
         <ExploreContainer />
@@ -22,4 +25,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Feed;
