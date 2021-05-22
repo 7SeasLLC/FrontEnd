@@ -1,0 +1,7 @@
+{
+  "name": "parley",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
