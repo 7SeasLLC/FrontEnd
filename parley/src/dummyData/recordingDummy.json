@@ -4,6 +4,7 @@
     "isStreaming": false,
     "title": "React is amazing!",
     "username": "h4cker7ingyu",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170127_1.png",
     "tags" : [
       "Javascript",
       "React",
@@ -19,6 +20,7 @@
     "isStreaming": false,
     "title": "Games and Web Design",
     "username": "packbenpack",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/5972661_2.jpg",
     "tags" : [
       "Typescript",
       "Angular",
@@ -34,6 +36,7 @@
     "isStreaming": true,
     "title": "jQuery SUXXXS!",
     "username": "h4cker7ingyu",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170127_1.png",
     "tags" : [
       "jQuery",
       "CSS"
@@ -48,6 +51,7 @@
     "isStreaming": true,
     "title": "Games and Web Design",
     "username": "emmi",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170214-12x18-72dpi_2.jpg",
     "tags" : [
       "Vue",
       "Fastify"

@@ -1,7 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import LiveStreams from './../components/LiveStreams/LiveStreams';
-import Recordings from './../components/Recordings/Recordings';
-import UserProfile from './../components/UserProfile/UserProfile'
+import { useState } from 'react';
+import List from './../components/List/List';
 import './Feed.css';
 
 //dummy data
@@ -9,6 +8,18 @@ import recordingDummy from './../dummyData/recordingDummy.json';
 
 
 const Feed = () => {
+
+  const [streamIsOpen, setStreamIsOpen] = useState(true);
+  const [recIsOpen, setRecIsOpen] = useState(true);
+
+  const handleSwitch = (component) => {
+    if (component === 'stream') {
+      setStreamIsOpen(!streamIsOpen);
+    } else {
+      setRecIsOpen(!recIsOpen);
+    }
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -22,11 +33,16 @@ const Feed = () => {
             <IonTitle size="large">Now Live</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <LiveStreams
-          streams={recordingDummy}/>
-        <Recordings
-          recordings={recordingDummy}/>
-        {/* <UserProfile /> */}
+        <List
+          unfolded={streamIsOpen}
+          setFold = {handleSwitch}
+          audio={recordingDummy}
+          isStreaming={true}/>
+        <List
+          unfolded={recIsOpen}
+          setFold = {handleSwitch}
+          audio={recordingDummy}
+          isStreaming={false}/>
       </IonContent>
     </IonPage>
   );
