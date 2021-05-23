@@ -2,3 +2,7 @@ h1 {
   font-family: 'Playfair Display', serif;
   padding-bottom: 10px;
 }
+
+ion-avatar {
+  border: 2px solid #00e1cf
+}
