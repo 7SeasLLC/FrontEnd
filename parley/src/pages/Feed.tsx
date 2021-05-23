@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonThumbnail, IonItem } from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
 import './Feed.css';
@@ -24,7 +24,12 @@ const Feed = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Main Feed</IonTitle>
+            <IonItem lines="none">
+            <IonThumbnail slot="start">
+              <IonImg src="/assets/logo-img.png" />
+            </IonThumbnail>
+            <h1>PARLEY</h1>
+            </IonItem>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
