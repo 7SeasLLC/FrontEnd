@@ -6,3 +6,11 @@ h1 {
 ion-avatar {
   border: 2px solid #00e1cf
 }
+
+ion-item {
+  margin: 0;
+}
+
+ion-button {
+  margin: 0;
+}

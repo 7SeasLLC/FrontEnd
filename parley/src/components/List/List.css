@@ -1,3 +1,11 @@
 ion-badge {
-  margin: 2px;
+  margin: 2px 2px 2px 0px;
+}
+
+ion-button {
+  --background: none;
+  --box-shadow: none;
+  --background-hover: none;
+  --color-hover: var(--ion-color-dark);
+  --transition: 0.5s;
 }

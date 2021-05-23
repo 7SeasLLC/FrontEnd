@@ -23,7 +23,7 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
             <IonItemSliding key={item.recording_id}>
               <IonItemOptions side="end">
                 <IonItemOption>
-                  <IonButton href={`/${item.recording_id}`}>
+                  <IonButton icon-only href={`/${item.recording_id}`}>
                     <IonIcon icon={playOutline} />
                   </IonButton>
                 </IonItemOption>

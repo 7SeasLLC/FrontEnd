@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonThumbnail, IonItem, IonAvatar, IonIcon, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonThumbnail, IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
 import { searchOutline } from 'ionicons/icons';
 import { useState } from 'react';
 import List from './../components/List/List';
@@ -35,11 +35,13 @@ const Feed = () => {
               </IonThumbnail>
               <h1>PARLEY</h1>
               <IonButton fill="clear" slot="end" href="/search">
-                <IonIcon icon={searchOutline}/>
+                  <IonIcon icon={searchOutline}/>
               </IonButton>
-              <IonAvatar slot="end" onClick={profileRedirect}>
+              <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
+                <IonAvatar onClick={profileRedirect}>
                 <img alt={'Your Profile'} src={userDummy[0].profile_img} />
-              </IonAvatar>
+                </IonAvatar>
+              </IonItem>
             </IonItem>
         </IonToolbar>
       </IonHeader>
