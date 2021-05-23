@@ -7,8 +7,17 @@ ion-avatar {
   border: 2px solid #00e1cf
 }
 
+.profilebtn {
+  margin: -8px;
+}
+
+ion-chip {
+  margin-left: -15px;
+  --background: none;
+}
+
 ion-item {
-  margin: 0;
+  margin: -4px;
 }
 
 ion-button {

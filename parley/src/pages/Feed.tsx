@@ -38,9 +38,11 @@ const Feed = () => {
                   <IonIcon icon={searchOutline}/>
               </IonButton>
               <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
+                <IonChip>
                 <IonAvatar onClick={profileRedirect}>
                 <img alt={'Your Profile'} src={userDummy[0].profile_img} />
                 </IonAvatar>
+                </IonChip>
               </IonItem>
             </IonItem>
         </IonToolbar>
