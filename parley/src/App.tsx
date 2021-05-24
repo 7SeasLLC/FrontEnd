@@ -33,15 +33,30 @@ import './theme/variables.css';
 
 const App = () => {
 
-  const [isSignedIn, setIsSignedIn] = useState();
-  const [user, setUser] = useState();
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [user, setUser] = useState("");
   const [providerId, setProviderId] = useState();
 
   const handleSignIn = async () => {
-    const result = await Plugins.GoogleAuth.signIn()
-    try {
 
-      console.log(result);
+
+    try {
+      const result = await Plugins.GoogleAuth.signIn()
+      console.log('original result', result);
+      setUser(result.id)
+
+      //set user info w/firebase
+
+        // const fbAuth = await FirebaseAuthentication.signInWithGoogle(result.authentication.idToken, result.authentication.accessToken)
+
+        const credential = firebase.auth.GoogleAuthProvider.credential(result.authentication.idToken)
+
+        firebase.auth().signInWithCredential(credential)
+        .then((data) => {
+          console.log('this is the promise data:', data)
+          setIsSignedIn(true);
+        })
+        .catch((error) => {console.log(error)})
 
     } catch(err) {
 
@@ -50,40 +65,31 @@ const App = () => {
   }
 
   return (
-    <FirebaseAuthProvider firebase={firebase} {...config}>
-
-      <FirebaseAuthConsumer>
-        {({ isSignedIn, user, providerId }) => {
-
-          return isSignedIn ?
-            (
-            <IonApp>
-                <IonReactRouter>
-                  <IonRouterOutlet>
-                    <Route exact path="/feed">
-                      <Feed />
-                    </Route>
-                    <Route exact path="/">
-                      <Redirect to="/feed" />
-                    </Route>
-                  </IonRouterOutlet>
-                </IonReactRouter>
-              </IonApp>
-          ) : (
-            <IonApp>
-              <button
-                onClick={handleSignIn}
-              >
-                Sign in with Google!
-              </button>
-            </IonApp>
-        )
-
-
-      }}
-    </FirebaseAuthConsumer>
-
-  </FirebaseAuthProvider>
+    <>
+   { isSignedIn ?
+      (
+      <IonApp>
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route exact path="/feed">
+                <Feed />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/feed" />
+              </Route>
+            </IonRouterOutlet>
+          </IonReactRouter>
+        </IonApp>
+    ) : (
+      <IonApp>
+        <button
+          onClick={handleSignIn}
+        >
+          Sign in with Google!
+        </button>
+      </IonApp>
+    )}
+  </>
   )
 };
 
