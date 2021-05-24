@@ -1,8 +1,6 @@
 import { IonContent,IonPage,IonButton, IonInput, IonItem, IonCard, IonGrid, IonRow, IonCol} from '@ionic/react';
 import './Login.css';
 
-
-
 const Login = () => {
   return (
     <IonPage>
@@ -25,13 +23,13 @@ const Login = () => {
           </IonRow>
           <IonRow className="ion-justify-content-center">
             <IonCol className="ion-text-center" size-lg="3">
-              <IonButton>Log in</IonButton>
+              <IonButton href="/feed">Log in</IonButton>
               <div id="forgot-password">Forgot Password?</div>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol className="ion-text-center">
-              <IonButton color="success">Create New Account
+              <IonButton color="success" href="/signup">Create New Account
               </IonButton>
             </IonCol>
           </IonRow>
