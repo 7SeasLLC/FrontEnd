@@ -4,6 +4,7 @@ import Header from './../components/Header/Header';
 import './Feed.css';
 import List from './../components/List/List';
 import './Feed.css';
+import FeedHeaderRight from './../components/Header/FeedHeaderRight'
 
 //dummy data
 import recordingDummy from './../dummyData/recordingDummy.json';
@@ -25,10 +26,12 @@ const Feed = () => {
 
   return (
     <IonPage>
-      <IonHeader collapse="condense">
+      <IonHeader >
         <IonToolbar>
           <Header
-            user={userDummy[0]}/>
+            user={userDummy[0]}
+            HeaderRight={FeedHeaderRight}
+          />
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
