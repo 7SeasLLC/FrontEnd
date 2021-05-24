@@ -1,6 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonThumbnail, IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
+import Header from './../components/Header/Header';
+import './Feed.css';
 import List from './../components/List/List';
 import './Feed.css';
 
@@ -21,30 +22,13 @@ const Feed = () => {
       setRecIsOpen(!recIsOpen);
     }
   }
-  const profileRedirect = () => {
-    window.location = "/profile";
-  }
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-            <IonItem lines="none">
-              <IonThumbnail slot="start">
-                <IonImg src={"/assets/logo-img.png"} />
-              </IonThumbnail>
-              <h1>PARLEY</h1>
-              <IonButton className="searchbtn" slot="end" href="/search">
-                  <IonIcon icon={searchOutline}/>
-              </IonButton>
-              <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
-                <IonChip>
-                <IonAvatar onClick={profileRedirect}>
-                <img alt={'Your Profile'} src={userDummy[0].profile_img} />
-                </IonAvatar>
-                </IonChip>
-              </IonItem>
-            </IonItem>
+          <Header
+            user={userDummy[0]}/>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
