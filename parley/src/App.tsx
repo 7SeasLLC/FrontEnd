@@ -7,6 +7,7 @@ import "firebase/auth";
 import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
+import Profile from './pages/Profile';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -27,6 +28,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+<<<<<<< HEAD
 const App = () => {
 
   const [user, setUser] = useState(window.localStorage.getItem('user')|| null);
@@ -72,6 +74,23 @@ const App = () => {
           Sign in with Google!
         </button>
     )}
+=======
+const App = () => (
+  <IonApp>
+    <IonReactRouter>
+      <IonRouterOutlet>
+        <Route exact path="/feed">
+          <Feed />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/feed" />
+        </Route>
+      </IonRouterOutlet>
+    </IonReactRouter>
+>>>>>>> Added profile page with temporary header.
   </IonApp>
   )
 };

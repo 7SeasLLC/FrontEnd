@@ -25,18 +25,13 @@ const Feed = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader collapse="condense">
         <IonToolbar>
           <Header
             user={userDummy[0]}/>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Now Live</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <List
           unfolded={streamIsOpen}
           setFold = {handleSwitch}
