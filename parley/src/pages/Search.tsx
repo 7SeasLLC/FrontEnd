@@ -1,38 +1,39 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonGrid, IonRow } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar} from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
 import UserList from './../components/List/UserList';
 import Header from './../components/Header/Header';
 import SearchHeaderRight from './../components/Header/SearchHeaderRight'
 import './search.css';
+import SuggestList from '../components/List/SuggestList';
 
 //dummy data
-import tag from './../dummyData/tag.json';
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
-import { search } from 'ionicons/icons';
+
 
 const Search = () => {
 
   const [searchText, setSearchText] = useState('');
-  const [tagList, setTagList] = useState(tag);
   const [users, setUsers] = useState(userDummy);
   const [records, setRecords] = useState(recordingDummy);
   const [showListRecords, setShowListRecords] = useState([]);
   const [showListStream, setshowListStream] = useState([]);
   const [showListUser, setShowListUser] = useState([]);
+  const [showSuggest, setShowSuggest] = useState(true);
 
 
-  function searchRecords(e) {
+  function searchRecords(key) {
+    setShowSuggest(false)
 
 
-    setSearchText(e.target.value.toLowerCase())
+    setSearchText(key)
     var showRecords = {}
     var showStreams = {}
     for (var i = 0; i < records.length; i++) {
       for (var j = 0; j < records[i].tags.length; j++) {
         var currentTags = records[i].tags[j];
-        const shouldShow = currentTags.toLowerCase().indexOf(e.target.value.toLowerCase());
+        const shouldShow = currentTags.toLowerCase().indexOf(key);
         if (shouldShow >= 0) {
           if (!records[i].isStreaming) {
             showRecords[records[i].recording_id] = records[i];
@@ -43,14 +44,18 @@ const Search = () => {
       }
     }
     setShowListRecords(Object.values(showRecords));
-    if (e.target.value === '') {
+    if (key === '') {
       setShowListRecords([])
+      setShowSuggest(true)
+
     }
     setshowListStream(Object.values(showStreams));
-    if (e.target.value === '') {
+    if (key === '') {
       setshowListStream([])
+      setShowSuggest(true)
+
     }
-    searchUsers(e.target.value.toLowerCase())
+    searchUsers(key)
   }
 
 
@@ -65,8 +70,13 @@ const Search = () => {
     setShowListUser(Object.values(list))
     if (key === '') {
       setShowListUser([])
+      setShowSuggest(true)
     }
 
+  }
+
+  function handleSuggest(){
+    setShowSuggest(false)
   }
 
   return (
@@ -80,9 +90,10 @@ const Search = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonSearchbar placeholder="Search for people and Records.." color="primary" value={searchText} onIonChange={(e) => { searchRecords(e) }}
+        <IonSearchbar placeholder="Search for people and Records.." color="primary" value={searchText} onIonChange={(e) => { searchRecords(e.target.value.toLowerCase()) }}
         ></IonSearchbar>
-        <UserList users={showListUser} />
+        {showSuggest ? <SuggestList search={searchRecords} /> : null}
+        <UserList users={showListUser} showHeader={false}/>
         {showListStream.length > 0 ?
           <List
             unfolded={true}
