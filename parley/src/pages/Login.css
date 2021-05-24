@@ -1,5 +1,5 @@
 
-img#logo {
+img#logo-sign-page {
   width: 300px;
   border: 0;
 }
@@ -11,4 +11,16 @@ div#forgot-password {
   border-bottom-style: ridge;
   cursor: pointer;
   color: grey;
+}
+
+div#forgot-password:hover{
+  color: #105bf0
+}
+
+p#term-condition {
+  font-size: 50%;
+}
+ion-input.sign-up {
+  border: solid 1px grey;
+  margin: 5px 0px;
 }
