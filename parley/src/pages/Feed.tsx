@@ -34,7 +34,7 @@ const Feed = () => {
                 <IonImg src={"/assets/logo-img.png"} />
               </IonThumbnail>
               <h1>PARLEY</h1>
-              <IonButton fill="clear" slot="end" href="/search">
+              <IonButton className="searchbtn" slot="end" href="/search">
                   <IonIcon icon={searchOutline}/>
               </IonButton>
               <IonItem className="profilebtn" lines="none" slot="end" href="/profile">

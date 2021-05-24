@@ -4,7 +4,11 @@ h1 {
 }
 
 ion-avatar {
-  border: 2px solid #00e1cf
+  border: 2px solid var(--ion-color-primary);
+  transition: border 0.5s;
+}
+ion-avatar:hover {
+  border: 2px solid var(--ion-color-dark)
 }
 
 .profilebtn {
@@ -13,13 +17,21 @@ ion-avatar {
 
 ion-chip {
   margin-left: -15px;
-  --background: none;
+  --background: transparent;
+  --background-hover: transparent;
 }
 
 ion-item {
   margin: -4px;
+  --background-hover: transparent;
+  --background-focused: transparent;
 }
 
-ion-button {
+.searchbtn {
   margin: 0;
+  --color: var(--ion-color-primary);
+  --transition: 0.5s;
+}
+.searchbtn:hover {
+  --color: var(--ion-color-dark);
 }

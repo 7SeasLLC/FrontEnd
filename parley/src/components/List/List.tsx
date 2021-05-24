@@ -8,6 +8,19 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
 
   const string = isStreaming ? 'stream': 'recording';
 
+  const handleClick = (id) => {
+    let element = document.getElementById(id);
+    element
+      .getOpenAmount()
+      .then(num => {
+        if (num > 0) {
+          element.close()
+        } else {
+          element.open();
+        }
+      })
+  }
+
   return (
     <IonCard>
       <IonItem onClick={() => setFold(string)}>
@@ -20,10 +33,10 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
       {audio.map((item) => {
         if (item.isStreaming === isStreaming) {
           return (
-            <IonItemSliding key={item.recording_id}>
-              <IonItemOptions side="end">
+            <IonItemSliding id={item.recording_id} key={item.recording_id} onClick={() => handleClick(item.recording_id)}>
+              <IonItemOptions side="end" >
                 <IonItemOption>
-                  <IonButton icon-only href={`/${item.recording_id}`}>
+                  <IonButton href={`/${item.recording_id}`}>
                     <IonIcon icon={playOutline} />
                   </IonButton>
                 </IonItemOption>
