@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -6,6 +7,9 @@ import "firebase/auth";
 import { FirebaseAuthProvider, FirebaseAuthConsumer } from "@react-firebase/auth";
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication'
 import config from './firebase.config.js';
+
+import "@codetrix-studio/capacitor-google-auth";
+import { Plugins } from '@capacitor/core';
 import Feed from './pages/Feed';
 
 /* Core CSS required for Ionic components to work properly */
@@ -27,39 +31,52 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App = () => (
-  <FirebaseAuthProvider firebase={firebase} {...config}>
+const App = () => {
 
-    <FirebaseAuthConsumer>
-      {({ isSignedIn, user, providerId }) => {
+  const [isSignedIn, setIsSignedIn] = useState();
+  const [user, setUser] = useState();
+  const [providerId, setProviderId] = useState();
 
-        return isSignedIn ?
-          (
-          <IonApp>
-              <IonReactRouter>
-                <IonRouterOutlet>
-                  <Route exact path="/feed">
-                    <Feed />
-                  </Route>
-                  <Route exact path="/">
-                    <Redirect to="/feed" />
-                  </Route>
-                </IonRouterOutlet>
-              </IonReactRouter>
+  const handleSignIn = async () => {
+    const result = await Plugins.GoogleAuth.signIn()
+    try {
+
+      console.log(result);
+
+    } catch(err) {
+
+      console.log('this is the err we dont want, but expect to get', err);
+    }
+  }
+
+  return (
+    <FirebaseAuthProvider firebase={firebase} {...config}>
+
+      <FirebaseAuthConsumer>
+        {({ isSignedIn, user, providerId }) => {
+
+          return isSignedIn ?
+            (
+            <IonApp>
+                <IonReactRouter>
+                  <IonRouterOutlet>
+                    <Route exact path="/feed">
+                      <Feed />
+                    </Route>
+                    <Route exact path="/">
+                      <Redirect to="/feed" />
+                    </Route>
+                  </IonRouterOutlet>
+                </IonReactRouter>
+              </IonApp>
+          ) : (
+            <IonApp>
+              <button
+                onClick={handleSignIn}
+              >
+                Sign in with Google!
+              </button>
             </IonApp>
-        ) : (
-          <IonApp>
-            <button
-              onClick={
-                () => {
-                  const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-                  FirebaseAuthentication.auth().signInWithPopup(googleAuthProvider);
-                }
-              }
-            >
-              Sign in with Google!
-            </button>
-          </IonApp>
         )
 
 
@@ -67,6 +84,7 @@ const App = () => (
     </FirebaseAuthConsumer>
 
   </FirebaseAuthProvider>
-);
+  )
+};
 
 export default App;
