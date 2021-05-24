@@ -27,7 +27,6 @@ import '@ionic/react/css/typography.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
 const App = () => {
 
   const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')) || false);

@@ -1,0 +1,14 @@
+
+img#logo {
+  width: 300px;
+  border: 0;
+}
+
+div#forgot-password {
+  justify-items: center;
+  margin: 3%;
+  padding: 3%;
+  border-bottom-style: ridge;
+  cursor: pointer;
+  color: grey;
+}
