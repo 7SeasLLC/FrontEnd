@@ -68,7 +68,7 @@
     "@capacitor/cli": "3.0.0"
   },
   "config": {
-    "ionic_build_to_es5" : false,
+    "ionic_build_to_es5": false,
     "ionic_source_map_type": "eval"
   },
   "description": "An Ionic project"
