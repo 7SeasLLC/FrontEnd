@@ -4,6 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Feed from './pages/Feed';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Search from './pages/Search';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -38,6 +39,9 @@ const App = () => (
         </Route>
         <Route exact path="/signup">
         <Signup />
+        </Route>
+        <Route exact path="/search">
+        <Search />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
