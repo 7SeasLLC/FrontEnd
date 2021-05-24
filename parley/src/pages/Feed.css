@@ -36,7 +36,7 @@ ion-item {
   transition: filter 0.5s;
 }
 .searchbtn:hover {
-  filter: brightness(0%);
+  filter: invert() grayscale(100%) contrast(0%);
 }
 
 .searchicon {
