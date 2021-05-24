@@ -61,7 +61,52 @@
   },
   {
     "id": 13,
-    "name": "Cloud computing",
+    "name": "windows10",
+    "count": 1
+  },
+  {
+    "id": 14,
+    "name": "ios",
+    "count": 1
+  },
+   {
+    "id": 15,
+    "name": "andriod",
+    "count": 1
+  },
+   {
+    "id": 16,
+    "name": "google",
+    "count": 1
+  },
+   {
+    "id": 17,
+    "name": "facebook",
+    "count": 1
+  },
+  {
+    "id": 18,
+    "name": "netflix",
+    "count": 1
+  },
+   {
+    "id": 19,
+    "name": "linkedin",
+    "count": 1
+  },
+    {
+    "id": 20,
+    "name": "apple",
+    "count": 1
+  },
+   {
+    "id": 21,
+    "name": "tesla",
+    "count": 1
+  },
+  {
+    "id": 22,
+    "name": "react",
     "count": 1
   }
 ]
