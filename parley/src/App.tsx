@@ -10,10 +10,15 @@ import Feed from './pages/Feed';
 import Session from './pages/Session'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+<<<<<<< HEAD
 
 import { getUser, getTags } from './Utils/Firestore'
 import Search from './pages/Search';
 
+=======
+import Signup from './pages/Signup';
+import Search from './pages/Search';
+>>>>>>> rebase
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
