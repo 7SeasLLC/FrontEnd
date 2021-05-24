@@ -3,7 +3,7 @@ import { searchOutline } from 'ionicons/icons';
 
 import ThemeToggle from './ThemeToggle';
 
-const Header = ({ user }) => {
+const Header = ({ user, HeaderRight }) => {
 
   return (
     <IonItem lines="none">
@@ -12,16 +12,7 @@ const Header = ({ user }) => {
       </IonThumbnail>
       <h1>PARLEY</h1>
       <ThemeToggle />
-      <IonButton icon-only className="searchbtn" slot="end" href="/search">
-        <IonIcon className="searchicon" icon={searchOutline}/>
-      </IonButton>
-      <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
-        <IonChip>
-        <IonAvatar>
-        <img alt={'Your Profile'} src={user.profile_img} />
-        </IonAvatar>
-        </IonChip>
-      </IonItem>
+      <HeaderRight user={user} />
     </IonItem>
   );
 }
