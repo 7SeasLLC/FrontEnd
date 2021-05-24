@@ -1,5 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonInput, IonItem, IonCard, IonGrid, IonRow, IonCol, IonImg, IonNote } from '@ionic/react';
+import { IonContent,IonPage,IonButton, IonInput, IonItem, IonCard, IonGrid, IonRow, IonCol} from '@ionic/react';
 import './Login.css';
+
 
 
 const Login = () => {
@@ -8,7 +9,7 @@ const Login = () => {
       <IonContent >
         <IonGrid>
           <IonRow className="ion-justify-content-center">
-            <img id="logo" src="assets/logo.png" alt="logo" />
+            <img id="logo-sign-page" src="assets/logo.png" alt="parley-logo" />
           </IonRow>
           <IonRow className="ion-justify-content-center">
             <IonCol size-lg="3" >
@@ -23,14 +24,15 @@ const Login = () => {
             </IonCol>
           </IonRow>
           <IonRow className="ion-justify-content-center">
-            <IonCol className="ion-text-center" size-lg="3"  >
+            <IonCol className="ion-text-center" size-lg="3">
               <IonButton>Log in</IonButton>
-              <div id="forgot-password">Forgot password?</div>
+              <div id="forgot-password">Forgot Password?</div>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol className="ion-text-center">
-              <IonButton color="success">Sign up</IonButton>
+              <IonButton color="success">Create New Account
+              </IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
