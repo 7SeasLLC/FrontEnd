@@ -16,11 +16,3 @@ div#forgot-password {
 div#forgot-password:hover{
   color: #105bf0
 }
-
-p#term-condition {
-  font-size: 50%;
-}
-ion-input.sign-up {
-  border: solid 1px grey;
-  margin: 5px 0px;
-}
