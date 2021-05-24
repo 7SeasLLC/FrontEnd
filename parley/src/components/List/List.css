@@ -2,7 +2,7 @@ ion-badge {
   margin: 2px 2px 2px 0px;
 }
 
-ion-button {
+.listplaybtn {
   --background: transparent;
   --box-shadow: transparent;
   --background-hover: transparent;

@@ -36,7 +36,7 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
             <IonItemSliding id={item.recording_id} key={item.recording_id} onClick={() => handleClick(item.recording_id)}>
               <IonItemOptions side="end" >
                 <IonItemOption>
-                  <IonButton href={`/${item.recording_id}`}>
+                  <IonButton icon-only className="listplaybtn" href={`/${item.recording_id}`}>
                     <IonIcon icon={playOutline} />
                   </IonButton>
                 </IonItemOption>
