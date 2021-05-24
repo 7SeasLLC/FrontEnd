@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "App developer",
+    "count": 8
+  },
+  {
+    "id": 2,
+    "name": "Web designer",
+    "count": 19
+  },
+  {
+    "id": 3,
+    "name": "Artificial intelligence",
+    "count": 8
+  },
+  {
+    "id": 4,
+    "name": "tech news",
+    "count": 7
+  },
+  {
+    "id": 5,
+    "name": "coding",
+    "count": 6
+  },
+  {
+    "id": 6,
+    "name": "new technology",
+    "count": 6
+  },
+  {
+    "id": 7,
+    "name": "Dynamic programming",
+    "count": 6
+  },
+  {
+    "id": 8,
+    "name": "Software developer",
+    "count": 6
+  },
+  {
+    "id": 9,
+    "name": "Tech solutions",
+    "count": 6
+  },
+  {
+    "id": 10,
+    "name": "Network security",
+    "count": 6
+  },
+  {
+    "id": 11,
+    "name": "Cloud computing",
+    "count": 6
+  },
+  {
+    "id": 12,
+    "name": "Cloud computing",
+    "count": 6
+  }
+]

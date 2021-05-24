@@ -1,0 +1,64 @@
+[
+  {
+    "recording_id": 1,
+    "isStreaming": false,
+    "title": "React is amazing!",
+    "username": "h4cker7ingyu",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170127_1.png",
+    "tags" : [
+      "Javascript",
+      "React",
+      "Front-End"
+    ],
+    "start": 1519211809934,
+    "length": 123476,
+    "views": 0,
+    "listeners": 0
+  },
+  {
+    "recording_id": 2,
+    "isStreaming": false,
+    "title": "Games and Web Design",
+    "username": "packbenpack",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/5972661_2.jpg",
+    "tags" : [
+      "Typescript",
+      "Angular",
+      "Algorithms"
+    ],
+    "start": 1519211810362,
+    "length": 938249,
+    "views": 0,
+    "listeners": 0
+  },
+  {
+    "recording_id": 3,
+    "isStreaming": true,
+    "title": "jQuery SUXXXS!",
+    "username": "h4cker7ingyu",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170127_1.png",
+    "tags" : [
+      "jQuery",
+      "CSS"
+    ],
+    "start": 1619211809934,
+    "length": null,
+    "views": 0,
+    "listeners": 984
+  },
+  {
+    "recording_id": 4,
+    "isStreaming": true,
+    "title": "Games and Web Design",
+    "username": "emmi",
+    "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170214-12x18-72dpi_2.jpg",
+    "tags" : [
+      "Vue",
+      "Fastify"
+    ],
+    "start": 1639211810362,
+    "length": null,
+    "views": 0,
+    "listeners": 203
+  }
+]

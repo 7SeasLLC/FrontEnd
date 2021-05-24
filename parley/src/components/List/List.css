@@ -1,0 +1,17 @@
+ion-badge {
+  margin: 2px 2px 2px 0px;
+  --color: var(--ion-card-background);
+}
+
+.listplaybtn {
+  --background: transparent;
+  --box-shadow: transparent;
+  --background-hover: transparent;
+  --color-hover: var(--ion-color-dark);
+  --transition: 0.5s;
+  margin: 0;
+}
+
+ion-item-option {
+  margin-right: -6px;
+}

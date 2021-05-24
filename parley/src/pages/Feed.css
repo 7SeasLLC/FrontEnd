@@ -1,0 +1,44 @@
+h1 {
+  font-family: 'Playfair Display', serif;
+  padding-bottom: 10px;
+  color: var(--ion-color-primary);
+}
+
+ion-avatar {
+  border: 2px solid var(--ion-color-primary);
+  transition: border 0.5s;
+}
+ion-avatar:hover {
+  border: 2px solid var(--ion-color-dark)
+}
+
+.profilebtn {
+  margin: -8px;
+}
+
+ion-chip {
+  margin-left: -15px;
+  --background: transparent;
+  --background-hover: transparent;
+}
+
+ion-item {
+  margin: -4px;
+  --background-hover: transparent;
+  --background-focused: transparent;
+}
+
+.searchbtn {
+  --background: transparent;
+  --box-shadow: transparent;
+  --background-hover: transparent;
+  margin: 0;
+  transition: filter 0.5s;
+}
+.searchbtn:hover {
+  filter: invert() grayscale(100%) contrast(0%);
+}
+
+.searchicon {
+  color: var(--ion-color-primary);
+}
