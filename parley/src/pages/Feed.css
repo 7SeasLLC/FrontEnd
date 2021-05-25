@@ -28,17 +28,29 @@ ion-item {
   --background-focused: transparent;
 }
 
-.searchbtn {
+.headerbtn {
   --background: transparent;
   --box-shadow: transparent;
   --background-hover: transparent;
   margin: 0;
   transition: filter 0.5s;
 }
-.searchbtn:hover {
+.headerbtn:hover {
   filter: invert() grayscale(100%) contrast(0%);
 }
 
-.searchicon {
+.headericon {
   color: var(--ion-color-primary);
+}
+
+ion-content {
+  max-width: 600px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+ion-header {
+  max-width: 580px;
+  left: 50%;
+  transform: translateX(-50%);
 }

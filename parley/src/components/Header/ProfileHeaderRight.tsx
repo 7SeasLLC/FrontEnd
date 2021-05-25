@@ -20,11 +20,11 @@ const ProfileHeaderRight = ({ user }) => {
   return (
     <>
       <IonButton
-        icon-only className="editButton"
+        icon-only className="headerbtn"
         slot="end"
         onClick={() => setShowModal(true)}
       >
-        <IonIcon className="editIcon" icon={buildOutline}/>
+        <IonIcon className="headericon" icon={buildOutline}/>
       </IonButton>
       <IonModal isOpen={showModal}>
       <IonButton onClick={() => setShowModal(false)}>
