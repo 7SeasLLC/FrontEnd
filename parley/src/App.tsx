@@ -43,6 +43,8 @@ const App = () => {
         const result = await FirebaseConfig.auth().signInWithPopup(provider);
         setUser(result.user);
         window.localStorage.setItem('user', JSON.stringify(result.user))
+        window.location.href = "/feed";
+
       } catch (err) {
         console.log(err)
       }
@@ -67,6 +69,9 @@ const App = () => {
             <Route exact path="/">
               <Redirect to="/feed" />
             </Route>
+            <Route exact path="/login">
+              <Redirect to="/feed" />
+            </Route>
             <Route exact path="/profile">
               <Profile />
             </Route>
@@ -74,13 +79,14 @@ const App = () => {
           ) : (
             <>
             <Route exact path="/login">
-              <Login handleSignIn={handleSignIn}/>
+              <Login signin={handleSignIn}/>
             </Route>
             <Route path="/">
               <Redirect to="/login" />
             </Route>
             </>
           )}
+
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

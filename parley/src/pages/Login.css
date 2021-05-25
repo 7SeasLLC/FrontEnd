@@ -4,15 +4,3 @@ img#logo-sign-page {
   border: 0;
 }
 
-div#forgot-password {
-  justify-items: center;
-  margin: 3%;
-  padding: 3%;
-  border-bottom-style: ridge;
-  cursor: pointer;
-  color: grey;
-}
-
-div#forgot-password:hover{
-  color: #105bf0
-}
