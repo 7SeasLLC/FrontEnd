@@ -19,6 +19,7 @@ const CreateSession = ({ user, allTags }) => {
       tags: streamTags,
     }
     console.log(streamInfo)
+    setShowModal(false)
   }
 
   return (
