@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "parley-7seas",
     "public": "build",
     "ignore": [
       "firebase.json",

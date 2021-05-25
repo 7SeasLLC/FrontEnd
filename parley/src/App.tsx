@@ -6,7 +6,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { FirebaseAuthProvider, FirebaseAuthConsumer } from "@react-firebase/auth";
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication'
-import config from './firebase.config.js';
+import FirebaseConfig from './firebase.config.js';
 
 import "@codetrix-studio/capacitor-google-auth";
 import { Plugins } from '@capacitor/core';
@@ -34,34 +34,23 @@ import './theme/variables.css';
 const App = () => {
 
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
   const [providerId, setProviderId] = useState();
+
 
   const handleSignIn = async () => {
 
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
 
-    try {
-      const result = await Plugins.GoogleAuth.signIn()
-      console.log('original result', result);
-      setUser(result.id)
-
-      //set user info w/firebase
-
-        // const fbAuth = await FirebaseAuthentication.signInWithGoogle(result.authentication.idToken, result.authentication.accessToken)
-
-        const credential = firebase.auth.GoogleAuthProvider.credential(result.authentication.idToken)
-
-        firebase.auth().signInWithCredential(credential)
-        .then((data) => {
-          console.log('this is the promise data:', data)
-          setIsSignedIn(true);
-        })
-        .catch((error) => {console.log(error)})
-
-    } catch(err) {
-
-      console.log('this is the err we dont want, but expect to get', err);
-    }
+      try {
+        const result = await FirebaseConfig.auth().signInWithPopup(provider);
+        console.log(result)
+        setUser(result.user);
+      } catch (err) {
+        console.log(err)
+      }
   }
 
   return (
