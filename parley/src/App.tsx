@@ -30,7 +30,7 @@ import './theme/variables.css';
 
 const App = () => {
 
-  const [user, setUser] = useState(window.localStorage.getItem('user')|| null);
+  const [user, setUser] = useState(window.localStorage.getItem('user')|| false);
 
   const handleSignIn = async () => {
 
@@ -49,7 +49,9 @@ const App = () => {
 
 
   useEffect(() => {
-    window.localStorage.setItem('user', user)
+    if (user) {
+      window.localStorage.setItem('user', JSON.stringify(user))
+    }
   }, [user])
 
   return (
