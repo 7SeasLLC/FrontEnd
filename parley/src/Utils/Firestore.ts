@@ -6,11 +6,11 @@ const db = FirebaseConfig.firestore();
 
 export const getUser = async (currentUser) => {
 
-  const users = db.collection("users");
+  const Users = db.collection("users");
 
   let user;
 
-  await users.where("authId", "==", currentUser.uid).get()
+  await Users.where("authId", "==", currentUser.uid).get()
   .then((querySnapshot) => {
     const items = [];
     querySnapshot.forEach((doc) => {
@@ -22,13 +22,36 @@ export const getUser = async (currentUser) => {
   if (user) {
     return user
   } else {
-    createUser(currentUser)
+    return createUser(currentUser)
   }
 
 }
 
-export const createUser = (newUser) => {
-  console.log('create me:', newUser)
+export const createUser = async (newUser) => {
+
+  const Users = db.collection('users');
+  //create new user
+  await ('users').doc(newUser.uid).set(
+    {
+      authId: newUser.uid,
+      email: newUser.email,
+      username: newUser.email,
+      photoUrl: newUser.photoURL
+    }
+  );
+
+  let user
+  //retrieve the newly created user
+  await Users.where("authId", "==", newUser.uid).get()
+  .then((querySnapshot) => {
+    const items = [];
+    querySnapshot.forEach((doc) => {
+      items.push(doc.data())
+    })
+    user = items[0]
+  });
+
+  return user;
 }
 
 export const getRecordings = () => {
