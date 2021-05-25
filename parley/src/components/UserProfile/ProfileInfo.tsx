@@ -1,9 +1,9 @@
-import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonCardHeader, IonCardContent } from '@ionic/react';
-import { chevronDownOutline, chevronUpOutline, playOutline } from 'ionicons/icons';
+import { IonCard, IonCardTitle, IonAvatar, IonCardHeader, IonCardContent } from '@ionic/react';
 import './UserProfile.css'
 
 const ProfileInfo = ({ userInfo }) => {
 
+  let index = 0;
   const paragraphs = userInfo.bio.split('\n')
 
   return (
@@ -17,9 +17,10 @@ const ProfileInfo = ({ userInfo }) => {
         </IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-      {paragraphs.map((lines) => (
-        <p>{lines}</p>
-      ))}
+      {paragraphs.map((lines) => {
+        index++;
+        return <p key={index}>{lines}</p>
+      })}
       </IonCardContent>
     </IonCard>
   );
