@@ -1,6 +1,6 @@
-import { IonItem, IonAvatar, IonIcon, IonButton, IonChip, IonModal, IonTextarea } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonIcon, IonButton, IonModal, IonTextarea } from '@ionic/react';
 import { buildOutline , close } from 'ionicons/icons';
-import { Fragment, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Headers.css'
 
 const ProfileHeaderRight = ({ user }) => {
@@ -30,21 +30,43 @@ const ProfileHeaderRight = ({ user }) => {
         isOpen={showModal}
         onDidDismiss={() => setShowModal(false)}
       >
-      <IonButton onClick={() => setShowModal(false)}>
-           <IonIcon icon={ close } />
-        </IonButton>
-        <p className="editBio"> Edit Bio </p>
-        <IonTextarea
-          className="editBioText"
-          rows={6}
-          maxlength={300}
-          value={userBio}
-          onIonChange={e => setUserBio(e.detail.value!)}
-        >
+        <IonCard>
+          <IonCardHeader>
+            <IonItem>
+              <IonCardTitle>
+                Edit Bio
+              </IonCardTitle>
+              <IonButton
+                className="headerbtn"
+                slot="end"
+                onClick={() => setShowModal(false)}
+              >
+                <IonIcon
+                  className="headericon"
+                  icon={ close }
+                />
+              </IonButton>
+            </IonItem>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonTextarea
+              autoGrow={true}
+              enterkeyhint="done"
+              inputmode="text"
+              className="editBioText"
+              maxlength={300}
+              value={userBio}
+              spellCheck={true}
+              readonly={false}
+              wrap="soft"
+              onIonChange={e => setUserBio(e.detail.value!)}
+            >
         </IonTextarea>
-          <IonButton onClick={saveNewBio}>
-            Save
-          </IonButton>
+          </IonCardContent>
+        </IonCard>
+        <IonButton onClick={saveNewBio}>
+          Save
+        </IonButton>
       </IonModal>
     </>
   );

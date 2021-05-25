@@ -5,9 +5,6 @@
 }
 
 .editBioText {
+  background: var(--ion-card-background);
   color:black
-}
-
-ion-textarea {
-  margin: 10px;
 }
