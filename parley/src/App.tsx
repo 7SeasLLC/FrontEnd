@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -34,7 +34,7 @@ import './theme/variables.css';
 const App = () => {
 
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(window.localStorage.getItem('user')|| null);
   const [providerId, setProviderId] = useState();
 
 
@@ -46,39 +46,39 @@ const App = () => {
 
       try {
         const result = await FirebaseConfig.auth().signInWithPopup(provider);
-        console.log(result)
+        console.log(result);
         setUser(result.user);
       } catch (err) {
         console.log(err)
       }
   }
 
+  useEffect(() => {
+    window.localStorage.setItem('user', user)
+  }, [user])
+
   return (
-    <>
-   { isSignedIn ?
+    <IonApp>
+   { user ?
       (
-      <IonApp>
-          <IonReactRouter>
-            <IonRouterOutlet>
-              <Route exact path="/feed">
-                <Feed />
-              </Route>
-              <Route exact path="/">
-                <Redirect to="/feed" />
-              </Route>
-            </IonRouterOutlet>
-          </IonReactRouter>
-        </IonApp>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route exact path="/feed">
+              <Feed />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/feed" />
+            </Route>
+          </IonRouterOutlet>
+        </IonReactRouter>
     ) : (
-      <IonApp>
         <button
           onClick={handleSignIn}
         >
           Sign in with Google!
         </button>
-      </IonApp>
     )}
-  </>
+  </IonApp>
   )
 };
 
