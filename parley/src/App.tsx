@@ -7,6 +7,7 @@ import "firebase/auth";
 import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
+import Profile from './pages/Profile';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -17,12 +18,12 @@ import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+// import '@ionic/react/css/padding.css';
+// import '@ionic/react/css/float-elements.css';
+// import '@ionic/react/css/text-alignment.css';
+// import '@ionic/react/css/text-transformation.css';
+// import '@ionic/react/css/flex-utils.css';
+// import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
@@ -54,17 +55,20 @@ const App = () => {
   return (
     <IonApp>
    { user ?
-      (
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route exact path="/feed">
-              <Feed />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/feed" />
-            </Route>
-          </IonRouterOutlet>
-        </IonReactRouter>
+    (
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/feed">
+            <Feed />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/feed" />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+        </IonRouterOutlet>
+      </IonReactRouter>
     ) : (
         <button
           onClick={handleSignIn}
@@ -72,6 +76,7 @@ const App = () => {
           Sign in with Google!
         </button>
     )}
+
   </IonApp>
   )
 };

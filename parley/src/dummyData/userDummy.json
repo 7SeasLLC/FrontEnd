@@ -1,13 +1,13 @@
 [
   {
-    "Auth_id" : "XYZ123",
-    "Username" : "jQueryFan42069",
-    "Email" : "ihatemylife@yahoo.com",
-    "Bio" : "I love jQuery and I don't care who knows it!",
+    "auth_id" : "XYZ123",
+    "username" : "jQueryFan42069",
+    "email" : "ihatemylife@yahoo.com",
+    "bio" : "I love jQuery and I don't care who knows it! I am a big fan of what's going on in the jQuery space. React suxxxxx. HTML is for the birds. \n THIS IS SUPPOSED TO BE ON A NEW LINE I SURE HOPE IT WORKS! \n ANOTHER NEW LINE WHATS UP EVERYONE LETS GO JQUERY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#!#!@#!#!@#!@$#!@#!@#!@#!@#!@",
     "profile_img": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170126-sm_2.jpg",
-    "Recordings" : [8675309, 4],
-    "Following" : "JortsMaster",
-    "Tags" : "jquery, react"
+    "recordings" : [8675309, 4],
+    "following" : "JortsMaster",
+    "tags" : "jquery, react"
   },
   {
     "Auth_id" : "ZYX321",
