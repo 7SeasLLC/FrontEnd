@@ -4,11 +4,13 @@ import Header from './../components/Header/Header';
 import './Feed.css';
 import List from './../components/List/List';
 import './Feed.css';
-import FeedHeaderRight from './../components/Header/FeedHeaderRight'
+import FeedHeaderRight from './../components/Header/FeedHeaderRight';
+import CreateSession from './../components/CreateSession';
 
 //dummy data
 import recordingDummy from './../dummyData/recordingDummy.json';
 import userDummy from './../dummyData/userDummy.json';
+import tags from './../dummyData/tag.json';
 
 
 const Feed = () => {
@@ -46,6 +48,7 @@ const Feed = () => {
           audio={recordingDummy}
           isStreaming={false}/>
       </IonContent>
+      <CreateSession user={userDummy[0]} allTags={tags}/>
     </IonPage>
   );
 };
