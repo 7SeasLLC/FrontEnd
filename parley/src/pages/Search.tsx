@@ -12,7 +12,6 @@ import tag from './../dummyData/tag.json';
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
 
-
 const Search = () => {
 
   const [searchText, setSearchText] = useState('');
