@@ -28,7 +28,6 @@ import '@ionic/react/css/typography.css';
 /* Theme variables */
 import './theme/variables.css';
 
-<<<<<<< HEAD
 const App = () => {
 
   const [user, setUser] = useState(window.localStorage.getItem('user')|| null);
@@ -56,17 +55,20 @@ const App = () => {
   return (
     <IonApp>
    { user ?
-      (
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route exact path="/feed">
-              <Feed />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/feed" />
-            </Route>
-          </IonRouterOutlet>
-        </IonReactRouter>
+    (
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/feed">
+            <Feed />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/feed" />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+        </IonRouterOutlet>
+      </IonReactRouter>
     ) : (
         <button
           onClick={handleSignIn}
@@ -74,23 +76,7 @@ const App = () => {
           Sign in with Google!
         </button>
     )}
-=======
-const App = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/feed">
-          <Feed />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/feed" />
-        </Route>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
->>>>>>> Added profile page with temporary header.
+
   </IonApp>
   )
 };
