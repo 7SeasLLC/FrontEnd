@@ -3,15 +3,22 @@ import { IonCard, IonChip, IonLabel, IonCardHeader } from '@ionic/react';
 const TagList = ({ tagList }) => {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> separate component
+=======
+
+>>>>>>> add margin for search chip
   return (
     <IonCard>
       <IonCardHeader>
         Search By Tags
           </IonCardHeader>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> add margin for search chip
       <p className="search-chips">
         {tagList.map(tag => {
           return (
@@ -21,6 +28,7 @@ const TagList = ({ tagList }) => {
           )
         })}
       </p>
+<<<<<<< HEAD
 =======
       {tagList.map(tag => {
         return (
@@ -30,6 +38,8 @@ const TagList = ({ tagList }) => {
         )
       })}
 >>>>>>> separate component
+=======
+>>>>>>> add margin for search chip
     </IonCard>
   );
 };
