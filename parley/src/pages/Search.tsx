@@ -1,13 +1,14 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonCard, IonChip, IonAvatar, IonLabel, IonCardHeader } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar} from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
+import TagList from './../components/List/TagList';
+import UserList from './../components/List/UserList';
 import './search.css';
 
 //dummy data
 import tag from './../dummyData/tag.json';
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
-
 
 const Search = () => {
 
@@ -38,8 +39,8 @@ const Search = () => {
     }
     var recordings = []
     if (ids !== undefined) {
-      recordings = ids.map((id)=> {
-        return records[id-1]
+      recordings = ids.map((id) => {
+        return records[id - 1]
       })
 
       console.log('-->', recordings)
@@ -59,35 +60,9 @@ const Search = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonCard>
-          <IonCardHeader>
-            Search By Users
-          </IonCardHeader>
-          {users.map(user => {
-            return (
-              <IonChip color="dark" className="search-user search-list" id={user.Username}>
-                <IonAvatar>
-                  <img src={user.profile_img} alt={`tag-${user.Username}`} />
-                </IonAvatar>
-                <IonLabel>{user.Username}</IonLabel>
-              </IonChip>
-            )
-          })}
-        </IonCard>
+        <UserList users={users} />
+        <TagList tagList={tagList} />
 
-        <IonCard>
-          <IonCardHeader>
-            Search By Tags
-          </IonCardHeader>
-
-          {tagList.map(tag => {
-            return (
-              <IonChip color="primary" className="search-tag search-list" id={tag.name}>
-                <IonLabel>{tag.name}</IonLabel>
-              </IonChip>
-            )
-          })}
-        </IonCard>
         {showList.length > 0 && showList !== undefined
           ? <div><List
             unfolded={true}
