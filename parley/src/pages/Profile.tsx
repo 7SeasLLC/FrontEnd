@@ -9,9 +9,9 @@ import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
 
-const Profile = ({ match }) => {
+const Profile = ({ user, match }) => {
 
-  // const [user, setUser] = useState(match.params.username || window.localStorage.getItem('user'));
+  // const [user, setUser] = useState(match.params.username || JSON.parse(window.localStorage.getItem('user')));
   const [userData, setUserData] = useState(data[0]);
 
   // axios
@@ -30,17 +30,17 @@ const Profile = ({ match }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-      <ProfileInfo userInfo={userData} />
-      <List
-        unfolded={true}
-        setFold = {() => {}}
-        audio={recordingDummy}
-        isStreaming={true}/>
-      <List
-        unfolded={true}
-        setFold = {() => {}}
-        audio={recordingDummy}
-        isStreaming={false}/>
+        <ProfileInfo userInfo={userData} />
+        <List
+          unfolded={true}
+          setFold = {() => {}}
+          audio={recordingDummy}
+          isStreaming={true}/>
+        <List
+          unfolded={true}
+          setFold = {() => {}}
+          audio={recordingDummy}
+          isStreaming={false}/>
       </IonContent>
     </IonPage>
       );
