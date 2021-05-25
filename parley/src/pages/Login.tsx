@@ -1,7 +1,7 @@
 import { IonContent, IonPage, IonButton, IonGrid, IonRow, IonCol } from '@ionic/react';
 import './Login.css';
 
-const Login = ({ handleSignIn }) => {
+const Login = ({ signin }) => {
 
   return (
     <IonPage>
@@ -12,8 +12,7 @@ const Login = ({ handleSignIn }) => {
           </IonRow>
           <IonRow className="ion-justify-content-center">
             <IonCol className="ion-text-center" size-lg="3" >
-              <IonButton expand="block" color="dark" href="" onClick={handleSignIn}>
-                {/* <IonIcon icon={googlePlus} ></IonIcon> */}
+              <IonButton expand="block" color="dark" onClick={signin}>
                 Sign in with Google!
               </IonButton>
             </IonCol>
