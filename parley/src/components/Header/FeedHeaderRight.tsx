@@ -6,8 +6,8 @@ const FeedHeaderRight = ({ user }) => {
 
   return (
     <>
-      <IonButton icon-only className="searchbtn" slot="end" href="/search">
-        <IonIcon className="searchicon" icon={searchOutline}/>
+      <IonButton icon-only className="headerbtn" slot="end" href="/search">
+        <IonIcon className="headericon" icon={searchOutline}/>
       </IonButton>
       <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
         <IonChip>
