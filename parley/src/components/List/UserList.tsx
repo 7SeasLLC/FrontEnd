@@ -7,6 +7,7 @@ const UserList = ({ users }) => {
     <IonCardHeader>
       Search By Users
     </IonCardHeader>
+    <p className="search-chips">
     {users.map(user => {
       return (
         <IonChip color="dark" className="search-user search-list" id={user.Username}>
@@ -17,6 +18,7 @@ const UserList = ({ users }) => {
         </IonChip>
       )
     })}
+    </p>
   </IonCard>
   );
 };

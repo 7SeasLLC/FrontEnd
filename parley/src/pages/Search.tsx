@@ -1,8 +1,9 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonGrid, IonRow } from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
 import TagList from './../components/List/TagList';
 import UserList from './../components/List/UserList';
+import ThemeToggle from './../components/Header/ThemeToggle';
 import './search.css';
 
 //dummy data
@@ -38,12 +39,11 @@ const Search = () => {
       }
     }
     var recordings = []
+
     if (ids !== undefined) {
       recordings = ids.map((id) => {
         return records[id - 1]
-      })
-
-      console.log('-->', recordings)
+      });
       setShowList(recordings);
     }
   }
@@ -53,6 +53,7 @@ const Search = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle> Search
+          <span id="toggle-search-page"><ThemeToggle /></span>
           </IonTitle>
         </IonToolbar>
         <IonToolbar>
