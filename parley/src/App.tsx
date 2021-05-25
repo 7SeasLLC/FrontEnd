@@ -57,36 +57,34 @@ const App = () => {
 
   return (
     <IonApp>
-      { user ?
-        (
-          <IonReactRouter>
-            <IonRouterOutlet>
-              <Route exact path="/feed">
-                <Feed />
-              </Route>
-              <Route exact path="/">
-                <Redirect to="/feed" />
-              </Route>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-            </IonRouterOutlet>
-          </IonReactRouter>
-        ) : (
-          <IonReactRouter>
-            <IonRouterOutlet>
-              <Route exact path="/login">
-                <Login handleSignIn={handleSignIn} />
-              </Route>
-              <Route path="/">
-                <Redirect to="/login" />
-              </Route>
-            </IonRouterOutlet>
-          </IonReactRouter>
-        )}
-
+      <IonReactRouter>
+        <IonRouterOutlet>
+          { user ? (
+            <>
+            <Route exact path="/feed">
+              <Feed />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/feed" />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            </>
+          ) : (
+            <>
+            <Route exact path="/login">
+              <Login handleSignIn={handleSignIn}/>
+            </Route>
+            <Route path="/">
+              <Redirect to="/login" />
+            </Route>
+            </>
+          )}
+        </IonRouterOutlet>
+      </IonReactRouter>
     </IonApp>
-        )
-      };
+  )
+};
 
 export default App;

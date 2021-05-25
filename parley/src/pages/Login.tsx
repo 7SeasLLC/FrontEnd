@@ -1,7 +1,8 @@
 import { IonContent, IonPage, IonButton, IonGrid, IonRow, IonCol } from '@ionic/react';
 import './Login.css';
 
-const Login = ({handleSignIn}) => {
+const Login = ({ handleSignIn }) => {
+
   return (
     <IonPage>
       <IonContent >

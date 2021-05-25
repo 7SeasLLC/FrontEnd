@@ -1,6 +1,5 @@
-import { IonItem, IonLabel, IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonButton } from '@ionic/react';
-import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
-import { useState } from 'react';
+import {IonPage, IonHeader, IonToolbar, IonContent} from '@ionic/react';
+
 import './Profile.css';
 import data from '../dummyData/userDummy.json'
 import recordingDummy from './../dummyData/recordingDummy.json';
