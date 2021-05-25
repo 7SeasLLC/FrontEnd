@@ -11,6 +11,7 @@ import SuggestList from '../components/List/SuggestList';
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
 
+
 const Search = () => {
 
   const [searchText, setSearchText] = useState('');
