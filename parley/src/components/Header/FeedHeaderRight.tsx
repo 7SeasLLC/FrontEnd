@@ -1,6 +1,5 @@
 import { IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
 import { searchOutline } from 'ionicons/icons';
-import { Fragment } from 'react';
 
 const FeedHeaderRight = ({ user }) => {
 

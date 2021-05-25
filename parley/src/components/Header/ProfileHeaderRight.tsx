@@ -26,7 +26,10 @@ const ProfileHeaderRight = ({ user }) => {
       >
         <IonIcon className="headericon" icon={buildOutline}/>
       </IonButton>
-      <IonModal isOpen={showModal}>
+      <IonModal
+        isOpen={showModal}
+        onDidDismiss={() => setShowModal(false)}
+      >
       <IonButton onClick={() => setShowModal(false)}>
            <IonIcon icon={ close } />
         </IonButton>

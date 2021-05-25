@@ -9,7 +9,7 @@ import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
 
-const Profile = ({ user, match }) => {
+const Profile = ({ match }) => {
 
   // const [user, setUser] = useState(match.params.username || JSON.parse(window.localStorage.getItem('user')));
   const [userData, setUserData] = useState(data[0]);
