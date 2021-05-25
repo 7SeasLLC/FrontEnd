@@ -30,7 +30,7 @@ import './theme/variables.css';
 
 const App = () => {
 
-  const [user, setUser] = useState(window.localStorage.getItem('user')|| null);
+  const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')) || false);
 
   const handleSignIn = async () => {
 
@@ -40,8 +40,8 @@ const App = () => {
 
       try {
         const result = await FirebaseConfig.auth().signInWithPopup(provider);
-        console.log(result);
         setUser(result.user);
+        window.localStorage.setItem('user', JSON.stringify(result.user))
       } catch (err) {
         console.log(err)
       }
@@ -49,7 +49,10 @@ const App = () => {
 
 
   useEffect(() => {
-    window.localStorage.setItem('user', user)
+    console.log('im happening')
+    if (user) {
+      window.localStorage.setItem('user', JSON.stringify(user))
+    }
   }, [user])
 
   return (
