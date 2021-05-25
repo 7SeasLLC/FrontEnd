@@ -7,3 +7,7 @@
 .editBioText {
   color:black
 }
+
+ion-textarea {
+  margin: 10px;
+}
