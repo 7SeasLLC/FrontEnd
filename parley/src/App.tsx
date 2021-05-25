@@ -8,8 +8,12 @@ import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
 import Profile from './pages/Profile';
+<<<<<<< HEAD
 import Login from './pages/Login';
 
+=======
+import { getUser} from './Utils/Firestore'
+>>>>>>> init db conenction, complete getUser model/methodwq
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,9 +46,13 @@ const App = () => {
       try {
         const result = await FirebaseConfig.auth().signInWithPopup(provider);
         setUser(result.user);
-        window.localStorage.setItem('user', JSON.stringify(result.user))
+
+        const user = await getUser(result.user)
+
+        window.localStorage.setItem('user', JSON.stringify(user))
         window.location.href = "/feed";
 
+        console.log('this should work', user)
       } catch (err) {
         console.log(err)
       }
