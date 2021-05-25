@@ -1,5 +1,5 @@
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonGrid, IonRow, IonCol, IonButton, IonInput, IonCard, IonItem, IonLabel, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonButton} from '@ionic/react';
 // import { googlePlus } from 'ionicons/icons';
 
 const Signup = () => {
