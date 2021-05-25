@@ -8,6 +8,8 @@ import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
 import Profile from './pages/Profile';
+import Login from './pages/Login';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,9 +35,9 @@ const App = () => {
 
   const handleSignIn = async () => {
 
-      const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('profile');
-      provider.addScope('email');
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
 
       try {
         const result = await FirebaseConfig.auth().signInWithPopup(provider);
@@ -46,7 +48,6 @@ const App = () => {
       }
   }
 
-
   useEffect(() => {
     console.log('im happening')
     if (user) {
@@ -56,31 +57,36 @@ const App = () => {
 
   return (
     <IonApp>
-   { user ?
-    (
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/feed">
-            <Feed />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/feed" />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    ) : (
-        <button
-          onClick={handleSignIn}
-        >
-          Sign in with Google!
-        </button>
-    )}
+      { user ?
+        (
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route exact path="/feed">
+                <Feed />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/feed" />
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            </IonRouterOutlet>
+          </IonReactRouter>
+        ) : (
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route exact path="/login">
+                <Login handleSignIn={handleSignIn} />
+              </Route>
+              <Route path="/">
+                <Redirect to="/login" />
+              </Route>
+            </IonRouterOutlet>
+          </IonReactRouter>
+        )}
 
-  </IonApp>
-  )
-};
+    </IonApp>
+        )
+      };
 
 export default App;
