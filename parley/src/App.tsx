@@ -4,12 +4,8 @@ import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import firebase from "firebase/app";
 import "firebase/auth";
-import { FirebaseAuthProvider, FirebaseAuthConsumer } from "@react-firebase/auth";
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication'
 import FirebaseConfig from './firebase.config.js';
 
-import "@codetrix-studio/capacitor-google-auth";
-import { Plugins } from '@capacitor/core';
 import Feed from './pages/Feed';
 
 /* Core CSS required for Ionic components to work properly */
@@ -33,10 +29,7 @@ import './theme/variables.css';
 
 const App = () => {
 
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState(window.localStorage.getItem('user')|| null);
-  const [providerId, setProviderId] = useState();
-
 
   const handleSignIn = async () => {
 
@@ -52,6 +45,7 @@ const App = () => {
         console.log(err)
       }
   }
+
 
   useEffect(() => {
     window.localStorage.setItem('user', user)
