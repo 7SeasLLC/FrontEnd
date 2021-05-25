@@ -1,8 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonGrid, IonRow } from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
-import TagList from './../components/List/TagList';
-import UserList from './../components/List/UserList';
+
 import Header from './../components/Header/Header';
 import SearchHeaderRight from './../components/Header/SearchHeaderRight'
 import './search.css';
@@ -63,8 +62,7 @@ const Search = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <UserList users={users} />
-        <TagList tagList={tagList} />
+
 
         {showList.length > 0 && showList !== undefined
           ? <div><List
