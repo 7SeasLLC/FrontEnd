@@ -9,17 +9,23 @@ const CreateSession = ({ user, allTags }) => {
   const [streamDescription, setStreamDescription] = useState('')
   const [streamTags, setStreamTags] = useState('')
 
-
-  const saveNewStream = () => {
+  const saveInfo = () => {
+    let newId = user.username + new Date()
     const streamInfo = {
       title : streamTitle,
       description : streamDescription,
       username: user.username,
-      ID: user.username + new Date(),
+      sessionId: newId.split(' ').join(''),
       tags: streamTags,
       userIds:[user.authId]
     }
     console.log(streamInfo)
+    return streamInfo
+  }
+  const startNewStream = () => {
+    const info = saveInfo()
+    const url = info.sessionId
+    window.location.replace(`session/${url}`)
     setShowModal(false)
   }
 
@@ -77,7 +83,7 @@ const CreateSession = ({ user, allTags }) => {
                 </IonSelect>
             </IonItem>
           </IonList>
-            <IonButton onClick={saveNewStream}>
+            <IonButton onClick={startNewStream}>
               Begin Stream
             </IonButton>
         </IonModal>
