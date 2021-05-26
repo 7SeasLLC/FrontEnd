@@ -6,7 +6,7 @@ import Logout from '../../Utils/Logout'
 import './Headers.css'
 import ThemeToggle from './ThemeToggle';
 
-const ProfileHeaderRight = ({ user }) => {
+const ProfileHeaderRight = ({ user, handleThemeChange }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [userBio, setUserBio] = useState(user.bio);
@@ -107,9 +107,9 @@ const ProfileHeaderRight = ({ user }) => {
           <IonCardContent>
             <IonItem lines="none">
               <IonLabel>
-                Theme Toggle:
+                Dark Mode:
               </IonLabel>
-              <ThemeToggle />
+              <ThemeToggle handleThemeChange={handleThemeChange}/>
             </IonItem>
           </IonCardContent>
         </IonCard>
