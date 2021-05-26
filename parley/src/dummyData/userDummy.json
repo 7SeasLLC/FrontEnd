@@ -7,7 +7,7 @@
     "photoUrl": "https://7ingyu.weebly.com/uploads/6/0/5/1/60519071/img-20170126-sm_2.jpg",
     "recordings" : [8675309, 4],
     "following" : "JortsMaster",
-    "preferences" : "jquery, react"
+    "preferences" : ["jquery", "react"]
   },
   {
     "authId" : "ZYX321",
