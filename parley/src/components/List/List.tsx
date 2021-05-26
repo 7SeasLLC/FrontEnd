@@ -87,7 +87,7 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
             );
           }
         })}
-      </IonList>gu
+      </IonList>
     ) : null}
     </IonCard>
   );
