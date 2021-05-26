@@ -28,7 +28,7 @@ const Feed = () => {
 
   return (
     <IonPage>
-      <IonHeader >
+      <IonHeader>
         <IonToolbar>
           <Header
             user={userDummy[0]}
