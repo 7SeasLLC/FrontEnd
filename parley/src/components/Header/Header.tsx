@@ -16,10 +16,18 @@ const Header = ({ user, HeaderRight, backBtn, handleThemeChange }) => {
           <IonIcon className="headericon" icon={chevronBackOutline}/>
         </IonButton>
       ) : null}
-      <IonThumbnail className="headerlogoimg" slot="start">
+      <IonThumbnail
+        onClick={() => {window.location.href = "/feed"}}
+        className="headerlogoimg" slot="start"
+      >
         <IonImg src={"/assets/logo-img.png"} />
       </IonThumbnail>
-      <IonTitle size="small" className="headerlogotxt">PARLEY</IonTitle>
+      <IonTitle
+        onClick={() => {window.location.href = "/feed"}}
+        size="small" className="headerlogotxt"
+      >
+        PARLEY
+      </IonTitle>
       <HeaderRight user={user} handleThemeChange={handleThemeChange} />
 
     </>
