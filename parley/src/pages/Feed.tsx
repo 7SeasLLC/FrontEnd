@@ -33,6 +33,7 @@ const Feed = () => {
           <Header
             user={userDummy[0]}
             HeaderRight={FeedHeaderRight}
+            backBtn={false}
           />
         </IonToolbar>
       </IonHeader>
