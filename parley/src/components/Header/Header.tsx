@@ -1,8 +1,6 @@
 import { IonImg, IonThumbnail, IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
-import Logout from '../../Utils/Logout'
 
-import ThemeToggle from './ThemeToggle';
+
 
 const Header = ({ user, HeaderRight }) => {
 
@@ -12,14 +10,6 @@ const Header = ({ user, HeaderRight }) => {
         <IonImg src={"/assets/logo-img.png"} />
       </IonThumbnail>
       <h1>PARLEY</h1>
-      <ThemeToggle />
-
-      <IonButton
-        onClick={() => Logout(window)}
-      >
-        LogOut
-      </IonButton>
-
       <HeaderRight user={user} />
 
     </IonItem>
