@@ -1,22 +1,20 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonGrid, IonRow } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar} from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
 import UserList from './../components/List/UserList';
 import Header from './../components/Header/Header';
 import SearchHeaderRight from './../components/Header/SearchHeaderRight'
 import './search.css';
-import TagList from './../components/List/TagList';
+import SuggestList from '../components/List/SuggestList';
 
 //dummy data
-import tag from './../dummyData/tag.json';
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
-import { search } from 'ionicons/icons';
+
 
 const Search = () => {
 
   const [searchText, setSearchText] = useState('');
-  const [tagList, setTagList] = useState(tag);
   const [users, setUsers] = useState(userDummy);
   const [records, setRecords] = useState(recordingDummy);
   const [showListRecords, setShowListRecords] = useState([]);
@@ -94,8 +92,8 @@ const Search = () => {
       <IonContent fullscreen>
         <IonSearchbar placeholder="Search for people and Records.." color="primary" value={searchText} onIonChange={(e) => { searchRecords(e.target.value.toLowerCase()) }}
         ></IonSearchbar>
-        {showSuggest ? <TagList search={searchRecords} /> : null}
-        <UserList users={showListUser} />
+        {showSuggest ? <SuggestList search={searchRecords} /> : null}
+        <UserList users={showListUser} showHeader={false}/>
         {showListStream.length > 0 ?
           <List
             unfolded={true}
