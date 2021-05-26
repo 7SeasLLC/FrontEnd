@@ -62,6 +62,19 @@ const App = () => {
     }
   }, [user])
 
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  prefersDark.addListener((e) => handleThemeChange(e.matches));
+
+  const handleThemeChange = (shouldCheck) => {
+    document.body.classList.toggle('dark', shouldCheck);
+    window.localStorage.setItem('colorScheme', JSON.stringify(shouldCheck));
+  };
+
+  useEffect(() => {
+    handleThemeChange(JSON.parse(window.localStorage.getItem('colorScheme')))
+  }, [])
+
   return (
     <IonApp>
       <IonReactRouter>
@@ -78,7 +91,7 @@ const App = () => {
               <Redirect to="/feed" />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile handleThemeChange={handleThemeChange}/>
             </Route>
             <Route exact path="/user/:username">
               <Profile />
