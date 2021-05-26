@@ -19,3 +19,10 @@ ion-item-option {
 ion-label.user-search-list {
   margin-left: 3%;
 }
+
+ion-chip.tag-list {
+  margin: 3px;
+}
+ion-card-subtitle.ion-inherit-color.md.hydrated.all-tag-title {
+  margin: 5px;
+}
