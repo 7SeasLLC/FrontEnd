@@ -7,6 +7,7 @@ import "firebase/auth";
 import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
+import Session from './pages/Session'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 
@@ -79,6 +80,9 @@ const App = () => {
             </Route>
             <Route exact path="/user/:username">
               <Profile />
+            </Route>
+            <Route exact path="/session/:roomId">
+              <Session />
             </Route>
             </>
           ) : (
