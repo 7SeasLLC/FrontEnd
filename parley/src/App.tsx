@@ -10,7 +10,7 @@ import Feed from './pages/Feed';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 
-import { getUser} from './Utils/Firestore'
+import { getUser, getTags} from './Utils/Firestore'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,18 +49,17 @@ const App = () => {
         window.localStorage.setItem('user', JSON.stringify(user))
         window.location.href = "/feed";
 
-        console.log('this should work', user)
       } catch (err) {
         console.log(err)
       }
   }
 
   useEffect(() => {
-    console.log('im happening')
     if (user) {
       window.localStorage.setItem('user', JSON.stringify(user))
     }
   }, [user])
+
 
   return (
     <IonApp>
