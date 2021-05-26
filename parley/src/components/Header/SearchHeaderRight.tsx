@@ -1,5 +1,4 @@
-import { IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
+import { IonItem, IonAvatar, IonChip } from '@ionic/react';
 
 
 const SearchHeaderRight = ({ user }) => {
