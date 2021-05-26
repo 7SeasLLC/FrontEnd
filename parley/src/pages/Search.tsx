@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonGrid, IonRow } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar} from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
 import TagList from './../components/List/TagList';
