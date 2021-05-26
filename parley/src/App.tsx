@@ -60,7 +60,6 @@ const App = () => {
     }
   }, [user])
 
-
   return (
     <IonApp>
       <IonReactRouter>

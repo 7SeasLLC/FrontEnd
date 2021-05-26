@@ -31,7 +31,7 @@ export const createUser = async (newUser) => {
 
   const Users = db.collection('users');
   //create new user
-  await ('users').doc(newUser.uid).set(
+  await Users.doc(newUser.uid).set(
     {
       authId: newUser.uid,
       bio: "I love to Parley!",
@@ -65,7 +65,6 @@ export const getTags = async () => {
 
   await Tags.get()
   .then((querySnapshot) => {
-    // const tags = [];
     querySnapshot.forEach((doc) => {
       tags.push(doc.data())
     })
