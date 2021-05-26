@@ -8,7 +8,7 @@ const Header = ({ user, HeaderRight }) => {
 
   return (
     <IonItem lines="none">
-      <IonThumbnail slot="start">
+      <IonThumbnail slot="start" onClick={()=>{window.location.href="/feed"}}>
         <IonImg src={"/assets/logo-img.png"} />
       </IonThumbnail>
       <h1>PARLEY</h1>
