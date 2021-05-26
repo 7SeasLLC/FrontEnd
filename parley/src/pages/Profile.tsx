@@ -1,5 +1,6 @@
-import {IonPage, IonHeader, IonToolbar, IonContent} from '@ionic/react';
-
+import { IonPage, IonHeader, IonToolbar, IonContent, IonItem } from '@ionic/react';
+import { useState } from 'react';
+// import axios from 'axios';
 import './Profile.css';
 import data from '../dummyData/userDummy.json'
 import recordingDummy from './../dummyData/recordingDummy.json';
@@ -8,29 +9,38 @@ import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
 
-const Profile = () => {
+const Profile = ({ match }) => {
+
+  // const [user, setUser] = useState(match.params.username || JSON.parse(window.localStorage.getItem('user')));
+  const [userData, setUserData] = useState(data[0]);
+
+  // axios
+  //   .get('')
+  //   .then(res => {
+  //     setUserData(res.data);
+  //   })
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <Header user={data[0]}
+          <Header user={userData}
                   HeaderRight={ProfileHeaderRight}
           />
         </IonToolbar>
       </IonHeader>
       <IonContent>
-      <ProfileInfo userInfo={data[0]} />
-      <List
-        unfolded={true}
-        setFold = {() => {}}
-        audio={recordingDummy}
-        isStreaming={true}/>
-      <List
-        unfolded={true}
-        setFold = {() => {}}
-        audio={recordingDummy}
-        isStreaming={false}/>
+        <ProfileInfo userInfo={userData} />
+        <List
+          unfolded={true}
+          setFold = {() => {}}
+          audio={recordingDummy}
+          isStreaming={true}/>
+        <List
+          unfolded={true}
+          setFold = {() => {}}
+          audio={recordingDummy}
+          isStreaming={false}/>
       </IonContent>
     </IonPage>
       );

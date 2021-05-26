@@ -48,7 +48,6 @@ const App = () => {
 
         window.localStorage.setItem('user', JSON.stringify(user))
         window.location.href = "/feed";
-
       } catch (err) {
         console.log(err)
       }
@@ -76,6 +75,9 @@ const App = () => {
               <Redirect to="/feed" />
             </Route>
             <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route exact path="/user/:username">
               <Profile />
             </Route>
             </>

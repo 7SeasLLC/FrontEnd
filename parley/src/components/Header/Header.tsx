@@ -1,28 +1,18 @@
-import { IonImg, IonThumbnail, IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
-import Logout from '../../Utils/Logout'
+import { IonImg, IonThumbnail, IonTitle } from '@ionic/react';
 
-import ThemeToggle from './ThemeToggle';
+
 
 const Header = ({ user, HeaderRight }) => {
 
   return (
-    <IonItem lines="none">
-      <IonThumbnail slot="start">
+    <>
+      <IonThumbnail className="headerlogoimg" slot="start">
         <IonImg src={"/assets/logo-img.png"} />
       </IonThumbnail>
-      <h1>PARLEY</h1>
-      <ThemeToggle />
-
-      <IonButton
-        onClick={() => Logout(window)}
-      >
-        LogOut
-      </IonButton>
-
+      <IonTitle size="small" className="headerlogotxt">PARLEY</IonTitle>
       <HeaderRight user={user} />
 
-    </IonItem>
+    </>
   );
 }
 
