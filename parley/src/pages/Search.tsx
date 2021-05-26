@@ -80,7 +80,7 @@ const Search = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonSearchbar value={searchText} onIonChange={(e) => { searchRecords(e) }}
+        <IonSearchbar placeholder="Search for people and Records.." color="primary" value={searchText} onIonChange={(e) => { searchRecords(e) }}
         ></IonSearchbar>
         <UserList users={showListUser} />
         {showListStream.length > 0 ?
