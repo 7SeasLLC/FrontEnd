@@ -11,7 +11,7 @@ const FeedHeaderRight = ({ user }) => {
       <IonButton className="profilebtn" slot="end" href="/profile">
         <IonChip>
           <IonAvatar>
-            <img alt={'Your Profile'} src={user.profile_img} />
+            <img alt={'Your Profile'} src={user.photoUrl} />
           </IonAvatar>
         </IonChip>
       </IonButton>
