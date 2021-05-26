@@ -34,9 +34,13 @@ export const createUser = async (newUser) => {
   await ('users').doc(newUser.uid).set(
     {
       authId: newUser.uid,
+      bio: "I love to Parley!",
       email: newUser.email,
       username: newUser.email,
-      photoUrl: newUser.photoURL
+      photoUrl: newUser.photoURL,
+      following: [],
+      preferences: [],
+      recordings: [],
     }
   );
 
@@ -54,6 +58,19 @@ export const createUser = async (newUser) => {
   return user;
 }
 
+export const getTags = async () => {
+  const Tags = db.collection("tags");
+
+  await Tags.get()
+  .then((querySnapshot) => {
+    const tags = [];
+    querySnapshot.forEach((doc) => {
+      tags.push(doc.data())
+    })
+    return tags
+  });
+}
+
 export const getRecordings = () => {
 
 }
@@ -63,9 +80,5 @@ export const createRecording = () => {
 }
 
 export const deleteRecording = () => {
-
-}
-
-export const getTags = () => {
 
 }
