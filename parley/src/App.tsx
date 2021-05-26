@@ -9,7 +9,7 @@ import FirebaseConfig from './firebase.config.js';
 import Feed from './pages/Feed';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-
+import Search from './pages/Search';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -74,6 +74,9 @@ const App = () => {
             </Route>
             <Route exact path="/profile">
               <Profile />
+            </Route>
+            <Route exact path="/search">
+              <Search />
             </Route>
             </>
           ) : (
