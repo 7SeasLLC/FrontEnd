@@ -1,19 +1,9 @@
-h1 {
-  font-family: 'Playfair Display', serif;
-  padding-bottom: 10px;
-  color: var(--ion-color-primary);
-}
-
 ion-avatar {
   border: 2px solid var(--ion-color-primary);
   transition: border 0.5s;
 }
 ion-avatar:hover {
-  border: 2px solid var(--ion-color-dark)
-}
-
-.profilebtn {
-  margin: -8px;
+  border: 2px solid var(--ion-color-dark);
 }
 
 ion-chip {
@@ -28,17 +18,14 @@ ion-item {
   --background-focused: transparent;
 }
 
-.searchbtn {
-  --background: transparent;
-  --box-shadow: transparent;
-  --background-hover: transparent;
-  margin: 0;
-  transition: filter 0.5s;
-}
-.searchbtn:hover {
-  filter: invert() grayscale(100%) contrast(0%);
+ion-content {
+  max-width: 600px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.searchicon {
-  color: var(--ion-color-primary);
+ion-header {
+  max-width: 580px;
+  left: 50%;
+  transform: translateX(-50%);
 }
