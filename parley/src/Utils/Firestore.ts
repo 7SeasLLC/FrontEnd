@@ -122,25 +122,39 @@ export const getRecording = async (sessionId) => {
 export const createRecording = async (recording) => {
   // const Recordings = db.collection("recodrings");
 
-  await Recordings.doc(recording.sessionId).set(
-    {
-      sessionId: recording.sessionId,
-      title: recording.title,
-      Description: recording.description,
-      Duration: null,
-      isStreaming: true,
-      StartTime: new Date(),
-      EndTime: null,
-      StreamURL: ``,
-      S3URL: null,
-      Hosts: [...recording.username],
-      Tags: [...recording.tags],
-      Likes: 0,
-      Plays: 0,
-      MaxLive: 0,
-      Comments: []
-    }
-  )
+  try {
+
+    await Recordings.doc(recording.sessionId).set(
+      {
+        sessionId: recording.sessionId,
+        title: recording.title,
+        Description: recording.description,
+        Duration: null,
+        isStreaming: true,
+        StartTime: new Date(),
+        EndTime: null,
+        StreamURL: ``,
+        S3URL: null,
+        Hosts: [...recording.username],
+        Tags: [...recording.tags],
+        Likes: 0,
+        Plays: 0,
+        MaxLive: 0,
+        Comments: []
+      }
+    )
+
+    recording.userIds.foreEach(async (id) => {
+      await Users.doc(id).update({
+        recordings: db.FieldValue.arrayUnion(id)
+      })
+    })
+
+  } catch (err) {
+    return "an error occurred, creating your recording"
+  }
+
+
 }
 
 export const updateRecording = async (update) => {
