@@ -12,58 +12,63 @@ declare module 'axios' {
   }
 }
 
-class Session extends React.Component<{}, { roomId: string, recording: boolean }> {
+class Session extends React.Component<{}, { roomId: string, recording: boolean, users: number }> {
   constructor(props) {
     super(props);
     this['chunks'] = [];
     this.state = {
       roomId: 'arandomstring',
-      recording: false
+      recording: false,
+      users: 0
     }
-    this.startRecording = this.startRecording.bind(this)
-    this.stopRecording = this.stopRecording.bind(this)
+    this.startRecording = this.startRecording.bind(this);
+    this.stopRecording = this.stopRecording.bind(this);
   }
 
   componentDidMount(){
+    socket.emit('rendered');
     var myAudio = document.createElement('audio');
-    myAudio.id = 'myaudio'
+    myAudio.id = 'myaudio';
 
     navigator.mediaDevices.getUserMedia({
       video: false,
       audio: true,
     })
     .then(stream =>{
-      // this.chunks = [];
       var options = {
         audioBitsPerSecond : 128000,
         mimeType: 'audio/webm'
       }
-      // this.addCallerAudio(myAudio, stream)
-      this['mediaRecorder'] = new MediaRecorder(stream, options)
+      this['mediaRecorder'] = new MediaRecorder(stream, options);
       this['mediaRecorder'].ondataavailable = (e) => {
-        this['chunks'].push(e.data)
+        this['chunks'].push(e.data);
       }
 
       this['mediaRecorder'].onstop = (e) => {
-        // console.log(this['chunks'], 'chunks')
         const blob =  new Blob(this['chunks'], { 'type' : 'audio/mpeg' });
-        this['chunks'] = []
-        this.sendToServer(new File([blob], 'testname.webm'))
+        this['chunks'] = [];
+        this.sendToServer(new File([blob], 'testname.webm'));
       }
 
       myPeer.on('call', call => {
-        console.log('received call')
-        call.answer(stream)
+        console.log('received call');
+        call.answer(stream);
         var Audio = document.createElement('audio');
-        Audio.classList.add('callerAudio')
+        Audio.classList.add('callerAudio');
         call.on('stream', callerAudioStream =>{
-          this.addCallerAudio(Audio, callerAudioStream)
+          this.addCallerAudio(Audio, callerAudioStream);
         })
       })
 
+    socket.emit('rendered');
+    socket.on('number-users', numClients => {
+      this.setState({users: numClients});
+      console.log(numClients);
+    })
+
 
     socket.on('user-connected', userId => {
-      this.connectToNewUser(userId, stream)
+      this.connectToNewUser(userId, stream);
     })
   })
 
@@ -75,40 +80,40 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean }
 
 
     myPeer.on('open', userId=>{
-        socket.emit('join-room', this.state.roomId, userId)
+        socket.emit('join-room', this.state.roomId, userId);
     })
 
   }
   startRecording() {
-    this['mediaRecorder'].start()
-    this.setState({recording: true})
+    this['mediaRecorder'].start();
+    this.setState({recording: true});
   }
 
   stopRecording() {
-    this['mediaRecorder'].stop()
-    this.setState({recording: false})
+    this['mediaRecorder'].stop();
+    this.setState({recording: false});
 
   }
 
   sendToServer (file) {
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
-    console.log(file)
-    return axios.post('http://localhost:4000/addAudio', bodyFormData)
+    console.log(file);
+    return axios.post('http://localhost:4000/addAudio', bodyFormData);
   }
 
   addCallerAudio(audio, stream) {
     audio.srcObject = stream;
-    audio.addEventListener('loadedmetadata',()=> {audio.play()})
-    document.getElementById('callGrid').append(audio)
+    audio.addEventListener('loadedmetadata',()=> {audio.play()});
+    document.getElementById('callGrid').append(audio);
   }
 
   connectToNewUser(userId, stream) {
     const call = myPeer.call(userId, stream);
     var audio = document.createElement('audio');
-    audio.classList.add('callerAudio')
+    audio.classList.add('callerAudio');
     call.on('stream', newUserAudioStream =>{
-      this.addCallerAudio(audio, newUserAudioStream)
+      this.addCallerAudio(audio, newUserAudioStream);
     })
     call.on('close', ()=> {
       audio.remove();
@@ -117,7 +122,7 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean }
       this.setState(obj);
     })
     var obj = {}
-    obj[userId]= call
+    obj[userId]= call;
     this.setState(obj);
   }
 
@@ -127,6 +132,7 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean }
       <button onClick={this.startRecording}>Start Recording</button>
       <button onClick={this.stopRecording}>Stop Recording</button>
       {this.state.recording ? (<div>Currently Recording</div>) : null}
+      <div>Number of listeners: {this.state.users}</div>
     </div>
     );
   }
