@@ -69,7 +69,7 @@ export const getTags = async () => {
   await Tags.get()
   .then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      tags.push(doc.data())
+      tags.push({...doc.data(), id: doc.id})
     })
   });
 
