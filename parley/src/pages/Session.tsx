@@ -3,7 +3,7 @@ import { } from '@ionic/react';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
 import axios from 'axios'
-const  socket = openSocket('http://localhost:4000');
+const socket = openSocket('http://localhost:4000');
 const myPeer = new Peer(undefined, {host: '/', port: 3001})
 declare var MediaRecorder: any;
 declare module 'axios' {
