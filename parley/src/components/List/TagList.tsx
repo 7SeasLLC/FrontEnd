@@ -1,4 +1,4 @@
-import { IonCard, IonChip, IonLabel, IonCardHeader,IonCardSubtitle} from '@ionic/react';
+import { IonCard, IonChip, IonLabel, IonCardHeader, IonCardSubtitle } from '@ionic/react';
 import { useState, useEffect } from 'react'
 // import { getTags } from './../../Utils/Firestore'
 import alltags from './../../dummyData/tag.json';
@@ -60,15 +60,12 @@ const TagList = ({ tagList }) => {
   return (
     <IonCard>
       <div className="all-tag">
-       <IonCardSubtitle className="all-tag-title">Search by popular tags..</IonCardSubtitle>
+        <IonCardSubtitle className="all-tag-title">Search by popular tags..</IonCardSubtitle>
         {tags.map(tag => {
-
           return (
-
-            <IonChip outline={true} className="tag-list" color="primary" onClick={() => { search(tag.name) }}>
+            <IonChip outline={true} className="tag-list" color="primary" onClick={() => { search(tag.name.toLowerCase()) }}>
               <IonLabel>{tag.name}</IonLabel>
             </IonChip>)
-
         }
         )}
       </div>
