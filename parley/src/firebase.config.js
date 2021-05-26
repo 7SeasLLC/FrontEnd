@@ -10,4 +10,6 @@ const config = {
   measurementId: "G-KFLH1K2129"
 };
 
+console.log('firebase config in use');
+
 export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
