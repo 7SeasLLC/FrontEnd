@@ -1,5 +1,6 @@
 import {Fragment, useState, useEffect} from 'react';
 import { } from '@ionic/react';
+import { updateRecording } from '../Utils/Firestore'
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
 import axios from 'axios';
@@ -11,16 +12,15 @@ declare module 'axios' {
     "Content-Type": 'multipart/form-data';
   }
 }
+var mediaRecorder = {};
 
 const Session = (props) => {
   const [roomId, setRoomId] = useState(props.location.pathname.substring(9))
   const [recording, setRecording] = useState(false)
   const [users, setUsers] = useState(0)
   const [host, setHost] = useState(false)
-  var mediaRecorder;
 
   useEffect (() => {
-    console.log(roomId)
     let chunks = []
     socket.emit('rendered');
     var myAudio = document.createElement('audio');
@@ -43,7 +43,7 @@ const Session = (props) => {
       mediaRecorder.onstop = (e) => {
         const blob =  new Blob(chunks, { 'type' : 'audio/mpeg' });
         chunks = [];
-        sendToServer(new File([blob], 'testname2.webm'));
+        sendToServer(new File([blob], `${roomId}`));
       }
 
       myPeer.on('call', call => {
@@ -94,12 +94,19 @@ const Session = (props) => {
    const sendToServer = async (file) => {
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
-    console.log(file);
-    return await axios.post('http://localhost:4000/addAudio', bodyFormData)
-      .then((url) => {
-        console.log(url.data)
-        window.location.replace("/feed")
+    try {
+      const data = await axios.post('http://localhost:4000/addAudio', bodyFormData)
+      const url = data.data
+      await updateRecording ({
+        sessionId: roomId,
+        isStreaming: false,
+        EndTime: new Date(),
+        S3URL: url
       })
+      window.location.replace("/feed")
+    } catch (err) {
+      console.log('error writing to firebase', err)
+    }
   }
 
   const addCallerAudio = (audio, stream)=> {
