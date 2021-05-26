@@ -3,7 +3,8 @@ import { useState } from 'react';
 import List from './../components/List/List';
 import TagList from './../components/List/TagList';
 import UserList from './../components/List/UserList';
-import ThemeToggle from './../components/Header/ThemeToggle';
+import Header from './../components/Header/Header';
+import SearchHeaderRight from './../components/Header/SearchHeaderRight'
 import './search.css';
 
 //dummy data
@@ -52,9 +53,10 @@ const Search = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle> Search
-          <span id="toggle-search-page"><ThemeToggle /></span>
-          </IonTitle>
+        <Header
+            user={userDummy[0]}
+            HeaderRight={SearchHeaderRight}
+          />
         </IonToolbar>
         <IonToolbar>
           <IonSearchbar value={searchText} onIonChange={(e) => { handleSearchBar(e) }}></IonSearchbar>
