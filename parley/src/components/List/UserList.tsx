@@ -1,4 +1,4 @@
-import { IonCard, IonLabel, IonItem, IonAvatar } from '@ionic/react';
+import { IonCard, IonLabel, IonItem, IonAvatar, IonBadge } from '@ionic/react';
 
 const UserList = ({ users }) => {
 
@@ -15,6 +15,7 @@ const UserList = ({ users }) => {
                   <IonLabel className="user-search-list">
                     <h3>{user.username}</h3>
                     <p>{`${user.bio.slice(0, 40)}...`}</p></IonLabel>
+                    <IonBadge color="primary">Follow</IonBadge>
                 </IonItem>
               )
             })
