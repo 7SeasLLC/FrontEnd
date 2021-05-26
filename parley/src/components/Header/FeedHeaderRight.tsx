@@ -8,13 +8,13 @@ const FeedHeaderRight = ({ user }) => {
       <IonButton icon-only className="headerbtn" slot="end" href="/search">
         <IonIcon className="headericon" icon={searchOutline}/>
       </IonButton>
-      <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
+      <IonButton className="profilebtn" slot="end" href="/profile">
         <IonChip>
-        <IonAvatar>
-          <img alt={'Your Profile'} src={user.profile_img} />
-        </IonAvatar>
+          <IonAvatar>
+            <img alt={'Your Profile'} src={user.profile_img} />
+          </IonAvatar>
         </IonChip>
-      </IonItem>
+      </IonButton>
     </>
   );
 }

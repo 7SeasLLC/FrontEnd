@@ -1,12 +1,45 @@
-.editBio{
-  text-align:center;
-  font-weight: 700;
-}
-
-.editBioText {
-  background: var(--ion-card-background);
-}
-
 .native-textarea {
   height: 80vh;
+}
+
+.headerlogoimg {
+  --size: 32px;
+  margin-left: 12px;
+}
+
+.headerlogotxt {
+  font-family: 'Playfair Display', serif;
+  padding-left: 5px;
+  --color: var(--ion-color-primary);
+}
+
+ion-toolbar {
+  --min-height: 40px;
+}
+
+.headerbtn {
+  --background: transparent;
+  --box-shadow: transparent;
+  --background-hover: transparent;
+  margin: -10px;
+  transition: filter 0.5s;
+}
+.headerbtn:hover {
+  filter: invert() grayscale(100%) contrast(0%);
+}
+
+.headericon {
+  color: var(--ion-color-primary);
+}
+
+.profilebtn {
+  --background: transparent;
+  --box-shadow: transparent;
+  --background-hover: transparent;
+  margin: -10px;
+  margin-right: -11px;
+}
+
+.headerfarright {
+  margin-right: -2px;
 }

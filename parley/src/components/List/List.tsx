@@ -1,4 +1,4 @@
-import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonNote } from '@ionic/react';
 import { chevronDownOutline, chevronUpOutline, playOutline } from 'ionicons/icons';
 
 import './List.css';
@@ -23,13 +23,13 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
   return (
     <IonCard>
       <IonItem onClick={() => setFold(string)}>
-        <IonCardTitle>
+        <IonCardSubtitle>
           {isStreaming ? (
-            <h2>Live Streams</h2>
+            "Live Streams"
           ) : (
-            <h2>Recordings</h2>
+            "Recordings"
           )}
-        </IonCardTitle>
+        </IonCardSubtitle>
           {unfolded ? (
             <IonIcon icon={chevronUpOutline} slot="end"></IonIcon>
           ) : (
@@ -69,14 +69,14 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
                       </IonAvatar>
                     </a>
                     <IonLabel>
-                      <IonCardSubtitle>
+                      <IonNote>
                         {item.username}
-                      </IonCardSubtitle>
-                      <IonCardTitle>
+                      </IonNote>
+                      <IonLabel>
                         {item.title}
-                      </IonCardTitle>
+                      </IonLabel>
                       {item.tags.map((tag) => (
-                        <IonBadge key={tag}>
+                        <IonBadge className="audioTag" key={tag}>
                           {tag}
                         </IonBadge>
                       ))}

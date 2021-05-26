@@ -33,7 +33,7 @@ const ProfileHeaderRight = ({ user }) => {
         <IonIcon className="headericon" icon={buildOutline}/>
       </IonButton>
       <IonButton
-        icon-only className="headerbtn"
+        icon-only className="headerbtn headerfarright"
         slot="end"
         onClick={() => setShowSettings(true)}
       >
