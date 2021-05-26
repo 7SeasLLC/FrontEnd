@@ -15,7 +15,7 @@ const UserList = ({ users }) => {
                   <IonLabel className="user-search-list">
                     <h3>{user.username}</h3>
                     <p>{`${user.bio.slice(0, 40)}...`}</p></IonLabel>
-                    <IonBadge color="primary">Follow</IonBadge>
+                    {/* <IonBadge color="primary">Follow</IonBadge> */}
                 </IonItem>
               )
             })
