@@ -1,17 +1,23 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonIcon, IonButton, IonModal, IonTextarea } from '@ionic/react';
-import { buildOutline , close } from 'ionicons/icons';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonIcon, IonButton, IonModal, IonTextarea, IonLabel, IonFooter, IonToolbar, useIonAlert } from '@ionic/react';
+import { buildOutline , close, settingsOutline } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
+import Logout from '../../Utils/Logout'
+
 import './Headers.css'
+import ThemeToggle from './ThemeToggle';
 
 const ProfileHeaderRight = ({ user }) => {
-  const [showModal, setShowModal] = useState(false)
-  const [userBio, setUserBio] = useState(user.bio)
-  const [newBioSubmitted, setNewBioSubmitted] = useState(false)
+  const [showEdit, setShowEdit] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [userBio, setUserBio] = useState(user.bio);
+  const [newBioSubmitted, setNewBioSubmitted] = useState(false);
+
+  const [present] = useIonAlert();
 
   const saveNewBio = (userBio) => {
     setNewBioSubmitted(true)
-    setShowModal(false)
-  }
+    setShowEdit(false)
+  };
 
   useEffect(() => {
 
@@ -22,13 +28,20 @@ const ProfileHeaderRight = ({ user }) => {
       <IonButton
         icon-only className="headerbtn"
         slot="end"
-        onClick={() => setShowModal(true)}
+        onClick={() => setShowEdit(true)}
       >
         <IonIcon className="headericon" icon={buildOutline}/>
       </IonButton>
+      <IonButton
+        icon-only className="headerbtn"
+        slot="end"
+        onClick={() => setShowSettings(true)}
+      >
+        <IonIcon className="headericon" icon={settingsOutline}/>
+      </IonButton>
       <IonModal
-        isOpen={showModal}
-        onDidDismiss={() => setShowModal(false)}
+        isOpen={showEdit}
+        onDidDismiss={() => setShowEdit(false)}
       >
         <IonCard>
           <IonCardHeader>
@@ -39,7 +52,7 @@ const ProfileHeaderRight = ({ user }) => {
               <IonButton
                 className="headerbtn"
                 slot="end"
-                onClick={() => setShowModal(false)}
+                onClick={() => setShowEdit(false)}
               >
                 <IonIcon
                   className="headericon"
@@ -66,6 +79,60 @@ const ProfileHeaderRight = ({ user }) => {
         <IonButton onClick={saveNewBio}>
           Save
         </IonButton>
+      </IonModal>
+
+      <IonModal
+        isOpen={showSettings}
+        onDidDismiss={() => setShowSettings(false)}
+      >
+        <IonCard>
+          <IonCardHeader>
+            <IonItem>
+              <IonCardTitle>
+                Settings
+              </IonCardTitle>
+              <IonButton
+                className="headerbtn"
+                slot="end"
+                onClick={() => setShowSettings(false)}
+              >
+                <IonIcon
+                  className="headericon"
+                  icon={ close }
+                />
+              </IonButton>
+            </IonItem>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonItem lines="none">
+              <IonLabel>
+                Theme Toggle:
+              </IonLabel>
+              <ThemeToggle />
+            </IonItem>
+          </IonCardContent>
+        </IonCard>
+        <IonFooter className="modal">
+          <IonToolbar>
+            <IonItem lines="none">
+            <IonButton
+              slot="end"
+              onClick={() =>
+                present({
+                  header:'Log Out',
+                  message: "Are you sure you want to log out?",
+                  buttons: [
+                    'Cancel',
+                    {text: 'Log Out', handler: (d) => Logout(window)}
+                  ]
+                })
+              }
+            >
+              Log Out
+            </IonButton>
+            </IonItem>
+          </IonToolbar>
+        </IonFooter>
       </IonModal>
     </>
   );
