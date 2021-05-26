@@ -61,14 +61,17 @@ export const createUser = async (newUser) => {
 export const getTags = async () => {
   const Tags = db.collection("tags");
 
+  let tags = [];
+
   await Tags.get()
   .then((querySnapshot) => {
-    const tags = [];
+    // const tags = [];
     querySnapshot.forEach((doc) => {
       tags.push(doc.data())
     })
-    return tags
   });
+
+  return tags
 }
 
 export const getRecordings = () => {
