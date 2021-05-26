@@ -78,9 +78,12 @@ const App = () => {
             <Route exact path="/profile">
               <Profile />
             </Route>
+<<<<<<< HEAD
             <Route exact path="/user/:username">
               <Profile />
             </Route>
+=======
+>>>>>>> routing to room id
             <Route exact path="/session/:roomId">
               <Session />
             </Route>
