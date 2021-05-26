@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar} from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import List from './../components/List/List';
 import UserList from './../components/List/UserList';
 import Header from './../components/Header/Header';
@@ -10,7 +10,6 @@ import SuggestList from '../components/List/SuggestList';
 //dummy data
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
-
 
 const Search = () => {
 
@@ -75,9 +74,6 @@ const Search = () => {
 
   }
 
-  function handleSuggest(){
-    setShowSuggest(false)
-  }
 
   return (
     <IonPage>
@@ -93,7 +89,7 @@ const Search = () => {
         <IonSearchbar placeholder="Search for people and Records.." color="primary" value={searchText} onIonChange={(e) => { searchRecords(e.target.value.toLowerCase()) }}
         ></IonSearchbar>
         {showSuggest ? <SuggestList search={searchRecords} /> : null}
-        <UserList users={showListUser} showHeader={false}/>
+        {showListUser.length > 0 ? <UserList users={showListUser} showHeader={true}/> : null}
         {showListStream.length > 0 ?
           <List
             unfolded={true}
