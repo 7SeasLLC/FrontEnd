@@ -21,7 +21,7 @@ const Search = () => {
   const [records, setRecords] = useState(recordingDummy);
   const [showListRecords, setShowListRecords] = useState([]);
   const [showListStream, setshowListStream] = useState([]);
-  const [showListUser, setShowListUser] = useState([userDummy[0]]);
+  const [showListUser, setShowListUser] = useState([]);
   const [showSuggest, setShowSuggest] = useState(true);
 
 
