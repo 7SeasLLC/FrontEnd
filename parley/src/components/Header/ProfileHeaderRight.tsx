@@ -50,7 +50,6 @@ const ProfileHeaderRight = ({ user }) => {
           </IonCardHeader>
           <IonCardContent>
             <IonTextarea
-              autoGrow={true}
               enterkeyhint="done"
               inputmode="text"
               className="editBioText"

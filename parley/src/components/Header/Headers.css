@@ -1,10 +1,12 @@
 .editBio{
   text-align:center;
   font-weight: 700;
-  color: black;
 }
 
 .editBioText {
   background: var(--ion-card-background);
-  color:black
+}
+
+.native-textarea {
+  height: 80vh;
 }
