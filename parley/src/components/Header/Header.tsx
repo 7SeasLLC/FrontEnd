@@ -2,7 +2,7 @@ import { IonImg, IonThumbnail, IonTitle, IonButton, IonIcon } from '@ionic/react
 import { chevronBackOutline } from 'ionicons/icons';
 
 
-const Header = ({ user, HeaderRight, backBtn }) => {
+const Header = ({ user, HeaderRight, backBtn, handleThemeChange }) => {
 
   return (
     <>
@@ -10,7 +10,8 @@ const Header = ({ user, HeaderRight, backBtn }) => {
         <IonButton
           icon-only className="headerbtn backBtn"
           slot="start"
-          onClick={() => setShowEdit(true)}
+          href="/feed"
+          routerDirection="back"
         >
           <IonIcon className="headericon" icon={chevronBackOutline}/>
         </IonButton>
@@ -19,7 +20,8 @@ const Header = ({ user, HeaderRight, backBtn }) => {
         <IonImg src={"/assets/logo-img.png"} />
       </IonThumbnail>
       <IonTitle size="small" className="headerlogotxt">PARLEY</IonTitle>
-      <HeaderRight user={user} />
+      <HeaderRight user={user} handleThemeChange={handleThemeChange} />
+
     </>
   );
 }
