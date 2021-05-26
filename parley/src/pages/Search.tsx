@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonGrid, IonRow } from '@ionic/react';
 import { useState } from 'react';
 import List from './../components/List/List';
-
+import UserList from './../components/List/UserList';
 import Header from './../components/Header/Header';
 import SearchHeaderRight from './../components/Header/SearchHeaderRight'
 import './search.css';
@@ -17,34 +17,35 @@ const Search = () => {
   const [tagList, setTagList] = useState(tag);
   const [users, setUsers] = useState(userDummy);
   const [records, setRecords] = useState(recordingDummy);
-  const [showList, setShowList] = useState([]);
+  const [showListRecords, setShowListRecords] = useState([]);
+  const [showListStream, setshowListStream] = useState([]);
 
 
-  function handleSearchBar(e) {
-    const query = e.target.value.toLowerCase();
-    setSearchText(query)
-    const items = Array.from(document.getElementsByClassName('search-list'));
-    items.forEach(item => {
-      const shouldShow = item.id.toLowerCase().indexOf(query) > -1;
-      item.style.display = shouldShow ? '' : 'none';
-    })
-    getRecording(query)
-  }
+  function searchRecords(e) {
 
-  function getRecording(key) {
-    for (var i = 0; i < tagList.length; i++) {
-      if (key === tagList[i].name) {
-        var ids = tagList[i].recording_id;
-        break;
+    setSearchText(e.target.value.toLowerCase())
+    var showRecords = {}
+    var showStreams = {}
+    for (var i = 0; i < records.length; i++) {
+      for (var j = 0; j < records[i].tags.length; j++) {
+        var currentTags = records[i].tags[j];
+        const shouldShow = currentTags.toLowerCase().indexOf(e.target.value.toLowerCase());
+        if (shouldShow >= 0) {
+          if (!records[i].isStreaming) {
+            showRecords[records[i].recording_id] = records[i];
+          } else {
+            showStreams[records[i].recording_id] = records[i];
+          }
+        }
       }
     }
-    var recordings = []
-
-    if (ids !== undefined) {
-      recordings = ids.map((id) => {
-        return records[id - 1]
-      });
-      setShowList(recordings);
+    setShowListRecords(Object.values(showRecords));
+    if (e.target.value === '') {
+      setShowListRecords([])
+    }
+    setshowListStream(Object.values(showStreams));
+    if (e.target.value === '') {
+      setshowListStream([])
     }
   }
 
@@ -52,29 +53,29 @@ const Search = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <Header
+          <Header
             user={userDummy[0]}
             HeaderRight={SearchHeaderRight}
           />
         </IonToolbar>
-        <IonToolbar>
-          <IonSearchbar value={searchText} onIonChange={(e) => { handleSearchBar(e) }}></IonSearchbar>
-        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-
-
-        {showList.length > 0 && showList !== undefined
-          ? <div><List
+        <IonSearchbar value={searchText} onIonChange={(e) => { searchRecords(e) }}
+        ></IonSearchbar>
+        <UserList users={users} />
+        {showListStream.length > 0 ?
+          <List
             unfolded={true}
             setFold={() => { }}
-            audio={showList}
+            audio={showListStream}
             isStreaming={true} />
-            <List
-              unfolded={true}
-              setFold={() => { }}
-              audio={showList}
-              isStreaming={false} /></div>
+          : null}
+        {showListRecords.length > 0 ?
+          <List
+            unfolded={true}
+            setFold={() => { }}
+            audio={showListRecords}
+            isStreaming={false} />
           : null
         }
       </IonContent>
