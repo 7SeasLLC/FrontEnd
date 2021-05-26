@@ -17,6 +17,7 @@ const CreateSession = ({ user, allTags }) => {
       username: user.username,
       ID: user.username + new Date(),
       tags: streamTags,
+      userIds:[user.authId]
     }
     console.log(streamInfo)
     setShowModal(false)
