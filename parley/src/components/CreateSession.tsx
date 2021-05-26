@@ -1,6 +1,7 @@
 import { IonIcon, IonButton, IonModal, IonTextarea, IonFab, IonFabButton, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput} from '@ionic/react';
 import { mic , close } from 'ionicons/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getTags, createRecording } from '../Utils/Firestore'
 import './CreateSession.css'
 
 const CreateSession = ({ user, allTags }) => {
@@ -8,13 +9,24 @@ const CreateSession = ({ user, allTags }) => {
   const [streamTitle, setStreamTitle] = useState('')
   const [streamDescription, setStreamDescription] = useState('')
   const [streamTags, setStreamTags] = useState('')
+  const [dbTags, setDbTags] = useState([])
+
+  // useEffect (() => {
+  //   setDbTags(findTags());
+  //   console.log(dbTags)
+  // }, [])
+
+  // const findTags = async () => {
+  //   const results = await getTags()
+  //   return results
+  // }
 
   const saveInfo = () => {
     let newId = user.username + new Date()
     const streamInfo = {
       title : streamTitle,
       description : streamDescription,
-      username: user.username,
+      username: [user.username],
       sessionId: newId.split(' ').join(''),
       tags: streamTags,
       userIds:[user.authId]
@@ -22,11 +34,16 @@ const CreateSession = ({ user, allTags }) => {
     console.log(streamInfo)
     return streamInfo
   }
-  const startNewStream = () => {
+  const startNewStream = async () => {
     const info = saveInfo()
     const url = info.sessionId
-    window.location.replace(`session/${url}`)
-    setShowModal(false)
+    try {
+      await createRecording (info);
+      window.location.replace(`session/${url}`);
+      setShowModal(false);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
