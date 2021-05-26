@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { } from '@ionic/react';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
@@ -12,14 +12,15 @@ declare module 'axios' {
   }
 }
 
-class Session extends React.Component<{}, { roomId: string, recording: boolean, users: number }> {
+class Session extends React.Component<{}, { roomId: string, recording: boolean, users: number, host: boolean }> {
   constructor(props) {
     super(props);
     this['chunks'] = [];
     this.state = {
       roomId: 'arandomstring',
       recording: false,
-      users: 0
+      users: 0,
+      host: false
     }
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
@@ -47,7 +48,7 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean, 
       this['mediaRecorder'].onstop = (e) => {
         const blob =  new Blob(this['chunks'], { 'type' : 'audio/mpeg' });
         this['chunks'] = [];
-        this.sendToServer(new File([blob], 'testname.webm'));
+        this.sendToServer(new File([blob], 'testname2.webm'));
       }
 
       myPeer.on('call', call => {
@@ -95,13 +96,14 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean, 
 
   }
 
-  sendToServer (file) {
+  async sendToServer (file) {
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     console.log(file);
-    return axios.post('http://localhost:4000/addAudio', bodyFormData)
+    return await axios.post('http://localhost:4000/addAudio', bodyFormData)
       .then((url) => {
         console.log(url.data)
+        // window.location.replace("/feed")
       })
   }
 
@@ -131,11 +133,16 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean, 
 
   render() {
     return (
-    <div id= 'callGrid'>
-      <button onClick={this.startRecording}>Start Recording</button>
-      <button onClick={this.stopRecording}>Stop Recording</button>
-      {this.state.recording ? (<div>Currently Recording</div>) : null}
-      <div>Number of listeners: {this.state.users}</div>
+    <div id= 'callGrid' style={{marginTop: '20%', marginLeft: '40%'}}>
+
+      {this.state.recording ? (
+      <Fragment>
+        <button  style={{height: '50px', width: '200px'}} onClick={this.stopRecording}>End Session</button>
+        <p style={{color: 'red'}}>Currently Recording</p>
+      </Fragment>
+
+      ) : <button style={{height: '50px', width: '200px'}} onClick={this.startRecording}>Start Recording</button>}
+      <p style={{color: 'red', marginTop: '2%'}}>Number of listeners: {this.state.users}</p>
     </div>
     );
   }
