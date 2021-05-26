@@ -144,11 +144,17 @@ export const createRecording = async (recording) => {
       }
     )
 
+      //updates all hosts with the newly created recording
     recording.userIds.foreEach(async (id) => {
       await Users.doc(id).update({
         recordings: db.FieldValue.arrayUnion(id)
       })
     })
+
+    // implementing update tag count on creation of new recoding
+    // recording.tags.forEach(async (tag) => {
+    //   await
+    // })
 
   } catch (err) {
     return "an error occurred, creating your recording"
