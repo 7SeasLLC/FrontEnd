@@ -16,7 +16,6 @@ ion-item-option {
   margin-right: -6px;
 }
 
-p.search-chips {
-  margin: 5px 15px;
-  /* margin-top: 0; */
+ion-label.user-search-list {
+  margin-left: 3%;
 }
