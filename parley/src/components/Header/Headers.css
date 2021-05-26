@@ -1,5 +1,19 @@
+.editBioCard {
+  height: 100%;
+}
+.editBioCardContent {
+  height: 80%;
+}
+.editBioText {
+  height: 80%;
+}
+
+.textarea-wrapper {
+  height: 100%;
+}
+
 .native-textarea {
-  height: 80vh;
+  height: 100%;
 }
 
 .headerlogoimg {
@@ -26,6 +40,10 @@ ion-toolbar {
 }
 .headerbtn:hover {
   filter: invert() grayscale(100%) contrast(0%);
+}
+
+.backBtn {
+  margin-right: -20px;
 }
 
 .headericon {
