@@ -99,7 +99,10 @@ class Session extends React.Component<{}, { roomId: string, recording: boolean, 
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     console.log(file);
-    return axios.post('http://localhost:4000/addAudio', bodyFormData);
+    return axios.post('http://localhost:4000/addAudio', bodyFormData)
+      .then((url) => {
+        console.log(url.data)
+      })
   }
 
   addCallerAudio(audio, stream) {
