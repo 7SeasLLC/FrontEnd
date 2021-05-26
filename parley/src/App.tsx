@@ -78,12 +78,8 @@ const App = () => {
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/user/:username">
-              <Profile />
-            </Route>
-            <Route exact path="/session/:roomId">
-              <Session />
-            </Route>
+            <Route exact path="/user/:username" component={Profile}/>
+            <Route path="/session/:roomId" component={Session}/>
             </>
           ) : (
             <>
