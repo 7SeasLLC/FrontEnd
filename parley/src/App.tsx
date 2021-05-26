@@ -8,12 +8,9 @@ import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
 import Profile from './pages/Profile';
-<<<<<<< HEAD
 import Login from './pages/Login';
 
-=======
 import { getUser} from './Utils/Firestore'
->>>>>>> init db conenction, complete getUser model/methodwq
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
