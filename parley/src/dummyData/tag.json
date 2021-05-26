@@ -2,123 +2,121 @@
   {
     "id": 1,
     "name": "app developer",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 2,
     "name": "web designer",
-    "count": 11,
+    "count": 11
   },
   {
     "id": 3,
     "name": "artificial intelligence",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 4,
     "name": "tech news",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 5,
     "name": "coding",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 6,
     "name": "new technology",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 7,
     "name": "dynamic programming",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 8,
     "name": "software developer",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 9,
     "name": "tech solutions",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 10,
     "name": "network security",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 11,
     "name": "cloud computing",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 12,
     "name": "javascript",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 13,
     "name": "windows10",
-    "count": 1,
-    "recording_id" : []
+    "count": 1
   },
   {
     "id": 14,
     "name": "ios",
-    "count": 1,
-    "recording_id" : []
+    "count": 1
   },
    {
     "id": 15,
     "name": "andriod",
-    "count": 1,
+    "count": 1
   },
    {
     "id": 16,
     "name": "react",
-    "count": 1,
+    "count": 1
   },
    {
     "id": 17,
     "name": "front-end",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 18,
     "name": "typescript",
-    "count": 1,
+    "count": 1
   },
    {
     "id": 19,
     "name": "angular",
-    "count": 1,
+    "count": 1
   },
     {
     "id": 20,
     "name": "algorithms",
-    "count": 1,
+    "count": 1
   },
    {
     "id": 21,
     "name": "jquery",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 22,
     "name": "css",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 23,
     "name": "vue",
-    "count": 1,
+    "count": 1
   },
   {
     "id": 24,
     "name": "fastify",
-    "count": 1,
+    "count": 1
   }
 ]
