@@ -10,7 +10,7 @@
     "tags" : "jquery, react"
   },
   {
-    "Auth_id" : "ZYX321",
+    "auth_id" : "ZYX321",
     "username" : "JortsMaster",
     "Email" : "ilovemyjorts@yahoo.com",
     "bio" : "I'm here to share all there is about the cutting edge of jort-tech!",
@@ -20,7 +20,7 @@
     "Tags" : "jquery, react, jort-tech"
   },
   {
-    "Auth_id" : "ZYX324",
+    "auth_id" : "ZYX324",
     "username" : "emmi",
     "Email" : "ilovemyjorts@yahoo.com",
     "bio" : "I'm here to share all there is about the cutting edge of jort-tech!",

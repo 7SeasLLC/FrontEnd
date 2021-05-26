@@ -10,6 +10,7 @@ import './search.css';
 import tag from './../dummyData/tag.json';
 import userDummy from './../dummyData/userDummy.json';
 import recordingDummy from './../dummyData/recordingDummy.json';
+import { search } from 'ionicons/icons';
 
 const Search = () => {
 
@@ -19,9 +20,11 @@ const Search = () => {
   const [records, setRecords] = useState(recordingDummy);
   const [showListRecords, setShowListRecords] = useState([]);
   const [showListStream, setshowListStream] = useState([]);
+  const [showListUser, setShowListUser] = useState([]);
 
 
   function searchRecords(e) {
+
 
     setSearchText(e.target.value.toLowerCase())
     var showRecords = {}
@@ -47,6 +50,23 @@ const Search = () => {
     if (e.target.value === '') {
       setshowListStream([])
     }
+    searchUsers(e.target.value.toLowerCase())
+  }
+
+
+  function searchUsers(key) {
+    var list = {}
+    users.map((user) => {
+      const shouldShow = user.username.toLowerCase().indexOf(key);
+      if (shouldShow >= 0) {
+        list[user.auth_id] = user;
+      }
+    })
+    setShowListUser(Object.values(list))
+    if (key === '') {
+      setShowListUser([])
+    }
+
   }
 
   return (
@@ -62,7 +82,7 @@ const Search = () => {
       <IonContent fullscreen>
         <IonSearchbar value={searchText} onIonChange={(e) => { searchRecords(e) }}
         ></IonSearchbar>
-        <UserList users={users} />
+        <UserList users={showListUser} />
         {showListStream.length > 0 ?
           <List
             unfolded={true}
