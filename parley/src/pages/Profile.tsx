@@ -9,23 +9,34 @@ import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import FeedHeaderRight from '../components/Header/FeedHeaderRight'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
+import { getUser } from '../Utils/Firestore';
 
 const Profile = ({ match, handleThemeChange }) => {
 
-  let ownPage = match !== undefined ? (
+  let userToGrab = match !== undefined ? (
     match.params.username
-  ) : (
-    JSON.parse(window.localStorage.getItem('user'))
-  );
+  ) : null;
 
-  const [userInfo, setUserInfo] = useState(JSON.parse(window.localStorage.getItem('user')));
   const ownInfo = JSON.parse(window.localStorage.getItem('user'));
 
+  const [userInfo, setUserInfo] = useState(ownInfo);
   const [newBio, setNewBio] = useState(ownInfo.bio)
 
   const handleNewBio = (string) => {
     setNewBio(string);
   }
+
+  const updateInfo = async () => {
+    if (userToGrab !== null) {
+      const otherUserInfo = await getUser(userToGrab);
+      console.log(otherUserInfo);
+      setUserInfo(otherUserInfo);
+    }
+  };
+
+  useEffect(() => {
+    updateInfo();
+  }, [])
 
   return (
     <IonPage>
@@ -40,7 +51,8 @@ const Profile = ({ match, handleThemeChange }) => {
           />
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+    {  userInfo
+    ? <IonContent>
         <ProfileInfo userInfo={userInfo} bio={newBio}/>
         <List
           unfolded={true}
@@ -55,6 +67,8 @@ const Profile = ({ match, handleThemeChange }) => {
           user={userInfo.authId}
           showTitle={false}/>
       </IonContent>
+      : null
+      }
     </IonPage>
   );
 }

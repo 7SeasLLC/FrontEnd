@@ -14,6 +14,7 @@ const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
 
   const grabRecordings = async () => {
     let array = user !== null ? await getUserRecordings(user) : await getRecordings();
+    console.log('recordings grabbed');
     setAudio(array);
   };
 
