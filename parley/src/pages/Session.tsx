@@ -76,11 +76,11 @@ const Session = (props) => {
   const determineHost = async () => {
     const newuser = await JSON.parse(window.localStorage.getItem('user'))
     const data = await getRecording(roomId)
-    const userData = await getUser(data.Hosts[0])
-    await setHostInfo(userData)
     if (data === undefined || data.Hosts === undefined) {
       setRoomExists(false)
     } else {
+      const userData = await getUser(data.Hosts[0])
+      await setHostInfo(userData)
       await setStartTime(data.StartTime.seconds)
       await setSessionInfo(data)
       if (data.Hosts.includes(newuser.username)){
