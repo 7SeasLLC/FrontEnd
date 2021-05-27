@@ -23,7 +23,7 @@ const Session = (props) => {
   const [users, setUsers] = useState(0);
   const [host, setHost] = useState(false);
 
-  const userData = JSON.parse(window.localStorage.getItem('user'));
+  const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect (() => {
     let chunks = []
@@ -142,7 +142,7 @@ const Session = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <Header user={userData}
+          <Header user={userInfo}
                   HeaderRight={()=> {return null}}
                   backBtn={true}
                   handleThemeChange={()=>{}}
