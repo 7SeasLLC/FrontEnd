@@ -6,7 +6,7 @@ const SearchHeaderRight = ({ user }) => {
   return (
     <>
       <IonItem className="profilebtn" lines="none" slot="end" href="/profile">
-        <IonChip>
+        <IonChip className="titlechip">
         <IonAvatar>
         <img alt={'Your Profile'} src={user.profile_img} />
         </IonAvatar>

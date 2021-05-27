@@ -6,12 +6,6 @@ ion-avatar:hover {
   border: 2px solid var(--ion-color-dark);
 }
 
-ion-chip {
-  margin-left: -15px;
-  --background: transparent;
-  --background-hover: transparent;
-}
-
 ion-item {
   margin: -4px;
   --background-hover: transparent;

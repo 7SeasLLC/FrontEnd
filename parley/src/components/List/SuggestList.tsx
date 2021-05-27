@@ -1,16 +1,15 @@
-import { IonCard, IonChip, IonLabel, IonCardSubtitle } from '@ionic/react';
-import { useState, useEffect } from 'react'
+import { IonCard, IonChip, IonLabel, IonCardSubtitle, IonSearchbar, IonCardContent } from '@ionic/react';
+import { useState, useEffect,  } from 'react'
 import { getTags, getUser } from './../../Utils/Firestore'
 import userDummy from '../../dummyData/userDummy.json';
 import UserList from './UserList';
 
-const SuggestList = ({ search }) => {
+const SuggestList = ({ searchText, addToTagArray}) => {
 
   const [tags, setTags] = useState([])
-  const [users, setUsers] = useState(userDummy)
 
   useEffect(() => {
-    getTags('tags').then(res => {
+    getTags().then(res => {
       setTags(res.sort((a, b) => {
         return b.count - a.count;
       }))
@@ -19,22 +18,21 @@ const SuggestList = ({ search }) => {
   }, [])
 
   return (
-    <div>
-      {/* <UserList users={users} showHeader={true}/> */}
       <IonCard>
-        <div className="all-tag">
-          <IonCardSubtitle className="all-tag-title"><strong>FIND CONVERSATIONS ABOUT....</strong></IonCardSubtitle>
+        <IonCardContent>
           {tags.map(tag => {
-            return (
-              <IonChip outline={true} className="tag-list" color="primary" onClick={() => { search(tag.name.toLowerCase()) }}>
-                <IonLabel>{tag.name}</IonLabel>
-              </IonChip>
-            )
-          }
-          )}
-        </div>
+            if (tag.name.toLowerCase().indexOf(searchText) > -1 ||
+                searchText === '') {
+              return (
+                <IonChip
+                  onClick={() => {addToTagArray(tag.name)}}>
+                  <IonLabel>{tag.name}</IonLabel>
+                </IonChip>
+              )
+            }
+          })}
+        </IonCardContent>
       </IonCard>
-    </div>
   );
 };
 

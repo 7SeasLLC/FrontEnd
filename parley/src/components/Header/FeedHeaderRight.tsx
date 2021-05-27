@@ -9,7 +9,7 @@ const FeedHeaderRight = ({ user }) => {
         <IonIcon className="headericon" icon={searchOutline}/>
       </IonButton>
       <IonButton className="profilebtn" slot="end" href="/profile">
-        <IonChip>
+        <IonChip className="titlechip">
           <IonAvatar>
             <img alt={'Your Profile'} src={user.photoUrl} />
           </IonAvatar>
