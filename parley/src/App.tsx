@@ -10,6 +10,7 @@ import Feed from './pages/Feed';
 import Session from './pages/Session'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import UserName from './pages/UserName'
 
 
 import { loginUser, updateUser } from './Utils/Firestore'
@@ -80,7 +81,7 @@ const App = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          {user ? (
+          {user && user.username ? (
             <>
             <Route exact path="/feed">
               <Feed />
@@ -105,6 +106,16 @@ const App = () => {
               component={Session}/>
             </>
           ) : (
+            user ? (
+              <>
+                <Route exact path="/username">
+                  <UserName user={user}/>
+                </Route>
+                <Route path="/">
+                  <Redirect to="/username" />
+                </Route>
+              </>
+            ) : (
             <>
               <Route exact path="/login">
                 <Login signin={handleSignIn} />
@@ -112,7 +123,7 @@ const App = () => {
               <Route path="/">
                 <Redirect to="/login" />
               </Route>
-            </>
+            </>)
           )}
 
 
