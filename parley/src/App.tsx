@@ -13,8 +13,7 @@ import Login from './pages/Login';
 import UserName from './pages/UserName'
 
 
-import { loginUser, updateUser } from './Utils/Firestore'
-import Search from './pages/Search';
+import { loginUser } from './Utils/Firestore'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
