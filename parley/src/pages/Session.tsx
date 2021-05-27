@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect} from 'react';
 import { IonPage, IonHeader, IonToolbar, IonContent, IonButton } from '@ionic/react';
-import { getRecording, updateRecording } from '../Utils/Firestore';
+import { getRecording, updateRecording, getUser } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
 import axios from 'axios';
@@ -28,10 +28,10 @@ const Session = (props) => {
   const [startRecord, setStartRecord] = useState(0)
   const [recordDuration, setRecordDuration] = useState(null)
   const [sessionInfo, setSessionInfo] = useState({})
+  const [hostInfo, setHostInfo] = useState({})
 
   useEffect (() => {
     determineHost()
-    console.log(startTime)
     if (startTime !== 0) {
       setInterval(() => {
         var endTime = Math.floor((new Date().getTime() / 1000))
@@ -67,7 +67,7 @@ const Session = (props) => {
           dm = '0' + dm
         }
         var elapsedRecord = (dh + ':' + dm + ':' + ds)
-        console.log(elapsedRecord)
+        // console.log(elapsedRecord)
         setRecordDuration(elapsedRecord)
       }, 1000)
     }
@@ -76,6 +76,8 @@ const Session = (props) => {
   const determineHost = async () => {
     const newuser = await JSON.parse(window.localStorage.getItem('user'))
     const data = await getRecording(roomId)
+    const userData = await getUser(data.Hosts[0])
+    await setHostInfo(userData)
     if (data === undefined || data.Hosts === undefined) {
       setRoomExists(false)
     } else {
@@ -93,7 +95,6 @@ const Session = (props) => {
 
   useEffect (() => {
     determineHost()
-    console.log(sessionInfo)
     if (roomExists) {
       let chunks = []
       socket.emit('rendered');
@@ -233,7 +234,7 @@ const Session = (props) => {
        </IonHeader>
        <IonContent>
          <SessionInfo listeners={users} title={sessionInfo.title} host={sessionInfo.Hosts} description = {sessionInfo.Description}
-         uptime={duration}/>
+         uptime={duration} hostName={hostInfo.username} hostPhoto={hostInfo.photoUrl}/>
        </IonContent>
          {host ? (
          <Fragment>
