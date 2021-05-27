@@ -50,7 +50,7 @@ const Profile = ({ match, handleThemeChange }) => {
           showTitle={false}/>
       </IonContent>
     </IonPage>
-      );
-  }
+  );
+}
 
 export default Profile;

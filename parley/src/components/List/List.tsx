@@ -61,9 +61,9 @@ const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
 
             return (
               <IonItemSliding
-                id={item.S3URL}
-                key={item.S3URL}
-                onClick={() => handleClick(item.S3URL)}
+                id={item.sessionId}
+                key={item.sessionId}
+                onClick={() => handleClick(item.sessionId)}
               >
                 <IonItemOptions side="end" >
                   <IonItemOption>

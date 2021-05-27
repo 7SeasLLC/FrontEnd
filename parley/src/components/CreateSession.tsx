@@ -128,7 +128,7 @@ const CreateSession = ({ user, allTags }) => {
               </IonList>
             </IonCardContent>
           </IonCard>
-            <IonButton onClick={saveNewStream}>
+            <IonButton onClick={startNewStream}>
               Begin Stream
             </IonButton>
         </IonModal>
