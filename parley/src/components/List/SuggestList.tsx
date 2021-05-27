@@ -4,7 +4,7 @@ import { getTags, getUser } from './../../Utils/Firestore'
 import userDummy from '../../dummyData/userDummy.json';
 import UserList from './UserList';
 
-const SuggestList = ({ searchText, addToTagArray}) => {
+const SuggestList = ({ searchText, searchArray, addToTagArray}) => {
 
   const [tags, setTags] = useState([])
 
@@ -22,15 +22,17 @@ const SuggestList = ({ searchText, addToTagArray}) => {
         <IonCardContent>
           {tags.map(tag => {
             if (tag.name.toLowerCase().indexOf(searchText) > -1 ||
-                searchText === '') {
-              return (
-                <IonChip
-                  key={tag.name}
-                  onClick={() => {addToTagArray(tag.name)}}
-                >
-                  {tag.name}
-                </IonChip>
-              )
+            searchText === '') {
+              if (searchArray.indexOf(tag.name) === -1) {
+                return (
+                  <IonChip
+                    key={tag.name}
+                    onClick={() => {addToTagArray(tag.name)}}
+                  >
+                    {tag.name}
+                  </IonChip>
+                )
+              }
             }
           })}
         </IonCardContent>

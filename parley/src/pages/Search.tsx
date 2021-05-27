@@ -1,5 +1,6 @@
 
-import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonCard, IonBadge, IonCardContent } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonCard, IonChip, IonBadge, IonCardContent, IonIcon } from '@ionic/react';
+import { close } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import List from './../components/List/List';
 import UserList from './../components/List/UserList';
@@ -122,10 +123,20 @@ const Search = ({ user }) => {
   };
 
   const addToTagArray = (tagStr) => {
-    let array = searchArray;
+    let array = searchArray.slice();
     array.push(tagStr);
     setSearchArray(array);
   };
+
+  const handleRemoveTag = (tagStr) => {
+    let newArray = [];
+    for (let i = 0; i < searchArray.length; i++) {
+      if (searchArray[i] !== tagStr) {
+        newArray.push(searchArray[i]);
+      }
+    }
+    setSearchArray(newArray);
+  }
 
   return (
     <IonPage>
@@ -140,23 +151,33 @@ const Search = ({ user }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+
         <IonSearchbar
           placeholder="Search for people and Records.."
           color="primary"
           value={searchText}
           onIonChange={e => { handleSearchStrChange(e.target.value) }}
         />
+
+        {searchArray.length > 0 ? (
           <IonCard>
             <IonCardContent>
-              {searchArray.map(tag => {
-                console.log(tag);
-                return (<IonBadge>{tag}</IonBadge>)
-              })}
+              {searchArray.map(tag => (
+                <IonChip key={tag}>
+                  {tag}
+                  <IonIcon
+                    icon={close}
+                    onClick={() => handleRemoveTag(tag)}
+                  />
+                </IonChip>)
+              )}
             </IonCardContent>
           </IonCard>
+        ) : null}
 
         <SuggestList
           searchText={searchText}
+          searchArray={searchArray}
           addToTagArray={addToTagArray}
         />
 
