@@ -1,11 +1,25 @@
 import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonNote } from '@ionic/react';
 import { chevronDownOutline, chevronUpOutline, playOutline } from 'ionicons/icons';
 
+import { useState, useEffect } from 'react';
+import { getRecordings, getUserRecordings } from './../../Utils/Firestore';
+
 import './List.css';
 
-const List = ({ unfolded, setFold, audio, isStreaming }) => {
-
+const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
   const string = isStreaming ? 'stream': 'recording';
+
+  const [audio, setAudio] = useState([]);
+  let count = 0;
+
+  const grabRecordings = async () => {
+    let array = user !== null ? await getUserRecordings(user) : await getRecordings();
+    setAudio(array);
+  };
+
+  useEffect(() => {
+    grabRecordings();
+  },[]);
 
   const handleClick = (id) => {
     let element = document.getElementById(id);
@@ -22,7 +36,8 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
 
   return (
     <IonCard>
-      <IonItem onClick={() => setFold(string)}>
+      {showTitle ? (
+              <IonItem onClick={() => setFold(string)}>
         <IonCardSubtitle>
           {isStreaming ? (
             "Live Streams"
@@ -36,15 +51,19 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
             <IonIcon icon={chevronDownOutline} slot="end"></IonIcon>
           )}
       </IonItem>
+      ) : null}
     {unfolded ? (
       <IonList>
         {audio.map((item) => {
           if (item.isStreaming === isStreaming) {
+            count++;
+            let username = item.Hosts[0].slice(0, item.Hosts[0].indexOf('@'));
+
             return (
               <IonItemSliding
-                id={item.recording_id}
-                key={item.recording_id}
-                onClick={() => handleClick(item.recording_id)}
+                id={item.sessionId}
+                key={item.sessionId}
+                onClick={() => handleClick(item.sessionId)}
               >
                 <IonItemOptions side="end" >
                   <IonItemOption>
@@ -59,23 +78,23 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
                 </IonItemOptions>
                   <IonItem lines="none">
                     <a
-                      href={'/user/' + item.username}
+                      href={'/user/' + username}
                       style={{marginRight: '11px'}}>
                       <IonAvatar slot="start">
                         <img
-                          alt={`${item.username}'s avatar`}
+                          alt={`${username}'s avatar`}
                           src={item.profile_img}
                         />
                       </IonAvatar>
                     </a>
                     <IonLabel>
                       <IonNote>
-                        {item.username}
+                        {username}
                       </IonNote>
                       <IonLabel>
                         {item.title}
                       </IonLabel>
-                      {item.tags.map((tag) => (
+                      {item.Tags.map((tag) => (
                         <IonBadge className="audioTag" key={tag}>
                           {tag}
                         </IonBadge>
@@ -87,6 +106,13 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
             );
           }
         })}
+        {count === 0 ? (
+          <IonItem lines="none">
+            <IonCardSubtitle>
+              {'No ' + string.charAt(0).toUpperCase() + string.slice(1) + 's'}
+            </IonCardSubtitle>
+          </IonItem>
+        ) : null}
       </IonList>
     ) : null}
     </IonCard>

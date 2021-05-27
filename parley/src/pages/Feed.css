@@ -29,3 +29,13 @@ ion-header {
   left: 50%;
   transform: translateX(-50%);
 }
+
+/* ion-textarea {
+  box-shadow:
+    inset 0px -2px var(--ion-color-light-tint);
+}
+
+ion-input {
+  box-shadow:
+    inset 0px -3px var(--ion-color-light-tint);
+} */
