@@ -1,12 +1,12 @@
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonIcon, IonButton, IonModal, IonTextarea, IonLabel, IonFooter, IonToolbar, useIonAlert } from '@ionic/react';
-import { buildOutline , close, settingsOutline } from 'ionicons/icons';
+import { createOutline , close, settingsOutline } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
 import Logout from '../../Utils/Logout'
 
 import './Headers.css'
 import ThemeToggle from './ThemeToggle';
 
-const ProfileHeaderRight = ({ user }) => {
+const ProfileHeaderRight = ({ user, handleThemeChange }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [userBio, setUserBio] = useState(user.bio);
@@ -30,7 +30,7 @@ const ProfileHeaderRight = ({ user }) => {
         slot="end"
         onClick={() => setShowEdit(true)}
       >
-        <IonIcon className="headericon" icon={buildOutline}/>
+        <IonIcon className="headericon" icon={createOutline}/>
       </IonButton>
       <IonButton
         icon-only className="headerbtn headerfarright"
@@ -43,7 +43,7 @@ const ProfileHeaderRight = ({ user }) => {
         isOpen={showEdit}
         onDidDismiss={() => setShowEdit(false)}
       >
-        <IonCard>
+        <IonCard className="editBioCard">
           <IonCardHeader>
             <IonItem>
               <IonCardTitle>
@@ -61,7 +61,7 @@ const ProfileHeaderRight = ({ user }) => {
               </IonButton>
             </IonItem>
           </IonCardHeader>
-          <IonCardContent>
+          <IonCardContent className="editBioCardContent">
             <IonTextarea
               enterkeyhint="done"
               inputmode="text"
@@ -106,9 +106,9 @@ const ProfileHeaderRight = ({ user }) => {
           <IonCardContent>
             <IonItem lines="none">
               <IonLabel>
-                Theme Toggle:
+                Dark Mode:
               </IonLabel>
-              <ThemeToggle />
+              <ThemeToggle handleThemeChange={handleThemeChange}/>
             </IonItem>
           </IonCardContent>
         </IonCard>

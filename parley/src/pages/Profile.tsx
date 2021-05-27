@@ -1,4 +1,4 @@
-import { IonPage, IonHeader, IonToolbar, IonContent, IonItem } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonContent } from '@ionic/react';
 import { useState } from 'react';
 // import axios from 'axios';
 import './Profile.css';
@@ -9,16 +9,19 @@ import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
 
-const Profile = (props) => {
+const Profile = ({ match, handleThemeChange }) => {
 
-  // const [user, setUser] = useState(match.params.username || JSON.parse(window.localStorage.getItem('user')));
+  let ownPage = match ? (match.params.id
+    ) : (JSON.parse(window.localStorage.getItem('user')));
+
+  const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')));
   const [userData, setUserData] = useState(data[0]);
 
-  // axios
-  //   .get('')
-  //   .then(res => {
-  //     setUserData(res.data);
-  //   })
+  const [recIsOpen, setRecIsOpen] = useState(true);
+
+  const handleSwitch = () => {
+      setRecIsOpen(!recIsOpen);
+  }
 
   return (
     <IonPage>
@@ -26,6 +29,8 @@ const Profile = (props) => {
         <IonToolbar>
           <Header user={userData}
                   HeaderRight={ProfileHeaderRight}
+                  backBtn={true}
+                  handleThemeChange={handleThemeChange}
           />
         </IonToolbar>
       </IonHeader>
@@ -33,17 +38,19 @@ const Profile = (props) => {
         <ProfileInfo userInfo={userData} />
         <List
           unfolded={true}
-          setFold = {() => {}}
-          audio={recordingDummy}
-          isStreaming={true}/>
+          setFold = {() =>{}}
+          isStreaming={true}
+          user={user.authId}
+          showTitle={false}/>
         <List
           unfolded={true}
-          setFold = {() => {}}
-          audio={recordingDummy}
-          isStreaming={false}/>
+          setFold = {handleSwitch}
+          isStreaming={false}
+          user={user.authId}
+          showTitle={false}/>
       </IonContent>
     </IonPage>
-      );
-  }
+  );
+}
 
 export default Profile;
