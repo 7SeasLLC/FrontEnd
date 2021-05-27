@@ -1,5 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
+
 import Header from './../components/Header/Header';
 import './Feed.css';
 import List from './../components/List/List';
@@ -11,9 +12,10 @@ import CreateSession from './../components/CreateSession';
 import recordingDummy from './../dummyData/recordingDummy.json';
 import userDummy from './../dummyData/userDummy.json';
 import tags from './../dummyData/tag.json';
+import { recording } from 'ionicons/icons';
 
 
-const Feed = () => {
+const Feed = ({audio}) => {
 
   const [streamIsOpen, setStreamIsOpen] = useState(true);
   const [recIsOpen, setRecIsOpen] = useState(true);
@@ -41,13 +43,13 @@ const Feed = () => {
         <List
           unfolded={streamIsOpen}
           setFold = {handleSwitch}
-          audio={recordingDummy}
-          isStreaming={true}/>
+          isStreaming={true}
+          user={null}/>
         <List
           unfolded={recIsOpen}
           setFold = {handleSwitch}
-          audio={recordingDummy}
-          isStreaming={false}/>
+          isStreaming={false}
+          user={null}/>
       </IonContent>
       <CreateSession user={userDummy[0]} allTags={tags}/>
     </IonPage>
