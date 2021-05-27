@@ -42,16 +42,16 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
           if (item.isStreaming === isStreaming) {
             return (
               <IonItemSliding
-                id={item.recording_id}
-                key={item.recording_id}
-                onClick={() => handleClick(item.recording_id)}
+                id={item.sessionId}
+                key={item.sessionId}
+                onClick={() => handleClick(item.sessionId)}
               >
                 <IonItemOptions side="end" >
                   <IonItemOption>
                     <IonButton
                       icon-only
                       className="listplaybtn"
-                      href={`/${isStreaming ? 'listen' : 'play'}/${item.recording_id}`}
+                      href={`/${isStreaming ? 'listen' : 'play'}/${item.sessionId}`}
                     >
                       <IonIcon icon={playOutline} />
                     </IonButton>
@@ -59,23 +59,23 @@ const List = ({ unfolded, setFold, audio, isStreaming }) => {
                 </IonItemOptions>
                   <IonItem lines="none">
                     <a
-                      href={'/user/' + item.username}
+                      href={'/user/' + item.Hosts[0]}
                       style={{marginRight: '11px'}}>
                       <IonAvatar slot="start">
                         <img
-                          alt={`${item.username}'s avatar`}
+                          alt={`${item.Hosts[0]}'s avatar`}
                           src={item.profile_img}
                         />
                       </IonAvatar>
                     </a>
                     <IonLabel>
                       <IonNote>
-                        {item.username}
+                        {item.Hosts[0]}
                       </IonNote>
                       <IonLabel>
                         {item.title}
                       </IonLabel>
-                      {item.tags.map((tag) => (
+                      {item.Tags.map((tag) => (
                         <IonBadge className="audioTag" key={tag}>
                           {tag}
                         </IonBadge>

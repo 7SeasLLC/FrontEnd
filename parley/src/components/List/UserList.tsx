@@ -8,7 +8,7 @@ const UserList = ({ users, showHeader}) => {
       {
         users.map(user => {
           return (
-            <IonItem button={true} href={'/user/' + user.username} key={user.auth_id}>
+            <IonItem lines="none" button={true} href={'/user/' + user.username} key={user.auth_id}>
               <IonAvatar>
                 <img src={user.profile_img} alt={`avatar-${user.username}`} />
               </IonAvatar>
