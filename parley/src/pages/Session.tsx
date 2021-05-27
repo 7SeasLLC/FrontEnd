@@ -7,8 +7,8 @@ import axios from 'axios';
 import Header from '../components/Header/Header';
 import SessionInfo from '../components/SessionInfo';
 
-const socket = openSocket('http://localhost:4000');
-const myPeer = new Peer(undefined, {host: '/', port: 3001})
+const socket = openSocket('http://54.193.3.132');
+const myPeer = new Peer(undefined, {host: '54.193.3.132', port: 3001})
 declare var MediaRecorder: any;
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -172,7 +172,7 @@ const Session = (props) => {
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
-      const data = await axios.post('http://localhost:4000/addAudio', bodyFormData)
+      const data = await axios.post('http://54.193.3.132/addAudio', bodyFormData)
       const url = data.data
       await updateRecording ({
         sessionId: roomId,
@@ -191,7 +191,7 @@ const Session = (props) => {
   const addCallerAudio = (audio, stream)=> {
     audio.srcObject = stream;
     audio.addEventListener('loadedmetadata',()=> {audio.play()});
-    document.getElementById('callGrid').append(audio);
+    // document.getElementById('callGrid').append(audio);
   }
 
   const connectToNewUser = (userId, stream) => {
