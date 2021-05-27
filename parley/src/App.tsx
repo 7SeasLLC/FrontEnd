@@ -12,7 +12,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 
 
-import { loginUser } from './Utils/Firestore'
+import { loginUser, updateUser } from './Utils/Firestore'
 import Search from './pages/Search';
 
 /* Core CSS required for Ionic components to work properly */
@@ -36,6 +36,19 @@ import './theme/variables.css';
 const App = () => {
 
   const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')) || false);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  prefersDark.addListener((e) => handleThemeChange(e.matches));
+
+  useEffect(() => {
+    if (user) {
+      window.localStorage.setItem('user', JSON.stringify(user))
+    }
+  }, [user])
+
+  useEffect(() => {
+    handleThemeChange(JSON.parse(window.localStorage.getItem('colorScheme')))
+  }, [])
 
   const handleSignIn = async () => {
 
@@ -56,24 +69,12 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    if (user) {
-      window.localStorage.setItem('user', JSON.stringify(user))
-    }
-  }, [user])
-
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-  prefersDark.addListener((e) => handleThemeChange(e.matches));
-
   const handleThemeChange = (shouldCheck) => {
     document.body.classList.toggle('dark', shouldCheck);
     window.localStorage.setItem('colorScheme', JSON.stringify(shouldCheck));
   };
 
-  useEffect(() => {
-    handleThemeChange(JSON.parse(window.localStorage.getItem('colorScheme')))
-  }, [])
+
 
   return (
     <IonApp>
