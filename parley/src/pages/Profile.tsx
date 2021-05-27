@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './Profile.css';
 import data from '../dummyData/userDummy.json'
 import recordingDummy from './../dummyData/recordingDummy.json';
-import Header from '../components/Header/Header'
+import Header from '../components/Header/Header';
 import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
