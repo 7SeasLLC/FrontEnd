@@ -31,6 +31,7 @@ const Session = (props) => {
 
   useEffect (() => {
     determineHost()
+    console.log(startTime)
     if (startTime !== 0) {
       setInterval(() => {
         var endTime = Math.floor((new Date().getTime() / 1000))
@@ -75,15 +76,16 @@ const Session = (props) => {
   const determineHost = async () => {
     const newuser = await JSON.parse(window.localStorage.getItem('user'))
     const data = await getRecording(roomId)
-    setSessionInfo(data)
     if (data === undefined || data.Hosts === undefined) {
       setRoomExists(false)
-    } else if (data.Hosts.includes(newuser.username)){
-      // console.log(data.StartTime.seconds, 'counter')
+    } else {
       await setStartTime(data.StartTime.seconds)
-      // console.log(startTime)
-      // console.log(Math.floor(new Date().getTime() / 1000))
-      setHost(true);
+      await setSessionInfo(data)
+      if (data.Hosts.includes(newuser.username)){
+        setHost(true);
+        return true;
+      }
+      return false
     }
   }
 
@@ -92,68 +94,69 @@ const Session = (props) => {
   useEffect (() => {
     determineHost()
     console.log(sessionInfo)
-    let chunks = []
-    socket.emit('rendered');
-    var myAudio = document.createElement('audio');
-    myAudio.id = 'myaudio';
+    if (roomExists) {
+      let chunks = []
+      socket.emit('rendered');
+      var myAudio = document.createElement('audio');
+      myAudio.id = 'myaudio';
 
-    navigator.mediaDevices.getUserMedia({
-      video: false,
-      audio: true,
-    })
-    .then(stream =>{
-      var options = {
-        audioBitsPerSecond : 128000,
-        mimeType: 'audio/webm'
-      }
-      mediaRecorder = new MediaRecorder(stream, options)
-      mediaRecorder.ondataavailable = (e) => {
-        chunks.push(e.data);
-      }
+      navigator.mediaDevices.getUserMedia({
+        video: false,
+        audio: true,
+      })
+      .then(stream =>{
+        var options = {
+          audioBitsPerSecond : 128000,
+          mimeType: 'audio/webm'
+        }
+        mediaRecorder = new MediaRecorder(stream, options)
+        mediaRecorder.ondataavailable = (e) => {
+          chunks.push(e.data);
+        }
 
-      mediaRecorder.onstop = (e) => {
-        const blob =  new Blob(chunks, { 'type' : 'audio/mpeg' });
-        chunks = [];
-        sendToServer(new File([blob], `${roomId}`));
-      }
+        mediaRecorder.onstop = (e) => {
+          const blob =  new Blob(chunks, { 'type' : 'audio/mpeg' });
+          chunks = [];
+          sendToServer(new File([blob], `${roomId}`));
+        }
 
-      myPeer.on('call', call => {
-        console.log('received call');
-        call.answer(stream);
-        var Audio = document.createElement('audio');
-        Audio.classList.add('callerAudio');
-        call.on('stream', callerAudioStream =>{
-          addCallerAudio(Audio, callerAudioStream);
+        myPeer.on('call', call => {
+          console.log('received call');
+          call.answer(stream);
+          var Audio = document.createElement('audio');
+          Audio.classList.add('callerAudio');
+          call.on('stream', callerAudioStream =>{
+            addCallerAudio(Audio, callerAudioStream);
+          })
         })
+
+      socket.emit('rendered');
+      socket.on('number-users', numClients => {
+        setUsers(numClients);
       })
 
-    socket.emit('rendered');
-    socket.on('number-users', numClients => {
-      setUsers(numClients);
+
+      socket.on('user-connected', userId => {
+        connectToNewUser(userId, stream);
+      })
+
+      socket.on('session-ended', () => {
+        alert('Session has ended')
+        window.location.replace("/feed")
+      })
     })
 
-
-    socket.on('user-connected', userId => {
-      connectToNewUser(userId, stream);
-    })
-
-    socket.on('session-ended', () => {
-      alert('Session has ended')
-      window.location.replace("/feed")
-    })
-  })
-
-    // socket.on('user-disconnect', userId =>{
-    //   if (this.state[userId]){
-    //     this.state[userId].close();
-    //   }
-    // })
+      // socket.on('user-disconnect', userId =>{
+      //   if (this.state[userId]){
+      //     this.state[userId].close();
+      //   }
+      // })
 
 
-    myPeer.on('open', userId=>{
-        socket.emit('join-room', roomId, userId);
-    })
-
+      myPeer.on('open', userId=>{
+          socket.emit('join-room', roomId, userId);
+      })
+    }
   }, [])
 
   const startRecording = () => {
@@ -188,9 +191,12 @@ const Session = (props) => {
     }
   }
 
-  const addCallerAudio = (audio, stream)=> {
-    audio.srcObject = stream;
-    audio.addEventListener('loadedmetadata',()=> {audio.play()});
+  const addCallerAudio = async (audio, stream)=> {
+    const getHost = await determineHost()
+    if (getHost) {
+      audio.srcObject = stream;
+      audio.addEventListener('loadedmetadata',()=> {audio.play()});
+    }
     // document.getElementById('callGrid').append(audio);
   }
 
@@ -213,36 +219,39 @@ const Session = (props) => {
   }
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <Header user={userInfo}
-                  HeaderRight={()=> {return null}}
-                  backBtn={true}
-                  handleThemeChange={()=>{}}
-          />
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <SessionInfo listeners={users}/>
-        <div>Session uptime: {duration} </div>
-      </IonContent>
-        {host ? (
-        <Fragment>
-        {recording ? (
-            <IonButton onClick={stopRecording}>
-              End Session
-            </IonButton>
-          ) : (
-            <IonButton onClick={startRecording}>
-              Start Recording
-            </IonButton>
-          )}
-      </Fragment>
-        ): null}
+    <Fragment>
+      {roomExists ? (
+        <IonPage>
+         <IonHeader>
+         <IonToolbar>
+           <Header user={userInfo}
+                   HeaderRight={()=> {return null}}
+                   backBtn={true}
+                   handleThemeChange={()=>{}}
+           />
+         </IonToolbar>
+       </IonHeader>
+       <IonContent>
+         <SessionInfo listeners={users} title={sessionInfo.title} host={sessionInfo.Hosts} description = {sessionInfo.Description}
+         uptime={duration}/>
+       </IonContent>
+         {host ? (
+         <Fragment>
+         {recording ? (
+             <IonButton onClick={stopRecording}>
+               End Session
+             </IonButton>
+           ) : (
+             <IonButton onClick={startRecording}>
+               Start Recording
+             </IonButton>
+           )}
+       </Fragment>
+         ): null}
+         </IonPage>
 
-
-    </IonPage>
+      ) : (<IonContent><div style={{marginTop: '40%', color: 'red'}}>There is no session in this room</div></IonContent>)}
+    </Fragment>
   );
 
 }
