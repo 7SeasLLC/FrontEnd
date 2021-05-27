@@ -10,7 +10,6 @@ import { getRecordings } from './../Utils/Firestore'
 
 //dummy data
 import userDummy from './../dummyData/userDummy.json';
-import recordingDummy from './../dummyData/recordingDummy.json';
 
 const Search = () => {
 
