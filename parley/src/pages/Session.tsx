@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { IonPage, IonHeader, IonToolbar, IonCard, IonContent, IonButton } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonButton } from '@ionic/react';
 import { updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
@@ -149,9 +149,7 @@ const Session = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonCard>
-          <SessionInfo listeners={users}/>
-        </IonCard>
+        <SessionInfo listeners={users}/>
       </IonContent>
           {recording ? (
             <IonButton onClick={stopRecording}>
