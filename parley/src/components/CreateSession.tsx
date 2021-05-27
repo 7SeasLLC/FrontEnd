@@ -30,6 +30,7 @@ const CreateSession = ({ user }) => {
       username: [user.username],
       sessionId: newId.split(' ').join(''),
       tags: streamTags,
+      photoId: [user.photoUrl],
       userIds:[user.authId]
     }
     console.log(streamInfo)
