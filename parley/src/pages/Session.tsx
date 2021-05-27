@@ -1,9 +1,12 @@
-import {Fragment, useState, useEffect} from 'react';
-import { } from '@ionic/react';
-import { updateRecording } from '../Utils/Firestore'
+import { useState, useEffect} from 'react';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonButton } from '@ionic/react';
+import { updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
 import axios from 'axios';
+import Header from '../components/Header/Header';
+import SessionInfo from '../components/SessionInfo';
+
 const socket = openSocket('http://localhost:4000');
 const myPeer = new Peer(undefined, {host: '/', port: 3001})
 declare var MediaRecorder: any;
@@ -15,10 +18,12 @@ declare module 'axios' {
 var mediaRecorder = {};
 
 const Session = (props) => {
-  const [roomId, setRoomId] = useState(props.location.pathname.substring(9))
-  const [recording, setRecording] = useState(false)
-  const [users, setUsers] = useState(0)
-  const [host, setHost] = useState(false)
+  const [roomId, setRoomId] = useState(props.location.pathname.substring(9));
+  const [recording, setRecording] = useState(false);
+  const [users, setUsers] = useState(0);
+  const [host, setHost] = useState(false);
+
+  const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect (() => {
     let chunks = []
@@ -134,17 +139,29 @@ const Session = (props) => {
   }
 
   return (
-  <div id= 'callGrid' style={{marginTop: '20%', marginLeft: '40%'}}>
-
-    {recording ? (
-    <Fragment>
-      <button  style={{height: '50px', width: '200px'}} onClick={stopRecording}>End Session</button>
-      <p style={{color: 'red'}}>Currently Recording</p>
-    </Fragment>
-
-    ) : <button style={{height: '50px', width: '200px'}} onClick={startRecording}>Start Recording</button>}
-    <p style={{color: 'red', marginTop: '2%'}}>Number of listeners: {users}</p>
-  </div>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <Header user={userInfo}
+                  HeaderRight={()=> {return null}}
+                  backBtn={true}
+                  handleThemeChange={()=>{}}
+          />
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <SessionInfo listeners={users}/>
+      </IonContent>
+          {recording ? (
+            <IonButton onClick={stopRecording}>
+              End Session
+            </IonButton>
+          ) : (
+            <IonButton onClick={startRecording}>
+              Start Recording
+            </IonButton>
+          )}
+    </IonPage>
   );
 
 }

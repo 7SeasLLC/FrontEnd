@@ -1,16 +1,17 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonModal, IonTextarea, IonFab, IonFabButton, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput, IonItemGroup } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonModal, IonTextarea, IonFab, IonFabButton, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput, IonItemGroup, useIonLoading } from '@ionic/react';
 import { mic , close } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
 import { getTags, createRecording } from '../Utils/Firestore'
 import './CreateSession.css'
 
-const CreateSession = () => {
-  const [showModal, setShowModal] = useState(false)
-  const [streamTitle, setStreamTitle] = useState('')
-  const [streamDescription, setStreamDescription] = useState('')
-  const [streamTags, setStreamTags] = useState('')
-  const [dbTags, setDbTags] = useState([])
-  const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')));
+const CreateSession = ({ user }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [streamTitle, setStreamTitle] = useState('');
+  const [streamDescription, setStreamDescription] = useState('');
+  const [streamTags, setStreamTags] = useState('');
+  const [dbTags, setDbTags] = useState([]);
+
+  const [presentLoading, dismissLoading] = useIonLoading();
 
   useEffect (() => {
     const findTags = async () => {
@@ -37,11 +38,20 @@ const CreateSession = () => {
   const startNewStream = async () => {
     const info = saveInfo()
     const url = info.sessionId
+    presentLoading({
+      message:"Initializing",
+      backdropDismiss: false
+    });
     try {
       await createRecording (info);
       window.location.replace(`session/${url}`);
       setShowModal(false);
     } catch (err) {
+      dismissLoading();
+      presentLoading({
+        message: "Initialization Failed",
+        duration: 3000
+      })
       console.log(err);
     }
   }
