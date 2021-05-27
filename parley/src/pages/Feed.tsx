@@ -20,6 +20,8 @@ const Feed = ({audio}) => {
   const [streamIsOpen, setStreamIsOpen] = useState(true);
   const [recIsOpen, setRecIsOpen] = useState(true);
 
+  const userInfo = JSON.parse(window.localStorage.getItem('user'));
+
   const handleSwitch = (component) => {
     if (component === 'stream') {
       setStreamIsOpen(!streamIsOpen);
@@ -33,7 +35,7 @@ const Feed = ({audio}) => {
       <IonHeader>
         <IonToolbar>
           <Header
-            user={userDummy[0]}
+            user={userInfo}
             HeaderRight={FeedHeaderRight}
             backBtn={false}
           />
@@ -44,14 +46,16 @@ const Feed = ({audio}) => {
           unfolded={streamIsOpen}
           setFold = {handleSwitch}
           isStreaming={true}
-          user={null}/>
+          user={null}
+          showTitle={true}/>
         <List
           unfolded={recIsOpen}
           setFold = {handleSwitch}
           isStreaming={false}
-          user={null}/>
+          user={null}
+          showTitle={true}/>
       </IonContent>
-      <CreateSession user={userDummy[0]} allTags={tags}/>
+      <CreateSession user={userInfo}/>
     </IonPage>
   );
 };

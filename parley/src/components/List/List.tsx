@@ -1,5 +1,5 @@
 import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonNote } from '@ionic/react';
-import { chevronDownOutline, chevronUpOutline, playOutline } from 'ionicons/icons';
+import { chevronDownOutline, chevronUpOutline, playOutline, headsetOutline } from 'ionicons/icons';
 
 import { useState, useEffect } from 'react';
 import { getRecordings, getUserRecordings } from './../../Utils/Firestore';
@@ -72,7 +72,7 @@ const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
                       className="listplaybtn"
                       href={`/${isStreaming ? 'listen' : 'play'}/${item.recording_id}`}
                     >
-                      <IonIcon icon={playOutline} />
+                      <IonIcon icon={isStreaming ? headsetOutline : playOutline} />
                     </IonButton>
                   </IonItemOption>
                 </IonItemOptions>
