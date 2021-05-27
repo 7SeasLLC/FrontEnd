@@ -12,14 +12,19 @@ import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
 
 const Profile = ({ match, handleThemeChange }) => {
 
-  let ownPage = match ? (match.params.id
-    ) : (JSON.parse(window.localStorage.getItem('user')));
+  let ownPage = match !== undefined ? (
+    match.params.username
+  ) : (
+    JSON.parse(window.localStorage.getItem('user'))
+  );
 
   const [userInfo, setUserInfo] = useState(JSON.parse(window.localStorage.getItem('user')));
   const ownInfo = JSON.parse(window.localStorage.getItem('user'));
 
-  const handleSwitch = () => {
-      setRecIsOpen(!recIsOpen);
+  const [newBio, setNewBio] = useState(ownInfo.bio)
+
+  const handleNewBio = (string) => {
+    setNewBio(string);
   }
 
   return (
@@ -27,14 +32,16 @@ const Profile = ({ match, handleThemeChange }) => {
       <IonHeader>
         <IonToolbar>
           <Header user={ownInfo}
-                  HeaderRight={match ? FeedHeaderRight : ProfileHeaderRight}
+                  HeaderRight={match !== undefined ? FeedHeaderRight : ProfileHeaderRight}
                   backBtn={true}
                   handleThemeChange={handleThemeChange}
+                  bio={newBio}
+                  setBio={handleNewBio}
           />
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <ProfileInfo userInfo={userInfo} />
+        <ProfileInfo userInfo={userInfo} bio={newBio}/>
         <List
           unfolded={true}
           setFold = {() =>{}}
