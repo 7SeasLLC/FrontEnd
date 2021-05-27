@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { getTags, createRecording } from '../Utils/Firestore'
 import './CreateSession.css'
 
-const CreateSession = ({ user, allTags }) => {
+const CreateSession = ({ user }) => {
   const [showModal, setShowModal] = useState(false);
   const [streamTitle, setStreamTitle] = useState('');
   const [streamDescription, setStreamDescription] = useState('');
