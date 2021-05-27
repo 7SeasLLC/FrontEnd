@@ -22,7 +22,8 @@ const Session = (props) => {
   const [recording, setRecording] = useState(false);
   const [users, setUsers] = useState(0);
   const [host, setHost] = useState(false);
-  const [userData, setUserData] = useState(JSON.parse(window.localStorage.getItem('user')));
+
+  const userData = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect (() => {
     let chunks = []

@@ -44,12 +44,14 @@ const Feed = ({audio}) => {
           unfolded={streamIsOpen}
           setFold = {handleSwitch}
           isStreaming={true}
-          user={null}/>
+          user={null}
+          showTitle={true}/>
         <List
           unfolded={recIsOpen}
           setFold = {handleSwitch}
           isStreaming={false}
-          user={null}/>
+          user={null}
+          showTitle={true}/>
       </IonContent>
       <CreateSession user={userDummy[0]} allTags={tags}/>
     </IonPage>
