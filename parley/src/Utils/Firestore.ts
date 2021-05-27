@@ -8,9 +8,6 @@ const Recordings = db.collection("recordings");
 const Tags = db.collection("tags");
 
 export const getUser = async (currentUser) => {
-
-  // const Users = db.collection("users");
-
   let user;
 
   await Users.where("authId", "==", currentUser.uid).get()
@@ -31,15 +28,14 @@ export const getUser = async (currentUser) => {
 }
 
 export const createUser = async (newUser) => {
-
-  // const Users = db.collection('users');
   //create new user
+  const username = newUser.email.slice(0, newUser.email.indexOf('@'));
   await Users.doc(newUser.uid).set(
     {
       authId: newUser.uid,
       bio: "I love to Parley!",
       email: newUser.email,
-      username: newUser.email,
+      username: username,
       photoUrl: newUser.photoURL,
       following: [],
       preferences: [],
@@ -62,8 +58,6 @@ export const createUser = async (newUser) => {
 }
 
 export const getTags = async () => {
-  // const Tags = db.collection("tags");
-
   const tags = [];
 
   await Tags.get()
@@ -77,8 +71,6 @@ export const getTags = async () => {
 }
 
 export const getRecordings = async (tag, user) => {
-  // const Recordings = db.collection("recordings");
-
   const recordings = [];
 
   await Recordings.get()
@@ -120,8 +112,6 @@ export const getRecording = async (sessionId) => {
 }
 
 export const createRecording = async (recording) => {
-  // const Recordings = db.collection("recodrings");
-
   try {
 
     await Recordings.doc(recording.sessionId).set(
