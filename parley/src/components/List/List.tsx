@@ -70,7 +70,7 @@ const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
                     <IonButton
                       icon-only
                       className="listplaybtn"
-                      href={`/${isStreaming ? 'listen' : 'play'}/${item.recording_id}`}
+                      href={`/${isStreaming ? 'listen' : 'play'}/${item.sessionId}`}
                     >
                       <IonIcon icon={playOutline} />
                     </IonButton>

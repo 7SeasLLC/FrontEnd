@@ -5,3 +5,9 @@ ion-chip.search-user, .search-tag {
 .sc-ion-searchbar-md-h{
   --border-radius: 10px;
 }
+
+ion-card-subtitle.ion-inherit-color.md.hydrated.all-tag-title {
+  margin: 10px 0px 10px 10px;
+  padding-bottom: 10px;
+  border-bottom: solid #d9d9d9 1px;
+}
