@@ -10,6 +10,16 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
 
   let count = 0;
 
+  const grabRecordings = async () => {
+    let array = user !== null ? await getUserRecordings(user) : await getRecordings();
+    console.log('recordings grabbed');
+    setAudio(array);
+  };
+
+  useEffect(() => {
+    grabRecordings();
+  },[]);
+
   const handleClick = (id) => {
     let element = document.getElementById(id);
     element
