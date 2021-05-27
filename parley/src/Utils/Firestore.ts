@@ -133,7 +133,6 @@ export const createRecording = async (recording) => {
         isStreaming: true,
         StartTime: new Date(),
         EndTime: null,
-        StreamURL: ``,
         S3URL: null,
         Hosts: [...recording.username],
         Tags: [...recording.tags],
@@ -145,7 +144,7 @@ export const createRecording = async (recording) => {
     )
 
       //updates all hosts with the newly created recording
-    recording.userIds.foreEach(async (id) => {
+    recording.userIds.forEach(async (id) => {
       await Users.doc(id).update({
         recordings: db.FieldValue.arrayUnion(id)
       })
@@ -164,6 +163,7 @@ export const createRecording = async (recording) => {
 }
 
 export const updateRecording = async (update) => {
+  console.log(update)
   const Recording = Recordings.doc(update.sessionId);
 
   try {
@@ -171,6 +171,7 @@ export const updateRecording = async (update) => {
     return "successfully saved your recording";
 
   } catch (err) {
+    console.log(err)
     return err
   }
 
