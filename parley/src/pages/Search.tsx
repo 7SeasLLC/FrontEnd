@@ -6,10 +6,11 @@ import Header from './../components/Header/Header';
 import SearchHeaderRight from './../components/Header/SearchHeaderRight';
 import './search.css';
 import SuggestList from '../components/List/SuggestList';
-import { getRecordings } from './../Utils/Firestore'
+import { getRecordings } from './../Utils/Firestore';
+
+
 //dummy data
 import userDummy from './../dummyData/userDummy.json';
-import recordingDummy from './../dummyData/recordingDummy.json';
 
 const Search = () => {
 
