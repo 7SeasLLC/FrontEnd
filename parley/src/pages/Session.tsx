@@ -1,6 +1,6 @@
-import { useState, useEffect} from 'react';
+import { Fragment, useState, useEffect} from 'react';
 import { IonPage, IonHeader, IonToolbar, IonContent, IonButton } from '@ionic/react';
-import { updateRecording } from '../Utils/Firestore';
+import { getRecording, updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
 import axios from 'axios';
@@ -22,10 +22,76 @@ const Session = (props) => {
   const [recording, setRecording] = useState(false);
   const [users, setUsers] = useState(0);
   const [host, setHost] = useState(false);
+  const [roomExists, setRoomExists] = useState(true)
+  const [startTime, setStartTime] = useState(0)
+  const [duration, setDuration] = useState(null)
+  const [startRecord, setStartRecord] = useState(0)
+  const [recordDuration, setRecordDuration] = useState(null)
+  const [sessionInfo, setSessionInfo] = useState({})
+
+  useEffect (() => {
+    determineHost()
+    if (startTime !== 0) {
+      setInterval(() => {
+        var endTime = Math.floor((new Date().getTime() / 1000))
+        var difference = (endTime - startTime)
+        var h = Math.floor(difference / 3600) % 24;
+        var m = Math.floor(difference % 3600 / 60);
+        var s = Math.floor(difference % 3600 % 60);
+        if (s < 10) {
+          s = '0' + s
+        }
+        if (m < 10) {
+          m = '0' + m
+        }
+        var elapsed = (h + ':' + m + ':' + s)
+
+        setDuration(elapsed)
+        }, 1000)
+    }
+  }, [startTime])
+
+  useEffect (() => {
+    if (startRecord !== 0) {
+      setInterval(() => {
+        var endRecord = Math.floor((new Date().getTime() / 1000))
+        var recordDifference = (endRecord - startRecord)
+        var dh = Math.floor(recordDifference / 3600) % 24;
+        var dm = Math.floor(recordDifference % 3600 / 60);
+        var ds = Math.floor(recordDifference % 3600 % 60);
+        if (ds < 10) {
+          ds = '0' + ds
+        }
+        if (dm < 10) {
+          dm = '0' + dm
+        }
+        var elapsedRecord = (dh + ':' + dm + ':' + ds)
+        console.log(elapsedRecord)
+        setRecordDuration(elapsedRecord)
+      }, 1000)
+    }
+  }, [startRecord])
+
+  const determineHost = async () => {
+    const newuser = await JSON.parse(window.localStorage.getItem('user'))
+    const data = await getRecording(roomId)
+    setSessionInfo(data)
+    if (data === undefined || data.Hosts === undefined) {
+      setRoomExists(false)
+    } else if (data.Hosts.includes(newuser.username)){
+      // console.log(data.StartTime.seconds, 'counter')
+      await setStartTime(data.StartTime.seconds)
+      // console.log(startTime)
+      // console.log(Math.floor(new Date().getTime() / 1000))
+      setHost(true);
+    }
+  }
 
   const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect (() => {
+    determineHost()
+    console.log(sessionInfo)
     let chunks = []
     socket.emit('rendered');
     var myAudio = document.createElement('audio');
@@ -70,6 +136,11 @@ const Session = (props) => {
     socket.on('user-connected', userId => {
       connectToNewUser(userId, stream);
     })
+
+    socket.on('session-ended', () => {
+      alert('Session has ended')
+      window.location.replace("/feed")
+    })
   })
 
     // socket.on('user-disconnect', userId =>{
@@ -92,11 +163,12 @@ const Session = (props) => {
 
   const stopRecording = () => {
     mediaRecorder.stop();
+    setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(false);
 
   }
 
-   const sendToServer = async (file) => {
+  const sendToServer = async (file) => {
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
@@ -106,8 +178,10 @@ const Session = (props) => {
         sessionId: roomId,
         isStreaming: false,
         EndTime: new Date(),
-        S3URL: url
+        S3URL: url,
+        Duration: recordDuration
       })
+      socket.emit('sessionEnded');
       window.location.replace("/feed")
     } catch (err) {
       console.log('error writing to firebase', err)
@@ -151,8 +225,11 @@ const Session = (props) => {
       </IonHeader>
       <IonContent>
         <SessionInfo listeners={users}/>
+        <div>Session uptime: {duration} </div>
       </IonContent>
-          {recording ? (
+        {host ? (
+        <Fragment>
+        {recording ? (
             <IonButton onClick={stopRecording}>
               End Session
             </IonButton>
@@ -161,6 +238,10 @@ const Session = (props) => {
               Start Recording
             </IonButton>
           )}
+      </Fragment>
+        ): null}
+
+
     </IonPage>
   );
 
