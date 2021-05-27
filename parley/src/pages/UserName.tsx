@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IonContent, IonPage, IonButton, IonGrid, IonRow, IonCol, IonItemDivider, IonInput, IonItem, IonSpinner } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonGrid, IonRow, IonCol, IonInput, IonItem, IonSpinner } from '@ionic/react';
 import './Login.css';
 import { createUserName } from '../Utils/Firestore'
 import { getCurrentUser } from '../Utils/getCurrentUser'
@@ -15,8 +15,6 @@ const UserName = () => {
     try {
 
       const saved = await createUserName(user.authId, userName)
-      console.log('saved', saved)
-
       //handle user with the same name
       if (saved) {
         setUserName("success! 🚀")
@@ -28,7 +26,6 @@ const UserName = () => {
       }
 
     } catch (err) {
-      console.log(err);
       return err
     }
 
@@ -37,10 +34,6 @@ const UserName = () => {
   useEffect(() => {
     if (!!user.username) {
       window.location.replace("/feed");
-    } else {
-      console.log(user)
-      // getCurrentUser()
-      // setUser()
     }
   }, [user])
 
@@ -67,7 +60,7 @@ const UserName = () => {
                   <IonInput value={userName} placeholder="GrndKvnHR5j05" onIonChange={e => setUserName(e.detail.value!)}></IonInput>
                 </IonItem>
                 <br/>
-              <IonButton onChange={(e) => handleChange(e)} expand="block" color="dark" onClick={handleSubmitUsername}>
+              <IonButton expand="block" color="dark" onClick={handleSubmitUsername}>
                 Save
               </IonButton>
             </IonCol>

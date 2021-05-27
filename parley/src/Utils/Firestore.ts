@@ -63,7 +63,6 @@ export const getAllUsers = async () => {
 
 export const createUser = async (newUser) => {
   //create new user
-  const username = newUser.email.slice(0, newUser.email.indexOf('@'));
   await Users.doc(newUser.uid).set(
     {
       authId: newUser.uid,
