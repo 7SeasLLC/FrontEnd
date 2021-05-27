@@ -11,7 +11,7 @@ const Login = ({ signin }) => {
             <img id="logo-sign-page" src="assets/logo.png" alt="parley-logo" />
           </IonRow>
           <IonRow className="ion-justify-content-center login-page">
-            <IonCol className="ion-text-center" size-lg="3" >
+            <IonCol className="ion-text-center" >
               <IonButton expand="block" color="dark" onClick={signin}>
                 Sign in with Google!
               </IonButton>
