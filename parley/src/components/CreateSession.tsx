@@ -4,22 +4,22 @@ import { useState, useEffect } from 'react';
 import { getTags, createRecording } from '../Utils/Firestore'
 import './CreateSession.css'
 
-const CreateSession = ({ user, allTags }) => {
+const CreateSession = () => {
   const [showModal, setShowModal] = useState(false)
   const [streamTitle, setStreamTitle] = useState('')
   const [streamDescription, setStreamDescription] = useState('')
   const [streamTags, setStreamTags] = useState('')
   const [dbTags, setDbTags] = useState([])
+  const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')));
 
-  // useEffect (() => {
-  //   setDbTags(findTags());
-  //   console.log(dbTags)
-  // }, [])
+  useEffect (() => {
+    const findTags = async () => {
+      const results = await getTags()
+      setDbTags(results)
+    }
+    findTags()
+  }, [])
 
-  // const findTags = async () => {
-  //   const results = await getTags()
-  //   return results
-  // }
 
   const saveInfo = () => {
     let newId = user.username + new Date()
@@ -82,7 +82,7 @@ const CreateSession = ({ user, allTags }) => {
                   <IonInput
                     color="medium"
                     className="sessionEntry"
-                    maxlength={30}
+                    maxlength={40}
                     required={true}
                     onIonChange={e => setStreamTitle(e.detail.value!)}
                   ></IonInput>
@@ -115,7 +115,7 @@ const CreateSession = ({ user, allTags }) => {
                     value={streamTags}
                     multiple={true}
                     onIonChange={e => setStreamTags(e.detail.value)}>
-                      {allTags.map(tag => (
+                      {dbTags.map(tag => (
                         <IonSelectOption
                           value={tag.name}
                           key={tag.id}
