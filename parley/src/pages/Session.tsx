@@ -28,7 +28,6 @@ const Session = (props) => {
   const [startRecord, setStartRecord] = useState(0);
   const [recordDuration, setRecordDuration] = useState(null);
   const [sessionInfo, setSessionInfo] = useState({});
-  const [hostInfo, setHostInfo] = useState({});
 
   useEffect (() => {
     determineHost()
@@ -78,8 +77,6 @@ const Session = (props) => {
     if (data === undefined || data.Hosts === undefined) {
       setRoomExists(false);
     } else {
-      const userData = await getUser(data.Hosts[0]);
-      await setHostInfo(userData);
       await setStartTime(data.StartTime.seconds);
       await setSessionInfo(data);
       if (data.Hosts.includes(newuser.username)){
@@ -94,6 +91,7 @@ const Session = (props) => {
 
   useEffect (() => {
     determineHost()
+    console.log(sessionInfo)
     if (roomExists) {
       let chunks = []
       socket.emit('rendered');
@@ -233,7 +231,7 @@ const Session = (props) => {
        </IonHeader>
        <IonContent>
          <SessionInfo listeners={users} title={sessionInfo.title} host={sessionInfo.Hosts} description = {sessionInfo.Description}
-         uptime={duration} hostName={hostInfo.username} hostPhoto={hostInfo.photoUrl}/>
+         uptime={duration} hostPhoto={sessionInfo.Photos}/>
        </IonContent>
          {host ? (
          <Fragment>

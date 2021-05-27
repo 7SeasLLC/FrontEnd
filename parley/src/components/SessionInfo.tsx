@@ -1,9 +1,10 @@
 import { IonCard, IonCardHeader, IonAvatar, IonCardTitle, IonCardContent, IonItem } from '@ionic/react';
 
-const SessionInfo = ({ listeners, title, host, description, uptime, hostName, hostPhoto }) => {
-  // const userInfo = JSON.parse(window.localStorage.getItem('user'));
+const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto }) => {
+  var firstHost;
   var allHosts;
   if (host) {
+    firstHost = host[0]
     host.map((each) => {
       if (allHosts !== undefined) {
         allHosts = allHosts + ' ' + each
@@ -20,7 +21,7 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostName, ho
         <img src={hostPhoto} alt="Your Profile"></img>
       </IonAvatar>
       <IonCardTitle className="profileUsername">
-          {hostName}
+          {firstHost}
         </IonCardTitle>
     </IonCardHeader>
     <IonCardContent>

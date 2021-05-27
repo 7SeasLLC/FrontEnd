@@ -167,7 +167,7 @@ export const getRecording = async (sessionId) => {
   return doc.data();
 }
 
-export const createRecording = async ({sessionId, title, description, username, tags, userIds}) => {
+export const createRecording = async ({sessionId, title, description, username, tags, userIds, photoId}) => {
   try {
     await Recordings.doc(sessionId).set(
       {
@@ -179,7 +179,8 @@ export const createRecording = async ({sessionId, title, description, username, 
         StartTime: new Date(),
         EndTime: null,
         S3URL: null,
-        Hosts: [...username],
+        Hosts: username,
+        Photos: photoId,
         Tags: [...tags],
         Likes: 0,
         Plays: 0,
@@ -219,6 +220,7 @@ export const createRecording = async ({sessionId, title, description, username, 
     })
 
   } catch (err) {
+    console.log(err)
     return "an error occurred, creating your recording"
   }
 
