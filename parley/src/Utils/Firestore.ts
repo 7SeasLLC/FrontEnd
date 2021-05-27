@@ -35,6 +35,7 @@ export const getAllUsers = async () => {
         users.push({...doc.data(), id: doc.id})
       })
     });
+  return users;
 }
 
 export const createUser = async (newUser) => {
