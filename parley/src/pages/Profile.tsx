@@ -11,14 +11,17 @@ import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
 
 const Profile = ({ match, handleThemeChange }) => {
 
-  // const [user, setUser] = useState(match.params.username || JSON.parse(window.localStorage.getItem('user')));
+  let ownPage = match ? (match.params.id
+    ) : (JSON.parse(window.localStorage.getItem('user')));
+
+  const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')));
   const [userData, setUserData] = useState(data[0]);
 
-  // axios
-  //   .get('')
-  //   .then(res => {
-  //     setUserData(res.data);
-  //   })
+  const [recIsOpen, setRecIsOpen] = useState(true);
+
+  const handleSwitch = () => {
+      setRecIsOpen(!recIsOpen);
+  }
 
   return (
     <IonPage>
@@ -35,14 +38,16 @@ const Profile = ({ match, handleThemeChange }) => {
         <ProfileInfo userInfo={userData} />
         <List
           unfolded={true}
-          setFold = {() => {}}
-          audio={recordingDummy}
-          isStreaming={true}/>
+          setFold = {() =>{}}
+          isStreaming={true}
+          user={user.authId}
+          showTitle={false}/>
         <List
           unfolded={true}
-          setFold = {() => {}}
-          audio={recordingDummy}
-          isStreaming={false}/>
+          setFold = {handleSwitch}
+          isStreaming={false}
+          user={user.authId}
+          showTitle={false}/>
       </IonContent>
     </IonPage>
       );
