@@ -55,7 +55,7 @@ const Feed = ({audio}) => {
           user={null}
           showTitle={true}/>
       </IonContent>
-      <CreateSession user={userInfo} allTags={tags}/>
+      <CreateSession user={userInfo}/>
     </IonPage>
   );
 };
