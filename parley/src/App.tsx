@@ -12,7 +12,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 
 
-import { getUser, getTags } from './Utils/Firestore'
+import { loginUser } from './Utils/Firestore'
 import Search from './pages/Search';
 
 /* Core CSS required for Ionic components to work properly */
@@ -47,7 +47,7 @@ const App = () => {
       const result = await FirebaseConfig.auth().signInWithPopup(provider);
       setUser(result.user);
 
-      const user = await getUser(result.user)
+      const user = await loginUser(result.user)
 
       window.localStorage.setItem('user', JSON.stringify(user))
       window.location.href = "/feed";

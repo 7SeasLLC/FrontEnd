@@ -7,22 +7,45 @@ const Users = db.collection("users");
 const Recordings = db.collection("recordings");
 const Tags = db.collection("tags");
 
-export const getUser = async (currentUser) => {
+export const loginUser = async (currentUser) => {
   let user;
 
-  await Users.where("authId", "==", currentUser.uid).get()
-  .then((querySnapshot) => {
-    const items = [];
-    querySnapshot.forEach((doc) => {
-      items.push(doc.data())
-    })
-    user = items[0]
-  });
+  try {
+    await Users.where("authId", "==", currentUser.uid).get()
+    .then((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      })
+      user = items[0]
+    });
 
-  if (user) {
-    return user
-  } else {
-    return createUser(currentUser)
+    if (user) {
+      return user;
+    } else {
+      return createUser(currentUser);
+    }
+  } catch (err) {
+    return err;
+  }
+}
+
+export const getUser = async (username) => {
+  let user;
+
+  try {
+    await Users.where("username", "==", username).get()
+    .then((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data())
+      })
+      user = items[0]
+    });
+
+    return user;
+  } catch (err) {
+    return err;
   }
 }
 
