@@ -8,7 +8,7 @@ import Header from '../components/Header/Header';
 import SessionInfo from '../components/SessionInfo';
 
 const socket = openSocket('http://54.193.3.132');
-const myPeer = new Peer(undefined, {host: '54.193.3.132', port: 3001})
+const myPeer = new Peer(undefined, {host: '/', port: 3001})
 declare var MediaRecorder: any;
 declare module 'axios' {
   export interface AxiosRequestConfig {
