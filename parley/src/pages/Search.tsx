@@ -1,5 +1,5 @@
 
-import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonCard, IonBadge } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonCard, IonBadge, IonCardContent } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import List from './../components/List/List';
 import UserList from './../components/List/UserList';
@@ -106,15 +106,6 @@ const Search = ({ user }) => {
   //   }
   // }
 
-
-  function addToTagArray(tagStr) {
-    let array = searchArray;
-    array.push(tagStr);
-    setSearchArray(array);
-  }
-
-
-
   useEffect(() => {
     getRecordings('recordings').then(res => {
       setRecords(res)
@@ -128,7 +119,13 @@ const Search = ({ user }) => {
 
   const handleSearchStrChange = (string) => {
     setSearchText(string);
-  }
+  };
+
+  const addToTagArray = (tagStr) => {
+    let array = searchArray;
+    array.push(tagStr);
+    setSearchArray(array);
+  };
 
   return (
     <IonPage>
@@ -147,22 +144,21 @@ const Search = ({ user }) => {
           placeholder="Search for people and Records.."
           color="primary"
           value={searchText}
-          onIonChange={e => {handleSearchStrChange(e.target.value)}}
+          onIonChange={e => { handleSearchStrChange(e.target.value) }}
         />
+          <IonCard>
+            <IonCardContent>
+              {searchArray.map(tag => {
+                console.log(tag);
+                return (<IonBadge>{tag}</IonBadge>)
+              })}
+            </IonCardContent>
+          </IonCard>
 
         <SuggestList
           searchText={searchText}
           addToTagArray={addToTagArray}
         />
-
-      {/* Array of Tags to Search */}
-      {searchArray.length > 1 ? (
-        <IonCard>
-          {searchArray.map((tag) => {
-      <IonBadge>{tag}</IonBadge>
-          })}
-        </IonCard>
-      ) : null}
 
         {showListUser.length > 0 ? (
           <UserList

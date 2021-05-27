@@ -25,8 +25,10 @@ const SuggestList = ({ searchText, addToTagArray}) => {
                 searchText === '') {
               return (
                 <IonChip
-                  onClick={() => {addToTagArray(tag.name)}}>
-                  <IonLabel>{tag.name}</IonLabel>
+                  key={tag.name}
+                  onClick={() => {addToTagArray(tag.name)}}
+                >
+                  {tag.name}
                 </IonChip>
               )
             }
