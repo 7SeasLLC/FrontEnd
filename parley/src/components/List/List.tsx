@@ -70,7 +70,7 @@ const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
                     <IonButton
                       icon-only
                       className="listplaybtn"
-                      href={`/${isStreaming ? 'listen' : 'play'}/${item.recording_id}`}
+                      href={`/${isStreaming ? 'listen' : 'play'}/${item.sessionId}`}
                     >
                       <IonIcon icon={isStreaming ? headsetOutline : playOutline} />
                     </IonButton>
@@ -78,18 +78,18 @@ const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
                 </IonItemOptions>
                   <IonItem lines="none">
                     <a
-                      href={'/user/' + username}
+                      href={'/user/' + item.Hosts[0]}
                       style={{marginRight: '11px'}}>
                       <IonAvatar slot="start">
                         <img
-                          alt={`${username}'s avatar`}
+                          alt={`${item.Hosts[0]}'s avatar`}
                           src={item.profile_img}
                         />
                       </IonAvatar>
                     </a>
                     <IonLabel>
                       <IonNote>
-                        {username}
+                        {item.Hosts[0]}
                       </IonNote>
                       <IonLabel>
                         {item.title}

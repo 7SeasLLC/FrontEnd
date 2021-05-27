@@ -3,19 +3,20 @@ import { useEffect, useState } from 'react';
 import List from './../components/List/List';
 import UserList from './../components/List/UserList';
 import Header from './../components/Header/Header';
-import SearchHeaderRight from './../components/Header/SearchHeaderRight'
+import SearchHeaderRight from './../components/Header/SearchHeaderRight';
 import './search.css';
 import SuggestList from '../components/List/SuggestList';
-import { getRecordings } from './../Utils/Firestore'
+import { getRecordings } from './../Utils/Firestore';
+
+
 //dummy data
 import userDummy from './../dummyData/userDummy.json';
-import recordingDummy from './../dummyData/recordingDummy.json';
 
 const Search = () => {
 
   const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState(userDummy);
-  const [records, setRecords] = useState(recordingDummy);
+  const [records, setRecords] = useState([]);
   const [showListRecords, setShowListRecords] = useState([]);
   const [showListStream, setshowListStream] = useState([]);
   const [showListUser, setShowListUser] = useState([]);
@@ -30,14 +31,14 @@ const Search = () => {
     var showRecords = {}
     var showStreams = {}
     for (var i = 0; i < records.length; i++) {
-      for (var j = 0; j < records[i].tags.length; j++) {
-        var currentTags = records[i].tags[j];
+      for (var j = 0; j < records[i].Tags.length; j++) {
+        var currentTags = records[i].Tags[j];
         const shouldShow = currentTags.toLowerCase().indexOf(key);
         if (shouldShow >= 0) {
           if (!records[i].isStreaming) {
-            showRecords[records[i].recording_id] = records[i];
+            showRecords[records[i].sessionId] = records[i];
           } else {
-            showStreams[records[i].recording_id] = records[i];
+            showStreams[records[i].sessionId] = records[i];
           }
         }
       }
@@ -74,7 +75,7 @@ const Search = () => {
 
   }
   useEffect(() => {
-    
+
     getRecordings('recordings').then(res => {
       setRecords(res)
     })
