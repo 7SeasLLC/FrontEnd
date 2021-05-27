@@ -8,7 +8,7 @@ import Header from '../components/Header/Header';
 import SessionInfo from '../components/SessionInfo';
 
 const socket = openSocket('http://54.193.3.132');
-const myPeer = new Peer(undefined, {host: '54.193.3.132', port: 3001})
+const myPeer = new Peer(undefined, {host: '54.193.3.132', port: 3001});
 declare var MediaRecorder: any;
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -22,32 +22,32 @@ const Session = (props) => {
   const [recording, setRecording] = useState(false);
   const [users, setUsers] = useState(0);
   const [host, setHost] = useState(false);
-  const [roomExists, setRoomExists] = useState(true)
-  const [startTime, setStartTime] = useState(0)
-  const [duration, setDuration] = useState(null)
-  const [startRecord, setStartRecord] = useState(0)
-  const [recordDuration, setRecordDuration] = useState(null)
-  const [sessionInfo, setSessionInfo] = useState({})
-  const [hostInfo, setHostInfo] = useState({})
+  const [roomExists, setRoomExists] = useState(true);
+  const [startTime, setStartTime] = useState(0);
+  const [duration, setDuration] = useState(null);
+  const [startRecord, setStartRecord] = useState(0);
+  const [recordDuration, setRecordDuration] = useState(null);
+  const [sessionInfo, setSessionInfo] = useState({});
+  const [hostInfo, setHostInfo] = useState({});
 
   useEffect (() => {
     determineHost()
     if (startTime !== 0) {
       setInterval(() => {
-        var endTime = Math.floor((new Date().getTime() / 1000))
-        var difference = (endTime - startTime)
+        var endTime = Math.floor((new Date().getTime() / 1000));
+        var difference = (endTime - startTime);
         var h = Math.floor(difference / 3600) % 24;
         var m = Math.floor(difference % 3600 / 60);
         var s = Math.floor(difference % 3600 % 60);
         if (s < 10) {
-          s = '0' + s
+          s = '0' + s;
         }
         if (m < 10) {
-          m = '0' + m
+          m = '0' + m;
         }
-        var elapsed = (h + ':' + m + ':' + s)
+        var elapsed = (h + ':' + m + ':' + s);
 
-        setDuration(elapsed)
+        setDuration(elapsed);
         }, 1000)
     }
   }, [startTime])
@@ -55,34 +55,33 @@ const Session = (props) => {
   useEffect (() => {
     if (startRecord !== 0) {
       setInterval(() => {
-        var endRecord = Math.floor((new Date().getTime() / 1000))
-        var recordDifference = (endRecord - startRecord)
+        var endRecord = Math.floor((new Date().getTime() / 1000));
+        var recordDifference = (endRecord - startRecord);
         var dh = Math.floor(recordDifference / 3600) % 24;
         var dm = Math.floor(recordDifference % 3600 / 60);
         var ds = Math.floor(recordDifference % 3600 % 60);
         if (ds < 10) {
-          ds = '0' + ds
+          ds = '0' + ds;
         }
         if (dm < 10) {
-          dm = '0' + dm
+          dm = '0' + dm;
         }
-        var elapsedRecord = (dh + ':' + dm + ':' + ds)
-        // console.log(elapsedRecord)
-        setRecordDuration(elapsedRecord)
+        var elapsedRecord = (dh + ':' + dm + ':' + ds);
+        setRecordDuration(elapsedRecord);
       }, 1000)
     }
   }, [startRecord])
 
   const determineHost = async () => {
-    const newuser = await JSON.parse(window.localStorage.getItem('user'))
-    const data = await getRecording(roomId)
+    const newuser = await JSON.parse(window.localStorage.getItem('user'));
+    const data = await getRecording(roomId);
     if (data === undefined || data.Hosts === undefined) {
-      setRoomExists(false)
+      setRoomExists(false);
     } else {
-      const userData = await getUser(data.Hosts[0])
-      await setHostInfo(userData)
-      await setStartTime(data.StartTime.seconds)
-      await setSessionInfo(data)
+      const userData = await getUser(data.Hosts[0]);
+      await setHostInfo(userData);
+      await setStartTime(data.StartTime.seconds);
+      await setSessionInfo(data);
       if (data.Hosts.includes(newuser.username)){
         setHost(true);
         return true;
@@ -142,8 +141,8 @@ const Session = (props) => {
       })
 
       socket.on('session-ended', () => {
-        alert('Session has ended')
-        window.location.replace("/feed")
+        alert('Session has ended');
+        window.location.replace("/feed");
       })
     })
 
@@ -186,9 +185,9 @@ const Session = (props) => {
         Duration: recordDuration
       })
       socket.emit('sessionEnded');
-      window.location.replace("/feed")
+      window.location.replace("/feed");
     } catch (err) {
-      console.log('error writing to firebase', err)
+      console.log('error writing to firebase', err);
     }
   }
 
