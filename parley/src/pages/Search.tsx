@@ -75,7 +75,6 @@ const Search = () => {
 
   }
   useEffect(() => {
-
     getRecordings('recordings').then(res => {
       setRecords(res)
     })
