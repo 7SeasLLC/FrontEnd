@@ -93,9 +93,12 @@ const App = () => {
             <Route exact path="/profile">
               <Profile handleThemeChange={handleThemeChange}/>
             </Route>
-
-            <Route exact path="/user/:username" component={Profile}/>
-            <Route path="/session/:roomId" component={Session}/>
+            <Route
+              exact path="/user/:username"
+              component={Profile}/>
+            <Route
+              path="/session/:roomId"
+              component={Session}/>
             </>
           ) : (
             <>
