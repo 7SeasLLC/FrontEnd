@@ -8,9 +8,6 @@ const Recordings = db.collection("recordings");
 const Tags = db.collection("tags");
 
 export const getUser = async (currentUser) => {
-
-  // const Users = db.collection("users");
-
   let user;
 
   await Users.where("authId", "==", currentUser.uid).get()
@@ -27,19 +24,29 @@ export const getUser = async (currentUser) => {
   } else {
     return createUser(currentUser)
   }
+}
 
+export const getAllUsers = async () => {
+  const users = [];
+
+  await Users.get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        users.push({...doc.data(), id: doc.id})
+      })
+    });
+  return users;
 }
 
 export const createUser = async (newUser) => {
-
-  // const Users = db.collection('users');
   //create new user
+  const username = newUser.email.slice(0, newUser.email.indexOf('@'));
   await Users.doc(newUser.uid).set(
     {
       authId: newUser.uid,
       bio: "I love to Parley!",
       email: newUser.email,
-      username: newUser.email,
+      username,
       photoUrl: newUser.photoURL,
       following: [],
       preferences: [],
@@ -62,23 +69,19 @@ export const createUser = async (newUser) => {
 }
 
 export const getTags = async () => {
-  // const Tags = db.collection("tags");
-
   const tags = [];
 
   await Tags.get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      tags.push({...doc.data(), id: doc.id})
-    })
-  });
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        tags.push({...doc.data(), id: doc.id})
+      })
+    });
 
   return tags
 }
 
 export const getRecordings = async (tag, user) => {
-  // const Recordings = db.collection("recordings");
-
   const recordings = [];
 
   await Recordings.get()
@@ -119,23 +122,20 @@ export const getRecording = async (sessionId) => {
   return doc.data();
 }
 
-export const createRecording = async (recording) => {
-  // const Recordings = db.collection("recodrings");
-
+export const createRecording = async ({sessionId, title, description, username, tags, userIds}) => {
   try {
-
-    await Recordings.doc(recording.sessionId).set(
+    await Recordings.doc(sessionId).set(
       {
-        sessionId: recording.sessionId,
-        title: recording.title,
-        Description: recording.description,
+        sessionId: sessionId,
+        title: title,
+        Description: description,
         Duration: null,
         isStreaming: true,
         StartTime: new Date(),
         EndTime: null,
         S3URL: null,
-        Hosts: [...recording.username],
-        Tags: [...recording.tags],
+        Hosts: [...username],
+        Tags: [...tags],
         Likes: 0,
         Plays: 0,
         MaxLive: 0,
@@ -143,17 +143,35 @@ export const createRecording = async (recording) => {
       }
     )
 
-      //updates all hosts with the newly created recording
-    recording.userIds.forEach(async (id) => {
-      await Users.doc(id).update({
-        recordings: db.FieldValue.arrayUnion(id)
+    //updates all hosts with the newly created recording
+    const doc = await Users.doc(userIds[0]).get();
+    const userRecordings = doc.data().recordings;
+
+    await Users.doc(userIds[0]).update({
+      recordings: [...userRecordings, sessionId]
+    })
+    // recording.userIds.forEach(async (id) => {
+    //   await Users.doc(id).update({
+    //     recordings: db.FieldValue.arrayUnion(id)
+    //   })
+    // })
+
+    // implementing update tag count on creation of new recording
+    tags.forEach(async (tag) => {
+      let currentTag;
+      await Tags.where("name", "==", tag).get()
+      .then((querySnapshot) => {
+          let items = [];
+          querySnapshot.forEach((doc) => {
+            items.push({...doc.data(), id: doc.id})
+          })
+          currentTag = items[0];
+        });
+        const count = currentTag.count + 1
+      await Tags.doc(currentTag.id).update({
+        count
       })
     })
-
-    // implementing update tag count on creation of new recoding
-    // recording.tags.forEach(async (tag) => {
-    //   await
-    // })
 
   } catch (err) {
     return "an error occurred, creating your recording"
