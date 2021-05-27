@@ -96,6 +96,9 @@ const App = () => {
 
             <Route exact path="/user/:username" component={Profile}/>
             <Route path="/session/:roomId" component={Session}/>
+            <Route exact path="/search">
+              <Search user={user}/>
+            </Route>
             </>
           ) : (
             <>

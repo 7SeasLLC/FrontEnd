@@ -6,16 +6,13 @@ import Header from './../components/Header/Header';
 import SearchHeaderRight from './../components/Header/SearchHeaderRight';
 import './search.css';
 import SuggestList from '../components/List/SuggestList';
-import { getRecordings } from './../Utils/Firestore';
+import { getRecordings, getAllUsers} from './../Utils/Firestore';
 
 
-//dummy data
-import userDummy from './../dummyData/userDummy.json';
-
-const Search = () => {
+const Search = ({user}) => {
 
   const [searchText, setSearchText] = useState('');
-  const [users, setUsers] = useState(userDummy);
+  const [users, setUsers] = useState([]);
   const [records, setRecords] = useState([]);
   const [showListRecords, setShowListRecords] = useState([]);
   const [showListStream, setshowListStream] = useState([]);
@@ -25,7 +22,6 @@ const Search = () => {
 
   function searchRecords(key) {
     setShowSuggest(false)
-
 
     setSearchText(key)
     var showRecords = {}
@@ -76,8 +72,12 @@ const Search = () => {
   }
   useEffect(() => {
 
-    getRecordings('recordings').then(res => {
+    getRecordings().then(res => {
       setRecords(res)
+    })
+
+    getAllUsers().then(res=>{
+      setUsers(res)
     })
 
   }, [])
@@ -87,7 +87,7 @@ const Search = () => {
       <IonHeader>
         <IonToolbar>
           <Header
-            user={userDummy[0]}
+            user={user}
             HeaderRight={SearchHeaderRight}
           />
         </IonToolbar>
