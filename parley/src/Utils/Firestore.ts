@@ -91,6 +91,28 @@ export const createUser = async (newUser) => {
   return user;
 }
 
+export const updateUser = async (userId, update) => {
+  const user = await Users.doc(userId);
+
+  try {
+    await user.update(update);
+
+    const updatedUser = await Users.doc(userId).get();
+
+    window.localStorage.removeItem('user');
+    window.localStorage.setItem('user', JSON.stringify(updatedUser.data()));
+
+    return "successfully updated the user info";
+
+  } catch (err) {
+    console.log('update user error:', err);
+    return err;
+  }
+
+
+
+}
+
 export const getTags = async () => {
   const tags = [];
 
@@ -205,10 +227,10 @@ export const createRecording = async ({sessionId, title, description, username, 
 
 export const updateRecording = async (update) => {
   console.log(update)
-  const Recording = Recordings.doc(update.sessionId);
+  const recording = Recordings.doc(update.sessionId);
 
   try {
-    await Recording.update(update);
+    await recording.update(update);
     return "successfully saved your recording";
 
   } catch (err) {
