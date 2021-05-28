@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import FirebaseConfig from './firebase.config.js';
 
 ReactDOM.render(
-    <App />,
+    <App FirebaseConfig={FirebaseConfig}/>,
   document.getElementById('root')
 );
 

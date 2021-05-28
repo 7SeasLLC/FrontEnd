@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import _ from 'underscore';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const config = {
   apiKey: "AIzaSyB6JS0yOxTe2bFST-HYateROqYK_se3EzM",
@@ -10,4 +11,7 @@ const config = {
   measurementId: "G-KFLH1K2129"
 };
 
-export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+const fbInit = _.debounce(firebase.initializeApp(config), 150);
+const fbApp = firebase.app()
+
+export default !firebase.apps.length ? fbInit : fbApp;
