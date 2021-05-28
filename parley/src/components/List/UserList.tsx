@@ -9,8 +9,7 @@ const UserList = ({ users, showHeader}) => {
         users.map(user => {
           return (
 
-            //username change to not have @...
-            <IonItem lines="none" button={true} href={'/user/' + 'sid.nguyen'} key={user.auth_id}>
+            <IonItem lines="none" button={true} href={'/user/' + user.username} key={user.auth_id}>
               <IonAvatar>
                 <img src={user.photoUrl} alt={`avatar-${user.username}`} />
               </IonAvatar>
