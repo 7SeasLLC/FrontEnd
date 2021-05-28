@@ -1,8 +1,6 @@
 import { IonCard, IonChip, IonLabel, IonCardSubtitle, IonSearchbar, IonCardContent } from '@ionic/react';
 import { useState, useEffect,  } from 'react'
 import { getTags, getUser } from './../../Utils/Firestore'
-import userDummy from '../../dummyData/userDummy.json';
-import UserList from './UserList';
 
 const SuggestList = ({ searchText, searchArray, addToTagArray}) => {
 

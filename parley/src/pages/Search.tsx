@@ -36,12 +36,12 @@ const Search = ({ user }) => {
   }
 
 
-  const search = (searchParams, ...str) => {
+  const search = (searchParams, str) => {
     // Only search user if tags is string
-    if (typeof str === 'string') {
+    console.log("----->", str)
+    if (str !== undefined) {
       searchUsers(str)
     }
-
     searchAudio(searchParams);
   }
 
@@ -89,6 +89,7 @@ const Search = ({ user }) => {
   }
 
   const searchUsers = (searchStr) => {
+
     var list = users.map((user) => {
       let found = user.username.toLowerCase().indexOf(searchStr.toLowerCase());
       if (found >= 0) {

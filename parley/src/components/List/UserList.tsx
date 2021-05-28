@@ -10,7 +10,7 @@ const UserList = ({ users, showHeader}) => {
           return (
             <IonItem lines="none" button={true} href={'/user/' + user.username} key={user.auth_id}>
               <IonAvatar>
-                <img src={user.profile_img} alt={`avatar-${user.username}`} />
+                <img src={user.photoUrl} alt={`avatar-${user.username}`} />
               </IonAvatar>
               <IonLabel className="user-search-list">
                 <h3>{user.username}</h3>
