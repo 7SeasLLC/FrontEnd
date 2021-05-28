@@ -19,8 +19,8 @@ const Search = ({ user }) => {
   const [searchArray, setSearchArray] = useState([]);
   const [users, setUsers] = useState([]);
   const [records, setRecords] = useState([]);
-  const [showListRecords, setShowListRecords] = useState([]);
-  const [showListStream, setShowListStream] = useState([]);
+  const [searchedRecords, setSearchedRecords] = useState([]);
+  const [searchedStreams, setSearchedStreams] = useState([]);
   const [showListUser, setShowListUser] = useState([]);
   const [streamIsOpen, setStreamIsOpen] = useState(true);
   const [recIsOpen, setRecIsOpen] = useState(true);
@@ -35,53 +35,69 @@ const Search = ({ user }) => {
   }
 
 
-  // function searchRecords(key) {
-  //   setSearchText(key)
-  //   var showRecords = {}
-  //   var showStreams = {}
-  //   for (var i = 0; i < records.length; i++) {
-  //     for (var j = 0; j < records[i].Tags.length; j++) {
-  //       var currentTags = records[i].Tags[j];
-  //       const shouldShow = currentTags.toLowerCase().indexOf(key);
-  //       if (shouldShow >= 0) {
-  //         if (!records[i].isStreaming) {
-  //           showRecords[records[i].sessionId] = records[i];
-  //         } else {
-  //           showStreams[records[i].sessionId] = records[i];
-  //         }
-  //       }
-  //     }
-  //   }
-  //   setShowListRecords(Object.values(showRecords));
-  //   if (key === '') {
-  //     setShowListRecords([])
-  //   }
-  //   setShowListStream(Object.values(showStreams));
-  //   if (key === '') {
-  //     setShowListStream([])
-  //   }
-  //   searchUsers(key)
-  // }
+  const search = (searchParams) => {
+    // Only search user if tags is string
+    if (typeof searchParams === 'string') {
+      searchUsers(searchParams)
+    }
+
+    searchAudio(searchParams);
+  }
+
+  const searchAudio = (searchParams) => {
+    let searchArray = typeof searchParams === 'string' ? (
+      [searchParams]
+    ) : searchParams;
+
+    var recordsToShow = []
+    var streamsToShow = []
 
 
-  // function searchUsers(searchStr) {
-  //   var list = {}
-  //   users.map((user) => {
-  //     const shouldShow = user.username.toLowerCase().indexOf(searchStr);
-  //     if (shouldShow >= 0) {
-  //       list[user.auth_id] = user;
-  //     }
-  //   })
-  //   setShowListUser(Object.values(list))
-  //   if (searchStr === '') {
-  //     setShowListUser([])
-  //   }
-  // }
+    for (var i = 0; i < records.length; i++) {
+      let found = true;
+      for (let j = 0; j < searchArray.length; j++) {
+        let shouldShow = records[i].Tags.indexOf(searchArray[j]);
+        if (shouldShow === -1) {
+          found = false;
+        }
+      }
+      if (found) {
+        if (!records[i].isStreaming) {
+          recordsToShow.push(records[i]);
+        } else {
+          streamsToShow.push(records[i]);
+        }
+      }
+    }
+
+    if (searchParams === '' || searchArray.length < 1) {
+      setSearchedRecords([])
+      setSearchedStreams([])
+    } else {
+      setSearchedRecords(recordsToShow);
+      setSearchedStreams(streamsToShow);
+    }
+  }
+
+
+  function searchUsers(searchStr) {
+    var list = {}
+    users.map((user) => {
+      const shouldShow = user.username.toLowerCase().indexOf(searchStr);
+      if (shouldShow >= 0) {
+        list[user.auth_id] = user;
+      }
+    })
+    setShowListUser(Object.values(list))
+    if (searchStr === '') {
+      setShowListUser([])
+    }
+  }
 
   // function searchByTag(array) {
 
-  //   var showRecords = {}
-  //   var showStreams = {}
+  //   var recordsToShow = {}
+  //   var streamsToShow = {}
   //   if (array.length > 0) {
   //     records.map(record => {
   //       var show = true;
@@ -95,15 +111,15 @@ const Search = ({ user }) => {
   //       })
   //       if (show) {
   //         if (record.isStreaming) {
-  //           showStreams.sessionId = record;
+  //           streamsToShow.sessionId = record;
   //         } else {
-  //           showRecords.sessionId = record
+  //           recordsToShow.sessionId = record
   //         }
   //       }
   //     })
 
-  //     setShowListRecords(Object.values(showRecords))
-  //     setShowListStream(Object.values(showStreams));
+  //     setSearchedRecords(Object.values(recordsToShow))
+  //     setSearchedStreams(Object.values(streamsToShow));
   //   }
   // }
 
@@ -119,6 +135,7 @@ const Search = ({ user }) => {
   }, [])
 
   const handleSearchStrChange = (string) => {
+    search(string);
     setSearchText(string);
   };
 
@@ -126,6 +143,7 @@ const Search = ({ user }) => {
     let array = searchArray.slice();
     array.push(tagStr);
     setSearchArray(array);
+    search(array);
   };
 
   const handleRemoveTag = (tagStr) => {
@@ -136,6 +154,7 @@ const Search = ({ user }) => {
       }
     }
     setSearchArray(newArray);
+    search(newArray);
   }
 
   return (
@@ -185,20 +204,20 @@ const Search = ({ user }) => {
           <UserList
             users={showListUser}
             showHeader={true} />) : null}
-        {showListStream.length > 0 ?
+        {searchedStreams.length > 0 ?
           (<List
             unfolded={true}
             setFold={handleSwitch}
-            data={showListStream}
+            data={searchedStreams}
             isStreaming={true}
             showTitle={true}
             user={undefined} />)
           : null}
-        {showListRecords.length > 0 ?
+        {searchedRecords.length > 0 ?
           <List
             unfolded={true}
             setFold={handleSwitch}
-            data={showListRecords}
+            data={searchedRecords}
             isStreaming={false}
             showTitle={true}
             user={undefined} />
