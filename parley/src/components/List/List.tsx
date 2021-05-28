@@ -46,7 +46,6 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
         {audio.map((item) => {
           if (item.isStreaming === isStreaming) {
             count++;
-            let username = item.Hosts[0].slice(0, item.Hosts[0].indexOf('@'));
 
             return (
               <IonItemSliding
@@ -72,7 +71,7 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
                       <IonAvatar slot="start">
                         <img
                           alt={`${item.Hosts[0]}'s avatar`}
-                          src={item.profile_img}
+                          src={item.Photos[0]}
                         />
                       </IonAvatar>
                     </a>
