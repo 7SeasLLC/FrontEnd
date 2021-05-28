@@ -34,6 +34,8 @@ export const loginUser = async (currentUser) => {
 
 export const getUser = async (username) => {
   let user;
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
 
   try {
     await Users.where("username", "==", username).get()
@@ -202,6 +204,9 @@ export const getRecording = async (sessionId) => {
 export const createRecording = async ({sessionId, title, description, username, tags, userIds, photoId}) => {
   const db = FirebaseConfig.firestore();
   const Recordings = db.collection("recordings");
+  const Users = db.collection("users");
+  const Tags = db.collection("tags");
+
   try {
     await Recordings.doc(sessionId).set(
       {
