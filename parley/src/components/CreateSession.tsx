@@ -33,7 +33,6 @@ const CreateSession = ({ user }) => {
       photoId: [user.photoUrl],
       userIds:[user.authId]
     }
-    console.log(streamInfo)
     return streamInfo
   }
   const startNewStream = async () => {
