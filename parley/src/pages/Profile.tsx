@@ -19,8 +19,8 @@ const Profile = ({ match, handleThemeChange }) => {
 
   const ownInfo = JSON.parse(window.localStorage.getItem('user'));
 
-  const [userInfo, setUserInfo] = useState(ownInfo);
-  const [newBio, setNewBio] = useState(ownInfo.bio)
+  const [userInfo, setUserInfo] = useState({});
+  const [newBio, setNewBio] = useState('')
   const [userRecords, setUserRecords] = useState([])
 
   const handleNewBio = (string) => {
@@ -30,25 +30,26 @@ const Profile = ({ match, handleThemeChange }) => {
   const updateInfo = async () => {
     if (userToGrab !== null) {
       const otherUserInfo = await getUser(userToGrab);
+      console.log(otherUserInfo);
+      setNewBio(otherUserInfo.bio);
       setUserInfo(otherUserInfo);
+      updateRecords(otherUserInfo.authId);
+    } else {
+      setUserInfo(ownInfo);
+      updateRecords(ownInfo.authId);
     }
   };
 
-  const updateRecords = async () => {
-    const newRecords = await getUserRecordings(userInfo.authId);
+  const updateRecords = async (user) => {
+    const newRecords = await getUserRecordings(user);
     if (Array.isArray(newRecords)) {
-      const filteredRecords = newRecords.filter((item) => (item !== undefined))
-      setUserRecords(filteredRecords)
+      setUserRecords(newRecords);
     }
   }
 
   useEffect(() => {
     updateInfo();
   }, [])
-
-  useEffect(() => {
-    updateRecords()
-  }, [userInfo])
 
   return (
     <IonPage>
@@ -65,7 +66,9 @@ const Profile = ({ match, handleThemeChange }) => {
       </IonHeader>
       {  userInfo
         ? <IonContent>
-          <ProfileInfo userInfo={userInfo} bio={newBio} />
+          {userInfo.bio ? (
+            <ProfileInfo userInfo={userInfo} bio={newBio} />
+          ) : null}
           <List
             unfolded={true}
             setFold={() => { }}

@@ -4,7 +4,7 @@ import './UserProfile.css'
 const ProfileInfo = ({ userInfo, bio }) => {
 
   let index = 0;
-  const paragraphs = userInfo.bio.split('\n')
+  const paragraphs = bio.split('\n')
 
   return (
     <IonCard>

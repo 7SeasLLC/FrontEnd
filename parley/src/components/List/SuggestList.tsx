@@ -4,7 +4,7 @@ import { getTags } from './../../Utils/Firestore'
 
 const SuggestList = ({ searchText, searchArray, addToTagArray }) => {
 
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     getTags().then(res => {
@@ -12,29 +12,30 @@ const SuggestList = ({ searchText, searchArray, addToTagArray }) => {
         return b.count - a.count;
       }))
     })
-
-  }, [])
+  }, []);
 
   return (
-    <IonCard>
-      <IonCardContent>
-        {tags.map(tag => {
-          if (tag.name.toLowerCase().indexOf(searchText) > -1 ||
-            searchText === '') {
-            if (searchArray.indexOf(tag.name) === -1) {
-              return (
-                <IonChip
-                  key={tag.name}
-                  onClick={() => { addToTagArray(tag.name) }}
-                >
-                  {tag.name}
-                </IonChip>
-              )
+    tags.length ? (
+      <IonCard>
+        <IonCardContent>
+          {tags.map(tag => {
+            if (tag.name.toLowerCase().indexOf(searchText) > -1 ||
+              searchText === '') {
+              if (searchArray.indexOf(tag.name) === -1) {
+                return (
+                  <IonChip
+                    key={tag.name}
+                    onClick={() => { addToTagArray(tag.name) }}
+                  >
+                    {tag.name}
+                  </IonChip>
+                )
+              }
             }
-          }
-        })}
-      </IonCardContent>
-    </IonCard>
+          })}
+        </IonCardContent>
+      </IonCard>
+    ) : null
   );
 };
 

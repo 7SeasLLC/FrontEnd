@@ -24,6 +24,24 @@ ion-header {
   transform: translateX(-50%);
 }
 
+ion-footer {
+  max-width: 580px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+audio {
+  display: block;
+  margin: auto;
+  width: 100%;
+  margin: 20px 0px;
+}
+audio::-webkit-media-controls-enclosure {
+  background: transparent;
+}
+audio::-webkit-media-controls {
+  filter: var(--filter-invert);
+}
 /* ion-textarea {
   box-shadow:
     inset 0px -2px var(--ion-color-light-tint);

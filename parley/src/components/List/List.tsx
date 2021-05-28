@@ -1,45 +1,45 @@
 import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonNote } from '@ionic/react';
 import { chevronDownOutline, chevronUpOutline, playOutline, headsetOutline } from 'ionicons/icons';
 
-import { useState, useEffect } from 'react';
-
 import './List.css';
 
-const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
+const List = ({ unfolded, audio, setFold, isStreaming, showTitle }) => {
   const string = isStreaming ? 'stream': 'recording';
 
   let count = 0;
 
-  const handleClick = (id) => {
-    let element = document.getElementById(id);
-    element
-      .getOpenAmount()
-      .then(num => {
-        if (num > 0) {
-          element.close()
-        } else {
-          element.open();
-        }
-      })
+  const handleClick = (event, id) => {
+    if (!(event.target instanceof HTMLImageElement)) {
+      let element = document.getElementById(id);
+      element
+        .getOpenAmount()
+        .then(num => {
+          if (num !== 0) {
+            element.close()
+          } else {
+            element.open();
+          }
+        })
+    }
   }
 
   return (
     <IonCard>
       {showTitle ? (
-              <IonItem onClick={() => setFold(string)}>
-        <IonCardSubtitle>
-          {isStreaming ? (
-            "Live Streams"
-          ) : (
-            "Recordings"
-          )}
-        </IonCardSubtitle>
-          {unfolded ? (
-            <IonIcon icon={chevronUpOutline} slot="end"></IonIcon>
-          ) : (
-            <IonIcon icon={chevronDownOutline} slot="end"></IonIcon>
-          )}
-      </IonItem>
+        <IonItem onClick={() => setFold(string)}>
+          <IonCardSubtitle>
+            {isStreaming ? (
+              "Live Streams"
+            ) : (
+              "Recordings"
+            )}
+          </IonCardSubtitle>
+            {unfolded ? (
+              <IonIcon icon={chevronUpOutline} slot="end"></IonIcon>
+            ) : (
+              <IonIcon icon={chevronDownOutline} slot="end"></IonIcon>
+            )}
+        </IonItem>
       ) : null}
     {unfolded ? (
       <IonList>
@@ -51,14 +51,15 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
               <IonItemSliding
                 id={item.sessionId}
                 key={item.sessionId}
-                onClick={() => handleClick(item.sessionId)}
+                onClick={(e) => handleClick(e, item.sessionId)}
               >
                 <IonItemOptions side="end" >
                   <IonItemOption>
                     <IonButton
-                      icon-only
+                      expand="full"
                       className="listplaybtn"
-                      href={`/${isStreaming ? 'listen' : 'play'}/${item.sessionId}`}
+                      href={`/${isStreaming ? 'session' : 'recording'}/${item.sessionId}`}
+                      onClick={() => {window.location.href = `/${isStreaming ? 'session' : 'recording'}/${item.sessionId}`}}
                     >
                       <IonIcon icon={isStreaming ? headsetOutline : playOutline} />
                     </IonButton>
@@ -66,9 +67,13 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
                 </IonItemOptions>
                   <IonItem lines="none">
                     <a
-                      href={'/user/' + item.Hosts[0].slice(0,-10)}
-                      style={{marginRight: '11px'}}>
-                      <IonAvatar slot="start">
+                      href={`/user/${item.Hosts}`}
+                      style={{marginRight: '11px'}}
+                    >
+                      <IonAvatar
+                        slot="start"
+                        style={{marginRight: '11px'}}
+                      >
                         <img
                           alt={`${item.Hosts}'s avatar`}
                           src={item.Photos}
