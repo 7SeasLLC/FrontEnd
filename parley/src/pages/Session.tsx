@@ -21,7 +21,7 @@ const Session = (props) => {
   const [roomId, setRoomId] = useState(props.location.pathname.substring(9));
   const [recording, setRecording] = useState(false);
   const [users, setUsers] = useState(0);
-  const [host, setHost] = useState(false);
+  const [host, setHost] = useState(' ');
   const [roomExists, setRoomExists] = useState(true);
   const [startTime, setStartTime] = useState(0);
   const [duration, setDuration] = useState(null);
@@ -81,16 +81,20 @@ const Session = (props) => {
       await setSessionInfo(data);
       if (data.Hosts.includes(newuser.username)){
         setHost(true);
-        return true;
+      } else{
+        setHost(false)
       }
-      return false
     }
   }
 
+  useEffect(() => {
+    determineHost();
+  }, [])
   const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect (() => {
-    determineHost()
+    // determineHost()
+    console.log(host)
     console.log(sessionInfo)
     if (roomExists) {
       let chunks = []
@@ -155,7 +159,7 @@ const Session = (props) => {
           socket.emit('join-room', roomId, userId);
       })
     }
-  }, [])
+  }, [host])
 
   const startRecording = () => {
     mediaRecorder.start();
@@ -190,11 +194,11 @@ const Session = (props) => {
   }
 
   const addCallerAudio = async (audio, stream)=> {
-    const getHost = await determineHost()
-    if (getHost) {
+    // const getHost = await determineHost()
+    // if (getHost) {
       audio.srcObject = stream;
       audio.addEventListener('loadedmetadata',()=> {audio.play()});
-    }
+    // }
     // document.getElementById('callGrid').append(audio);
   }
 
