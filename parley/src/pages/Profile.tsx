@@ -30,9 +30,10 @@ const Profile = ({ match, handleThemeChange }) => {
   const updateInfo = async () => {
     if (userToGrab !== null) {
       const otherUserInfo = await getUser(userToGrab);
+      console.log(otherUserInfo);
       setNewBio(otherUserInfo.bio);
       setUserInfo(otherUserInfo);
-      updateRecords(userToGrab);
+      updateRecords(otherUserInfo.authId);
     } else {
       setUserInfo(ownInfo);
       updateRecords(ownInfo.authId);
