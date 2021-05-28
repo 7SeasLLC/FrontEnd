@@ -47,7 +47,7 @@ const Play = ({ location, match }) => {
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonItem>
+            <IonItem lines="none">
               {sessionInfo.Description}
             </IonItem>
           </IonCardContent>
@@ -57,6 +57,7 @@ const Play = ({ location, match }) => {
         <IonToolbar>
           <IonItem>
             <audio
+              className="audioclip"
               controls
               src={sessionInfo.S3URL}>
                   Your browser does not support the

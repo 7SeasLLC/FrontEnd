@@ -29,14 +29,14 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto })
         </IonCardTitle>
       </IonCardHeader>
     <IonCardContent>
-      <IonItem>
+      <IonItem lines="none">
         {description}
       </IonItem>
     </IonCardContent>
   </IonCard>
   <IonCard>
     <IonCardContent>
-      <IonItem>
+      <IonItem lines="none">
         <IonLabel>
           Currently Listening
         </IonLabel>
@@ -44,7 +44,7 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto })
           {listeners}
         </IonBadge>
       </IonItem>
-      <IonItem>
+      <IonItem lines="none">
         <IonLabel>
           Stream Uptime
         </IonLabel>
