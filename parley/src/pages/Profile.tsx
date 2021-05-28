@@ -38,8 +38,10 @@ const Profile = ({ match, handleThemeChange }) => {
   const updateRecords = async () => {
     const newRecords = await getUserRecordings(userInfo.authId);
     console.log(newRecords)
-    const filteredRecords = newRecords.filter((item) => (item !== undefined))
-    setUserRecords(filteredRecords)
+    if (Array.isArray(newRecords)) {
+      const filteredRecords = newRecords.filter((item) => (item !== undefined))
+      setUserRecords(filteredRecords)
+    }
   }
 
   useEffect(() => {
@@ -55,35 +57,35 @@ const Profile = ({ match, handleThemeChange }) => {
       <IonHeader>
         <IonToolbar>
           <Header user={ownInfo}
-                  HeaderRight={match !== undefined ? FeedHeaderRight : ProfileHeaderRight}
-                  backBtn={true}
-                  handleThemeChange={handleThemeChange}
-                  bio={newBio}
-                  setBio={handleNewBio}
+            HeaderRight={match !== undefined ? FeedHeaderRight : ProfileHeaderRight}
+            backBtn={true}
+            handleThemeChange={handleThemeChange}
+            bio={newBio}
+            setBio={handleNewBio}
           />
         </IonToolbar>
       </IonHeader>
-    {  userInfo
-    ? <IonContent>
-        <ProfileInfo userInfo={userInfo} bio={newBio}/>
-        <List
-          unfolded={true}
-          setFold = {() =>{}}
-          isStreaming={true}
-          user={userInfo.authId}
-          showTitle={false}
-          audio={userRecords}
+      {  userInfo
+        ? <IonContent>
+          <ProfileInfo userInfo={userInfo} bio={newBio} />
+          <List
+            unfolded={true}
+            setFold={() => { }}
+            isStreaming={true}
+            user={userInfo.authId}
+            showTitle={false}
+            audio={userRecords}
           />
-        <List
-          unfolded={true}
-          setFold = {()=>{}}
-          isStreaming={false}
-          user={userInfo.authId}
-          showTitle={false}
-          audio={userRecords}
+          <List
+            unfolded={true}
+            setFold={() => { }}
+            isStreaming={false}
+            user={userInfo.authId}
+            showTitle={false}
+            audio={userRecords}
           />
-      </IonContent>
-      : null
+        </IonContent>
+        : null
       }
     </IonPage>
   );
