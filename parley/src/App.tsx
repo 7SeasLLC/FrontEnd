@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, useIonLoading } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -37,8 +37,10 @@ const App = () => {
 
   const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')) || false);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const [present, dismiss] = useIonLoading();
 
   prefersDark.addListener((e) => handleThemeChange(e.matches));
+
 
   useEffect(() => {
     if (user) {
@@ -51,7 +53,10 @@ const App = () => {
   }, [])
 
   const handleSignIn = async () => {
-
+    present({
+      backdropDismiss: true,
+      message: 'loading...',
+    });
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
@@ -66,6 +71,7 @@ const App = () => {
       window.location.href = "/feed";
     } catch (err) {
       console.log(err)
+      dismiss();
     }
   }
 
