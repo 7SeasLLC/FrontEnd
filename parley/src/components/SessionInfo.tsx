@@ -14,11 +14,18 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto })
     })
   }
 
+  const handleAvatarClick = () => {
+    window.location.href = `/user/${host[0]}`;
+  }
+
   return (
     <>
     <IonCard>
       <IonCardHeader>
-        <IonAvatar className="profileImg" >
+        <IonAvatar
+          className="profileImg"
+          onClick={handleAvatarClick}
+        >
           <img src={hostPhoto} alt="Your Profile"></img>
         </IonAvatar>
         <IonCardSubtitle className="profileUsername">

@@ -16,6 +16,10 @@ const Play = ({ location, match }) => {
     setSessionInfo(info);
   }
 
+  const handleAvatarClick = () => {
+    window.location.href = `/user/${sessionInfo.Hosts[0]}`;
+  }
+
   useEffect(() => {
     grabSessionInfo();
   }, []);
@@ -36,7 +40,10 @@ const Play = ({ location, match }) => {
       <IonContent>
         <IonCard>
           <IonCardHeader>
-            <IonAvatar className="profileImg" >
+            <IonAvatar
+              className="profileImg"
+              onClick={handleAvatarClick}
+            >
             <img src={sessionInfo.Photos[0]} alt="Your Profile"></img>
             </IonAvatar>
             <IonCardSubtitle className="profileUsername">
