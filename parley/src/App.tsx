@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, useIonLoading } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -10,10 +10,10 @@ import Feed from './pages/Feed';
 import Session from './pages/Session'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-
-
-import { loginUser, updateUser } from './Utils/Firestore'
+import UserName from './pages/UserName';
 import Search from './pages/Search';
+
+import { loginUser } from './Utils/Firestore'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,8 +37,10 @@ const App = () => {
 
   const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')) || false);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const [present, dismiss] = useIonLoading();
 
   prefersDark.addListener((e) => handleThemeChange(e.matches));
+
 
   useEffect(() => {
     if (user) {
@@ -51,7 +53,10 @@ const App = () => {
   }, [])
 
   const handleSignIn = async () => {
-
+    present({
+      backdropDismiss: true,
+      message: 'loading...',
+    });
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
@@ -66,6 +71,7 @@ const App = () => {
       window.location.href = "/feed";
     } catch (err) {
       console.log(err)
+      dismiss();
     }
   }
 
@@ -80,7 +86,7 @@ const App = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          {user ? (
+          {user && user.username ? (
             <>
             <Route exact path="/feed">
               <Feed />
@@ -105,6 +111,16 @@ const App = () => {
               component={Session}/>
             </>
           ) : (
+            user ? (
+              <>
+                <Route exact path="/username">
+                  <UserName user={user}/>
+                </Route>
+                <Route path="/">
+                  <Redirect to="/username" />
+                </Route>
+              </>
+            ) : (
             <>
               <Route exact path="/login">
                 <Login signin={handleSignIn} />
@@ -112,7 +128,7 @@ const App = () => {
               <Route path="/">
                 <Redirect to="/login" />
               </Route>
-            </>
+            </>)
           )}
 
 

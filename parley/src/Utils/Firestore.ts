@@ -63,13 +63,12 @@ export const getAllUsers = async () => {
 
 export const createUser = async (newUser) => {
   //create new user
-  const username = newUser.email.slice(0, newUser.email.indexOf('@'));
   await Users.doc(newUser.uid).set(
     {
       authId: newUser.uid,
       bio: "I love to Parley!",
       email: newUser.email,
-      username,
+      username: null,
       photoUrl: newUser.photoURL,
       following: [],
       preferences: [],
@@ -110,7 +109,24 @@ export const updateUser = async (userId, update) => {
   }
 
 
+}
 
+export const createUserName = async(userId, userName) => {
+
+  try {
+    let match = await getUser(userName);
+
+    if (match) {
+      return false
+    } else {
+      await updateUser(userId, {username: userName})
+      return true
+    }
+
+  } catch (err) {
+    console.log('error in creating user name', err);
+    return err
+  }
 }
 
 export const getTags = async () => {
