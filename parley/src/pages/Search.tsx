@@ -35,10 +35,10 @@ const Search = ({ user }) => {
   }
 
 
-  const search = (searchParams) => {
+  const search = (searchParams, str) => {
     // Only search user if tags is string
-    if (typeof searchParams === 'string') {
-      searchUsers(searchParams)
+    if (typeof str === 'string') {
+      searchUsers(str)
     }
 
     searchAudio(searchParams);
@@ -56,8 +56,14 @@ const Search = ({ user }) => {
     for (var i = 0; i < records.length; i++) {
       let found = true;
       for (let j = 0; j < searchArray.length; j++) {
-        let shouldShow = records[i].Tags.indexOf(searchArray[j]);
-        if (shouldShow === -1) {
+        let strFound = false;
+        for (let k = 0; k < records[i].Tags.length; k++) {
+          let shouldShow = records[i].Tags[k].toLowerCase().indexOf(searchArray[j].toLowerCase());
+          if (shouldShow > -1) {
+            strFound = true;
+          }
+        }
+        if (strFound === false) {
           found = false;
         }
       }
@@ -135,7 +141,9 @@ const Search = ({ user }) => {
   }, [])
 
   const handleSearchStrChange = (string) => {
-    search(string);
+    let newArray = searchArray.slice();
+    newArray.push(string);
+    search(newArray, string);
     setSearchText(string);
   };
 
@@ -206,7 +214,7 @@ const Search = ({ user }) => {
             showHeader={true} />) : null}
         {searchedStreams.length > 0 ?
           (<List
-            unfolded={true}
+            unfolded={streamIsOpen}
             setFold={handleSwitch}
             data={searchedStreams}
             isStreaming={true}
@@ -215,7 +223,7 @@ const Search = ({ user }) => {
           : null}
         {searchedRecords.length > 0 ?
           <List
-            unfolded={true}
+            unfolded={recIsOpen}
             setFold={handleSwitch}
             data={searchedRecords}
             isStreaming={false}
