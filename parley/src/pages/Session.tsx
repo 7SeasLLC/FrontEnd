@@ -87,11 +87,13 @@ const Session = (props) => {
     }
   }
 
+  useEffect(() => {
+    determineHost();
+  }, [])
+
   const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   useEffect (() => {
-    determineHost()
-    console.log(sessionInfo)
     if (roomExists) {
       let chunks = []
       socket.emit('rendered');
@@ -155,7 +157,7 @@ const Session = (props) => {
           socket.emit('join-room', roomId, userId);
       })
     }
-  }, [])
+  }, [host])
 
   const startRecording = () => {
     mediaRecorder.start();
