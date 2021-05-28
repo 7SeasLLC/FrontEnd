@@ -21,7 +21,7 @@ const Profile = ({ match, handleThemeChange }) => {
 
   const [userInfo, setUserInfo] = useState(ownInfo);
   const [newBio, setNewBio] = useState(ownInfo.bio)
-  const [userRecords, setUserRecords] = useState('')
+  const [userRecords, setUserRecords] = useState([])
 
   const handleNewBio = (string) => {
     setNewBio(string);
@@ -38,7 +38,8 @@ const Profile = ({ match, handleThemeChange }) => {
   const updateRecords = async () => {
     const newRecords = await getUserRecordings(userInfo.authId);
     console.log(newRecords)
-    setUserRecords(newRecords)
+    const filteredRecords = newRecords.filter((item) => (item !== undefined))
+    setUserRecords(filteredRecords)
   }
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const Profile = ({ match, handleThemeChange }) => {
           isStreaming={true}
           user={userInfo.authId}
           showTitle={false}
-          // data={undefined}
+          audio={userRecords}
           />
         <List
           unfolded={true}
@@ -79,7 +80,7 @@ const Profile = ({ match, handleThemeChange }) => {
           isStreaming={false}
           user={userInfo.authId}
           showTitle={false}
-          // data={undefined}
+          audio={userRecords}
           />
       </IonContent>
       : null
