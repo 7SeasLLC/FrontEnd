@@ -9,7 +9,7 @@ import List from './../components/List/List';
 import ProfileInfo from './../components/UserProfile/ProfileInfo'
 import FeedHeaderRight from '../components/Header/FeedHeaderRight'
 import ProfileHeaderRight from '../components/Header/ProfileHeaderRight';
-import { getUser } from '../Utils/Firestore';
+import { getUser, getUserRecordings } from '../Utils/Firestore';
 
 const Profile = ({ match, handleThemeChange }) => {
 
@@ -21,6 +21,7 @@ const Profile = ({ match, handleThemeChange }) => {
 
   const [userInfo, setUserInfo] = useState(ownInfo);
   const [newBio, setNewBio] = useState(ownInfo.bio)
+  const [userRecords, setUserRecords] = useState('')
 
   const handleNewBio = (string) => {
     setNewBio(string);
@@ -34,9 +35,19 @@ const Profile = ({ match, handleThemeChange }) => {
     }
   };
 
+  const updateRecords = async () => {
+    const newRecords = await getUserRecordings(userInfo.authId);
+    console.log(newRecords)
+    setUserRecords(newRecords)
+  }
+
   useEffect(() => {
     updateInfo();
   }, [])
+
+  useEffect(() => {
+    updateRecords()
+  }, [userInfo])
 
   return (
     <IonPage>
@@ -59,13 +70,17 @@ const Profile = ({ match, handleThemeChange }) => {
           setFold = {() =>{}}
           isStreaming={true}
           user={userInfo.authId}
-          showTitle={false}/>
+          showTitle={false}
+          // data={undefined}
+          />
         <List
           unfolded={true}
           setFold = {()=>{}}
           isStreaming={false}
           user={userInfo.authId}
-          showTitle={false}/>
+          showTitle={false}
+          // data={undefined}
+          />
       </IonContent>
       : null
       }
