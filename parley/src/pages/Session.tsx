@@ -161,17 +161,18 @@ const Session = (props) => {
 
   const startRecording = () => {
     mediaRecorder.start();
+    setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(true);
   }
 
   const stopRecording = () => {
     mediaRecorder.stop();
-    setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(false);
 
   }
 
   const sendToServer = async (file) => {
+    var recordingDuration = document.getElementById('recordUptime').innerText.substring(15)
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
@@ -182,7 +183,7 @@ const Session = (props) => {
         isStreaming: false,
         EndTime: new Date(),
         S3URL: url,
-        Duration: recordDuration
+        Duration: recordingDuration
       })
       socket.emit('sessionEnded');
       window.location.replace("/feed");
@@ -230,7 +231,7 @@ const Session = (props) => {
        </IonHeader>
        <IonContent>
          <SessionInfo listeners={users} title={sessionInfo.title} host={sessionInfo.Hosts} description = {sessionInfo.Description}
-         uptime={duration} hostPhoto={sessionInfo.Photos}/>
+         uptime={duration} recordUptime={recordDuration} hostPhoto={sessionInfo.Photos}/>
        </IonContent>
          {host ? (
          <Fragment>

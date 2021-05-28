@@ -1,6 +1,6 @@
 import { IonCard, IonCardHeader, IonAvatar, IonCardTitle, IonCardContent, IonItem } from '@ionic/react';
 
-const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto }) => {
+const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto, recordUptime }) => {
   var firstHost;
   var allHosts;
   if (host) {
@@ -39,6 +39,9 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto })
     </IonItem>
     <IonItem>
       Stream uptime: {uptime}
+    </IonItem>
+    <IonItem id="recordUptime">
+      Record Uptime: {recordUptime}
     </IonItem>
     </IonCardContent>
     </IonCard>
