@@ -34,6 +34,13 @@ audio {
   display: block;
   margin: auto;
   width: 100%;
+  margin: 20px 0px;
+}
+audio::-webkit-media-controls-enclosure {
+  background: transparent;
+}
+audio::-webkit-media-controls {
+  filter: var(--filter-invert);
 }
 /* ion-textarea {
   box-shadow:
