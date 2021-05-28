@@ -1,14 +1,14 @@
 import { IonCard, IonLabel, IonItem, IonAvatar, IonBadge, IonCardSubtitle } from '@ionic/react';
 
-const UserList = ({ users, showHeader }) => {
+const UserList = ({ users, showHeader}) => {
 
   return (
     <IonCard>
-      {showHeader ? <IonCardSubtitle className="all-tag-title"><strong>FIND PEOPLE YOU FOLLOWS....</strong></IonCardSubtitle> : null}
+      {showHeader ? <IonCardSubtitle className="all-tag-title">Users</IonCardSubtitle> : null}
       {
         users.map(user => {
           return (
-            <IonItem button={true} href={'/user/' + user.username} key={user.auth_id}>
+            <IonItem lines="none" button={true} href={'/user/' + user.username} key={user.auth_id}>
               <IonAvatar>
                 <img src={user.profile_img} alt={`avatar-${user.username}`} />
               </IonAvatar>

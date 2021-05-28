@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './../components/Header/Header';
 import './Feed.css';
@@ -13,12 +13,14 @@ import recordingDummy from './../dummyData/recordingDummy.json';
 import userDummy from './../dummyData/userDummy.json';
 import tags from './../dummyData/tag.json';
 import { recording } from 'ionicons/icons';
+import { getRecordings, getUserRecordings } from './../Utils/Firestore';
 
 
-const Feed = ({audio}) => {
+const Feed = () => {
 
   const [streamIsOpen, setStreamIsOpen] = useState(true);
   const [recIsOpen, setRecIsOpen] = useState(true);
+  const [audio, setAudio] = useState([]);
 
   const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
@@ -29,6 +31,15 @@ const Feed = ({audio}) => {
       setRecIsOpen(!recIsOpen);
     }
   }
+
+  const grabRecordings = async () => {
+    let array = await getRecordings();
+    setAudio(array);
+  };
+
+  useEffect(() => {
+    grabRecordings();
+  },[]);
 
   return (
     <IonPage>
@@ -46,12 +57,14 @@ const Feed = ({audio}) => {
           unfolded={streamIsOpen}
           setFold = {handleSwitch}
           isStreaming={true}
+          audio={audio}
           user={null}
           showTitle={true}/>
         <List
           unfolded={recIsOpen}
           setFold = {handleSwitch}
           isStreaming={false}
+          audio={audio}
           user={null}
           showTitle={true}/>
       </IonContent>

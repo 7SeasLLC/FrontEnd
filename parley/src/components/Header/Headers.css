@@ -62,3 +62,9 @@ ion-toolbar {
   margin-right: -2px;
 }
 
+.titlechip {
+  margin-left: -15px;
+  background: transparent;
+  --background-hover: transparent;
+}
+
