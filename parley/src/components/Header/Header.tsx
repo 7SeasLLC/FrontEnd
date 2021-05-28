@@ -2,7 +2,7 @@ import { IonImg, IonThumbnail, IonTitle, IonButton, IonIcon } from '@ionic/react
 import { chevronBackOutline } from 'ionicons/icons';
 
 
-const Header = ({ user, HeaderRight, backBtn, handleThemeChange }) => {
+const Header = ({ user, HeaderRight, backBtn, handleThemeChange, bio, setBio }) => {
 
   return (
     <>
@@ -28,7 +28,12 @@ const Header = ({ user, HeaderRight, backBtn, handleThemeChange }) => {
       >
         PARLEY
       </IonTitle>
-      <HeaderRight user={user} handleThemeChange={handleThemeChange} />
+      <HeaderRight
+        user={user}
+        handleThemeChange={handleThemeChange}
+        bio={bio}
+        setBio={setBio}
+      />
 
     </>
   );

@@ -1,7 +1,7 @@
 import { IonCard, IonCardTitle, IonAvatar, IonCardHeader, IonCardContent } from '@ionic/react';
 import './UserProfile.css'
 
-const ProfileInfo = ({ userInfo }) => {
+const ProfileInfo = ({ userInfo, bio }) => {
 
   let index = 0;
   const paragraphs = userInfo.bio.split('\n')

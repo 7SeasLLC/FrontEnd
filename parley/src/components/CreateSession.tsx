@@ -1,4 +1,4 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonModal, IonTextarea, IonFab, IonFabButton, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput, IonItemGroup, useIonLoading } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonModal, IonTextarea, IonFooter, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput, IonItemGroup, useIonLoading } from '@ionic/react';
 import { mic , close } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
 import { getTags, createRecording } from '../Utils/Firestore'
@@ -59,14 +59,14 @@ const CreateSession = ({ user }) => {
 
   return (
     <>
-      <IonFab vertical="bottom" horizontal="center">
-        <IonFabButton
-          className="newStreamaButton"
+      <IonFooter className="footer">
+        <IonButton
+          className="newStreamButton"
           onClick={() => setShowModal(true)}
           >
-            <IonIcon className="editIcon" icon={mic}/>
-        </IonFabButton>
-      </IonFab>
+            New Session
+        </IonButton>
+      </IonFooter>
         <IonModal isOpen={showModal}>
           <IonCard>
             <IonCardHeader>

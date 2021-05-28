@@ -1,12 +1,12 @@
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonIcon, IonButton, IonModal, IonTextarea, IonLabel, IonFooter, IonToolbar, useIonAlert } from '@ionic/react';
 import { createOutline , close, settingsOutline } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
-import Logout from '../../Utils/Logout'
-
-import './Headers.css'
+import Logout from '../../Utils/Logout';
+import { updateUser } from '../../Utils/Firestore';
+import './Headers.css';
 import ThemeToggle from './ThemeToggle';
 
-const ProfileHeaderRight = ({ user, handleThemeChange }) => {
+const ProfileHeaderRight = ({ user, handleThemeChange, bio, setBio }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [userBio, setUserBio] = useState(user.bio);
@@ -14,7 +14,9 @@ const ProfileHeaderRight = ({ user, handleThemeChange }) => {
 
   const [present] = useIonAlert();
 
-  const saveNewBio = (userBio) => {
+  const saveNewBio = () => {
+    setBio(userBio)
+    updateUser(user.authId, {bio: userBio})
     setNewBioSubmitted(true)
     setShowEdit(false)
   };
