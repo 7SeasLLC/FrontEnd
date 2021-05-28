@@ -21,7 +21,7 @@ const Search = ({ user }) => {
   const [records, setRecords] = useState([]);
   const [searchedRecords, setSearchedRecords] = useState([]);
   const [searchedStreams, setSearchedStreams] = useState([]);
-  const [showListUser, setShowListUser] = useState([]);
+  const [searchedUsers, setSearchedUsers] = useState([]);
   const [streamIsOpen, setStreamIsOpen] = useState(true);
   const [recIsOpen, setRecIsOpen] = useState(true);
 
@@ -85,18 +85,20 @@ const Search = ({ user }) => {
     }
   }
 
-
-  function searchUsers(searchStr) {
-    var list = {}
-    users.map((user) => {
-      const shouldShow = user.username.toLowerCase().indexOf(searchStr);
-      if (shouldShow >= 0) {
-        list[user.auth_id] = user;
+  const searchUsers = (searchStr) => {
+    var list = users.map((user) => {
+      let found = user.username.toLowerCase().indexOf(searchStr.toLowerCase());
+      if (found >= 0) {
+        return user;
       }
-    })
-    setShowListUser(Object.values(list))
+    }).filter((item) => (item !== undefined));
+
+    console.log(list);
+
     if (searchStr === '') {
-      setShowListUser([])
+      setSearchedUsers([])
+    } else {
+      setSearchedUsers(list);
     }
   }
 
@@ -143,7 +145,11 @@ const Search = ({ user }) => {
   const handleSearchStrChange = (string) => {
     let newArray = searchArray.slice();
     newArray.push(string);
-    search(newArray, string);
+    if (searchArray.length > 0) {
+      search(newArray, string);
+    } else {
+      search(string, string);
+    }
     setSearchText(string);
   };
 
@@ -208,11 +214,12 @@ const Search = ({ user }) => {
           addToTagArray={addToTagArray}
         />
 
-        {showListUser.length > 0 ? (
+        {searchedUsers.length ? (
           <UserList
-            users={showListUser}
-            showHeader={true} />) : null}
-        {searchedStreams.length > 0 ?
+            users={searchedUsers}
+            showHeader={false} />
+        ) : null}
+        {searchedStreams.length ?
           (<List
             unfolded={streamIsOpen}
             setFold={handleSwitch}
