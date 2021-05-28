@@ -10,8 +10,8 @@ import Feed from './pages/Feed';
 import Session from './pages/Session'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import UserName from './pages/UserName'
-
+import UserName from './pages/UserName';
+import Search from './pages/Search';
 
 import { loginUser } from './Utils/Firestore'
 
