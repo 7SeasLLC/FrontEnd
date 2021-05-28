@@ -4,7 +4,6 @@ import { IonApp, IonRouterOutlet, useIonLoading } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import firebase from "firebase/app";
 import "firebase/auth";
-import FirebaseConfig from './firebase.config.js';
 
 import Feed from './pages/Feed';
 import Session from './pages/Session'
@@ -33,7 +32,7 @@ import '@ionic/react/css/typography.css';
 
 /* Theme variables */
 import './theme/variables.css';
-const App = () => {
+const App = ({FirebaseConfig}) => {
 
   const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('user')) || false);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

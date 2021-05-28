@@ -2,13 +2,15 @@ import 'firebase/firestore'
 import FirebaseConfig from '../firebase.config.js';
 
 
-const db = FirebaseConfig.firestore();
-const Users = db.collection("users");
-const Recordings = db.collection("recordings");
-const Tags = db.collection("tags");
+// const db = FirebaseConfig.firestore();
+// const Users = db.collection("users");
+// const Recordings = db.collection("recordings");
+// const Tags = db.collection("tags");
 
 export const loginUser = async (currentUser) => {
   let user;
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
 
   try {
     await Users.where("authId", "==", currentUser.uid).get()
@@ -32,6 +34,8 @@ export const loginUser = async (currentUser) => {
 
 export const getUser = async (username) => {
   let user;
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
 
   try {
     await Users.where("username", "==", username).get()
@@ -51,6 +55,8 @@ export const getUser = async (username) => {
 
 export const getAllUsers = async () => {
   const users = [];
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
 
   await Users.get()
     .then((querySnapshot) => {
@@ -62,6 +68,8 @@ export const getAllUsers = async () => {
 }
 
 export const createUser = async (newUser) => {
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
   //create new user
   await Users.doc(newUser.uid).set(
     {
@@ -91,6 +99,8 @@ export const createUser = async (newUser) => {
 }
 
 export const updateUser = async (userId, update) => {
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
   const user = await Users.doc(userId);
 
   try {
@@ -131,6 +141,8 @@ export const createUserName = async(userId, userName) => {
 
 export const getTags = async () => {
   const tags = [];
+  const db = FirebaseConfig.firestore();
+  const Tags = db.collection("tags");
 
   await Tags.get()
     .then((querySnapshot) => {
@@ -144,6 +156,8 @@ export const getTags = async () => {
 
 export const getRecordings = async (tag, user) => {
   const recordings = [];
+  const db = FirebaseConfig.firestore();
+  const Recordings = db.collection("recordings");
 
   await Recordings.get()
   .then((querySnapshot) => {
@@ -157,6 +171,8 @@ export const getRecordings = async (tag, user) => {
 
 export const getUserRecordings = async (userId) => {
   //get users recordings
+  const db = FirebaseConfig.firestore();
+  const Users = db.collection("users");
   const doc = await Users.doc(userId).get();
 
   if (!doc.exists) {
@@ -174,6 +190,8 @@ export const getUserRecordings = async (userId) => {
 }
 
 export const getRecording = async (sessionId) => {
+  const db = FirebaseConfig.firestore();
+  const Recordings = db.collection("recordings");
   const doc = await Recordings.doc(sessionId).get();
 
   if (!doc.exists) {
@@ -184,6 +202,11 @@ export const getRecording = async (sessionId) => {
 }
 
 export const createRecording = async ({sessionId, title, description, username, tags, userIds, photoId}) => {
+  const db = FirebaseConfig.firestore();
+  const Recordings = db.collection("recordings");
+  const Users = db.collection("users");
+  const Tags = db.collection("tags");
+
   try {
     await Recordings.doc(sessionId).set(
       {
@@ -245,6 +268,8 @@ export const createRecording = async ({sessionId, title, description, username, 
 
 export const updateRecording = async (update) => {
   console.log(update)
+  const db = FirebaseConfig.firestore();
+  const Recordings = db.collection("recordings");
   const recording = Recordings.doc(update.sessionId);
 
   try {
