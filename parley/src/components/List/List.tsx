@@ -10,36 +10,38 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
 
   let count = 0;
 
-  const handleClick = (id) => {
-    let element = document.getElementById(id);
-    element
-      .getOpenAmount()
-      .then(num => {
-        if (num > 0) {
-          element.close()
-        } else {
-          element.open();
-        }
-      })
+  const handleClick = (event, id) => {
+    if (!(event.target instanceof HTMLImageElement)) {
+      let element = document.getElementById(id);
+      element
+        .getOpenAmount()
+        .then(num => {
+          if (num !== 0) {
+            element.close()
+          } else {
+            element.open();
+          }
+        })
+    }
   }
 
   return (
     <IonCard>
       {showTitle ? (
-              <IonItem onClick={() => setFold(string)}>
-        <IonCardSubtitle>
-          {isStreaming ? (
-            "Live Streams"
-          ) : (
-            "Recordings"
-          )}
-        </IonCardSubtitle>
-          {unfolded ? (
-            <IonIcon icon={chevronUpOutline} slot="end"></IonIcon>
-          ) : (
-            <IonIcon icon={chevronDownOutline} slot="end"></IonIcon>
-          )}
-      </IonItem>
+        <IonItem onClick={() => setFold(string)}>
+          <IonCardSubtitle>
+            {isStreaming ? (
+              "Live Streams"
+            ) : (
+              "Recordings"
+            )}
+          </IonCardSubtitle>
+            {unfolded ? (
+              <IonIcon icon={chevronUpOutline} slot="end"></IonIcon>
+            ) : (
+              <IonIcon icon={chevronDownOutline} slot="end"></IonIcon>
+            )}
+        </IonItem>
       ) : null}
     {unfolded ? (
       <IonList>
@@ -51,6 +53,7 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
               <IonItemSliding
                 id={item.sessionId}
                 key={item.sessionId}
+                onClick={(e) => handleClick(e, item.sessionId)}
               >
                 <IonItemOptions side="end" >
                   <IonItemOption>
@@ -66,16 +69,20 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
                 </IonItemOptions>
                   <IonItem lines="none">
                     <a
-                      href={'/user/' + item.Hosts[0].slice(0,-10)}
-                      style={{marginRight: '11px'}}>
-                      <IonAvatar slot="start">
+                      href={`/user/${item.Hosts}`}
+                      style={{marginRight: '11px'}}
+                    >
+                      <IonAvatar
+                        slot="start"
+                        style={{marginRight: '11px'}}
+                      >
                         <img
                           alt={`${item.Hosts}'s avatar`}
                           src={item.Photos}
                         />
                       </IonAvatar>
                     </a>
-                    <IonLabel onClick={() => handleClick(item.sessionId)}>
+                    <IonLabel>
                       <IonNote>
                         {item.Hosts}
                       </IonNote>
