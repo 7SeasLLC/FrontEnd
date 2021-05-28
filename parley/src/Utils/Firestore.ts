@@ -252,9 +252,10 @@ export const createRecording = async ({sessionId, title, description, username, 
           })
           currentTag = items[0];
         });
-        const count = currentTag.count + 1
+        const count = Number(currentTag.count) + 1
+        console.log(currentTag.name + count)
       await Tags.doc(currentTag.id).update({
-        count
+        count: count
       })
     })
 
