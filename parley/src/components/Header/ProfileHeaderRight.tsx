@@ -10,20 +10,14 @@ const ProfileHeaderRight = ({ user, handleThemeChange, bio, setBio }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [userBio, setUserBio] = useState(user.bio);
-  const [newBioSubmitted, setNewBioSubmitted] = useState(false);
 
   const [present] = useIonAlert();
 
   const saveNewBio = () => {
-    setBio(userBio)
-    updateUser(user.authId, {bio: userBio})
-    setNewBioSubmitted(true)
-    setShowEdit(false)
+    setBio(userBio);
+    updateUser(user.authId, {bio: userBio});
+    setShowEdit(false);
   };
-
-  useEffect(() => {
-
-  }, [newBioSubmitted])
 
   return (
     <>
