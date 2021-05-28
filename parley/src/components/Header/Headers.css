@@ -39,7 +39,7 @@ ion-toolbar {
   transition: filter 0.5s;
 }
 .headerbtn:hover {
-  filter: invert() grayscale(100%) contrast(0%);
+  filter: var(--filter-hover);
 }
 
 .backBtn {
