@@ -1,4 +1,4 @@
-import { IonCard, IonCardHeader, IonAvatar, IonCardTitle, IonCardContent, IonItem } from '@ionic/react';
+import { IonCard, IonCardHeader, IonAvatar, IonCardTitle, IonCardContent, IonItem, IonItemDivider, IonCardSubtitle, IonLabel, IonBadge, IonItemGroup, IonNote } from '@ionic/react';
 
 const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto }) => {
   var firstHost;
@@ -15,33 +15,46 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto })
   }
 
   return (
+    <>
     <IonCard>
-    <IonCardHeader>
-      <IonAvatar className="profileImg" >
-        <img src={hostPhoto} alt="Your Profile"></img>
-      </IonAvatar>
-      <IonCardTitle className="profileUsername">
+      <IonCardHeader>
+        <IonAvatar className="profileImg" >
+          <img src={hostPhoto} alt="Your Profile"></img>
+        </IonAvatar>
+        <IonCardSubtitle className="profileUsername">
           {firstHost}
+        </IonCardSubtitle>
+        <IonCardTitle className="profileUsername">
+          {title}
         </IonCardTitle>
-    </IonCardHeader>
+      </IonCardHeader>
     <IonCardContent>
-    <IonItem>
-      Talk: {title}
-    </IonItem>
-    <IonItem>
-      Description: {description}
-    </IonItem>
-    <IonItem>
-      Hosts: {allHosts}
-    </IonItem>
-    <IonItem>
-      In Room: {listeners}
-    </IonItem>
-    <IonItem>
-      Stream uptime: {uptime}
-    </IonItem>
+      <IonItem>
+        {description}
+      </IonItem>
     </IonCardContent>
-    </IonCard>
+  </IonCard>
+  <IonCard>
+    <IonCardContent>
+      <IonItem>
+        <IonLabel>
+          Currently Listening
+        </IonLabel>
+        <IonBadge slot="end">
+          {listeners}
+        </IonBadge>
+      </IonItem>
+      <IonItem>
+        <IonLabel>
+          Stream Uptime
+        </IonLabel>
+        <IonBadge slot="end">
+          {uptime}
+        </IonBadge>
+      </IonItem>
+    </IonCardContent>
+  </IonCard>
+  </>
   );
 };
 
