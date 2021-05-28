@@ -30,14 +30,12 @@ const Profile = ({ match, handleThemeChange }) => {
   const updateInfo = async () => {
     if (userToGrab !== null) {
       const otherUserInfo = await getUser(userToGrab);
-      console.log(otherUserInfo);
       setUserInfo(otherUserInfo);
     }
   };
 
   const updateRecords = async () => {
     const newRecords = await getUserRecordings(userInfo.authId);
-    console.log(newRecords)
     if (Array.isArray(newRecords)) {
       const filteredRecords = newRecords.filter((item) => (item !== undefined))
       setUserRecords(filteredRecords)
