@@ -1,10 +1,11 @@
 import { Fragment, useState, useEffect} from 'react';
-import { IonPage, IonHeader, IonToolbar, IonContent, IonButton } from '@ionic/react';
-import { getRecording, updateRecording, getUser } from '../Utils/Firestore';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonButton, IonCard, IonCardContent, IonItem } from '@ionic/react';
+import { getRecording, updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
 import axios from 'axios';
 import Header from '../components/Header/Header';
+import FeedHeaderRight from './../components/Header/FeedHeaderRight';
 import SessionInfo from '../components/SessionInfo';
 
 const socket = openSocket('http://54.193.3.132');
@@ -18,7 +19,8 @@ declare module 'axios' {
 var mediaRecorder = {};
 
 const Session = (props) => {
-  const [roomId, setRoomId] = useState(props.location.pathname.substring(9));
+  const roomId = props.location.pathname.substring(9);
+
   const [recording, setRecording] = useState(false);
   const [users, setUsers] = useState(0);
   const [host, setHost] = useState(false);
@@ -216,39 +218,54 @@ const Session = (props) => {
   }
 
   return (
-    <Fragment>
-      {roomExists ? (
-        <IonPage>
-         <IonHeader>
-         <IonToolbar>
-           <Header user={userInfo}
-                   HeaderRight={()=> {return null}}
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <Header user={userInfo}
+                   HeaderRight={FeedHeaderRight}
                    backBtn={true}
-                   handleThemeChange={()=>{}}
-           />
-         </IonToolbar>
-       </IonHeader>
-       <IonContent>
-         <SessionInfo listeners={users} title={sessionInfo.title} host={sessionInfo.Hosts} description = {sessionInfo.Description}
-         uptime={duration} hostPhoto={sessionInfo.Photos}/>
-       </IonContent>
-         {host ? (
-         <Fragment>
-         {recording ? (
-             <IonButton onClick={stopRecording}>
-               End Session
-             </IonButton>
-           ) : (
-             <IonButton onClick={startRecording}>
-               Start Recording
-             </IonButton>
-           )}
-       </Fragment>
-         ): null}
-         </IonPage>
+          />
+        </IonToolbar>
+      </IonHeader>
 
-      ) : (<IonContent><div style={{marginTop: '40%', color: 'red'}}>There is no session in this room</div></IonContent>)}
-    </Fragment>
+      {roomExists ? (
+        <>
+        <IonContent>
+          <SessionInfo
+            listeners={users}
+            title={sessionInfo.title}
+            host={sessionInfo.Hosts}
+            description = {sessionInfo.Description}
+            uptime={duration}
+            hostPhoto={sessionInfo.Photos}
+          />
+        </IonContent>
+        {host ? (
+          <>
+          {recording ? (
+            <IonButton onClick={stopRecording}>
+              End Session
+            </IonButton>
+          ) : (
+            <IonButton onClick={startRecording}>
+              Start Recording
+            </IonButton>
+          )}
+          </>
+        ): null}
+        </>
+      ) : (
+      <IonContent>
+        <IonCard>
+          <IonCardContent>
+            <IonItem color="warning">
+              There is no session in this room
+            </IonItem>
+          </IonCardContent>
+        </IonCard>
+      </IonContent>
+      )}
+    </IonPage>
   );
 
 }

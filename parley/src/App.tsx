@@ -7,6 +7,7 @@ import "firebase/auth";
 
 import Feed from './pages/Feed';
 import Session from './pages/Session'
+import Play from './pages/Play'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import UserName from './pages/UserName';
@@ -108,6 +109,9 @@ const App = ({FirebaseConfig}) => {
             <Route
               path="/session/:roomId"
               component={Session}/>
+            <Route
+              path="/recording/:recId"
+              component={Play}/>
             </>
           ) : (
             user ? (

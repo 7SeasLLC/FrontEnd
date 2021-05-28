@@ -1,4 +1,4 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonModal, IonTextarea, IonFooter, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput, IonItemGroup, useIonLoading } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonModal, IonTextarea, IonFooter, IonList, IonListHeader, IonLabel, IonItem, IonSelect, IonSelectOption, IonInput, IonItemGroup, useIonLoading, IonFab, IonFabButton } from '@ionic/react';
 import { mic , close } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
 import { getTags, createRecording } from '../Utils/Firestore'
@@ -59,90 +59,94 @@ const CreateSession = ({ user }) => {
 
   return (
     <>
-      <IonFooter className="footer">
+      <IonFab
+        slot="fixed"
+        vertical="bottom"
+        horizontal="center"
+      >
         <IonButton
-          className="newStreamButton"
+          className="createsessionbtn"
           onClick={() => setShowModal(true)}
-          >
-            New Session
+        >
+          Create Session
         </IonButton>
-      </IonFooter>
-        <IonModal isOpen={showModal}>
-          <IonCard>
-            <IonCardHeader>
-              <IonItem>
-                <IonCardTitle>
-                  Start New Stream
-                </IonCardTitle>
-                <IonButton
-                  icon-only className="headerbtn"
-                  slot="end"
-                  onClick={() => setShowModal(false)}>
-                  <IonIcon
-                    className="headericon"
-                    icon={ close } />
-                </IonButton>
+      </IonFab>
+      <IonModal isOpen={showModal}>
+        <IonCard>
+          <IonCardHeader>
+            <IonItem>
+              <IonCardTitle>
+                Start New Stream
+              </IonCardTitle>
+              <IonButton
+                icon-only className="headerbtn"
+                slot="end"
+                onClick={() => setShowModal(false)}>
+                <IonIcon
+                  className="headericon"
+                  icon={ close } />
+              </IonButton>
+            </IonItem>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonItemGroup>
+              <IonItem lines="none">
+                <IonLabel>Stream Title</IonLabel>
               </IonItem>
-            </IonCardHeader>
-            <IonCardContent>
-              <IonItemGroup>
-                <IonItem lines="none">
-                  <IonLabel>Stream Title</IonLabel>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput
-                    color="medium"
-                    className="sessionEntry"
-                    maxlength={40}
-                    required={true}
-                    onIonChange={e => setStreamTitle(e.detail.value!)}
-                  ></IonInput>
-                </IonItem>
-              </IonItemGroup>
-              <IonItemGroup>
-                <IonItem lines="none">
-                  <IonLabel>Description</IonLabel>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonTextarea
-                    color="medium"
-                    autoGrow={true}
-                    className=""
-                    maxlength={120}
-                    required={true}
-                    onIonChange={e => setStreamDescription(e.detail.value!)}
-                  >
-                  </IonTextarea>
-                </IonItem>
-              </IonItemGroup>
-              <IonList>
-                <IonListHeader>
-                </IonListHeader>
-                <IonItem lines="none">
-                  <IonLabel>
-                    Tags
-                  </IonLabel>
-                  <IonSelect
-                    value={streamTags}
-                    multiple={true}
-                    onIonChange={e => setStreamTags(e.detail.value)}>
-                      {dbTags.map(tag => (
-                        <IonSelectOption
-                          value={tag.name}
-                          key={tag.id}
-                        >
-                          {tag.name}
-                        </IonSelectOption>
-                      ))}
-                    </IonSelect>
-                </IonItem>
-              </IonList>
-            </IonCardContent>
-          </IonCard>
-            <IonButton onClick={startNewStream}>
-              Begin Stream
-            </IonButton>
-        </IonModal>
+              <IonItem lines="none">
+                <IonInput
+                  color="medium"
+                  className="sessionEntry"
+                  maxlength={40}
+                  required={true}
+                  onIonChange={e => setStreamTitle(e.detail.value!)}
+                ></IonInput>
+              </IonItem>
+            </IonItemGroup>
+            <IonItemGroup>
+              <IonItem lines="none">
+                <IonLabel>Description</IonLabel>
+              </IonItem>
+              <IonItem lines="none">
+                <IonTextarea
+                  color="medium"
+                  autoGrow={true}
+                  className=""
+                  maxlength={120}
+                  required={true}
+                  onIonChange={e => setStreamDescription(e.detail.value!)}
+                >
+                </IonTextarea>
+              </IonItem>
+            </IonItemGroup>
+            <IonList>
+              <IonListHeader>
+              </IonListHeader>
+              <IonItem lines="none">
+                <IonLabel>
+                  Tags
+                </IonLabel>
+                <IonSelect
+                  value={streamTags}
+                  multiple={true}
+                  onIonChange={e => setStreamTags(e.detail.value)}>
+                    {dbTags.map(tag => (
+                      <IonSelectOption
+                        value={tag.name}
+                        key={tag.id}
+                      >
+                        {tag.name}
+                      </IonSelectOption>
+                    ))}
+                  </IonSelect>
+              </IonItem>
+            </IonList>
+          </IonCardContent>
+        </IonCard>
+          <IonButton onClick={startNewStream}>
+            Begin Stream
+          </IonButton>
+      </IonModal>
     </>
   );
 }
