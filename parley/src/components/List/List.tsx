@@ -2,24 +2,13 @@ import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge,
 import { chevronDownOutline, chevronUpOutline, playOutline, headsetOutline } from 'ionicons/icons';
 
 import { useState, useEffect } from 'react';
-import { getRecordings, getUserRecordings } from './../../Utils/Firestore';
 
 import './List.css';
 
-const List = ({ unfolded, setFold, isStreaming, user, showTitle }) => {
+const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
   const string = isStreaming ? 'stream': 'recording';
 
-  const [audio, setAudio] = useState([]);
   let count = 0;
-
-  const grabRecordings = async () => {
-    let array = user !== null ? await getUserRecordings(user) : await getRecordings();
-    setAudio(array);
-  };
-
-  useEffect(() => {
-    grabRecordings();
-  },[]);
 
   const handleClick = (id) => {
     let element = document.getElementById(id);

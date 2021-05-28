@@ -77,6 +77,8 @@ const Search = ({ user }) => {
       }
     }
 
+    console.log(recordsToShow);
+    console.log(streamsToShow);
     if (searchParams === '' || searchArray.length < 1) {
       setSearchedRecords([])
       setSearchedStreams([])
@@ -195,7 +197,7 @@ const Search = ({ user }) => {
           (<List
             unfolded={streamIsOpen}
             setFold={handleSwitch}
-            data={searchedStreams}
+            audio={searchedStreams}
             isStreaming={true}
             showTitle={true}
             user={undefined} />)
@@ -204,7 +206,7 @@ const Search = ({ user }) => {
           <List
             unfolded={recIsOpen}
             setFold={handleSwitch}
-            data={searchedRecords}
+            audio={searchedRecords}
             isStreaming={false}
             showTitle={true}
             user={undefined} />
