@@ -36,6 +36,7 @@ const Profile = ({ match, handleThemeChange }) => {
       updateRecords(otherUserInfo.authId);
     } else {
       setUserInfo(ownInfo);
+      setNewBio(ownInfo.bio);
       updateRecords(ownInfo.authId);
     }
   };
