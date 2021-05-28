@@ -66,18 +66,18 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
                 </IonItemOptions>
                   <IonItem lines="none">
                     <a
-                      href={'/user/' + item.Hosts[0]}
+                      href={'/user/' + item.Hosts}
                       style={{marginRight: '11px'}}>
                       <IonAvatar slot="start">
                         <img
-                          alt={`${item.Hosts[0]}'s avatar`}
-                          src={item.Photos[0]}
+                          alt={`${item.Hosts}'s avatar`}
+                          src={item.Photos}
                         />
                       </IonAvatar>
                     </a>
                     <IonLabel>
                       <IonNote>
-                        {item.Hosts[0]}
+                        {item.Hosts}
                       </IonNote>
                       <IonLabel>
                         {item.title}

@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './../components/Header/Header';
 import './Feed.css';
@@ -33,7 +33,7 @@ const Feed = () => {
   }
 
   const grabRecordings = async () => {
-    let array = user !== null ? await getUserRecordings(user) : await getRecordings();
+    let array = await getRecordings();
     setAudio(array);
   };
 
