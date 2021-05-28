@@ -10,8 +10,6 @@ import './search.css';
 import SuggestList from '../components/List/SuggestList';
 import { getRecordings, getAllUsers } from './../Utils/Firestore';
 
-//dummy data
-import userDummy from './../dummyData/userDummy.json';
 
 const Search = ({ user }) => {
   const ownInfo = JSON.parse(window.localStorage.getItem('user'));
@@ -36,12 +34,11 @@ const Search = ({ user }) => {
   }
 
 
-  const search = (searchParams, ...str) => {
+  const search = (searchParams, str) => {
     // Only search user if tags is string
-    if (typeof str === 'string') {
+    if (str !== undefined) {
       searchUsers(str)
     }
-
     searchAudio(searchParams);
   }
 
@@ -77,8 +74,7 @@ const Search = ({ user }) => {
       }
     }
 
-    console.log(recordsToShow);
-    console.log(streamsToShow);
+
     if (searchParams === '' || searchArray.length < 1) {
       setSearchedRecords([])
       setSearchedStreams([])
@@ -89,6 +85,7 @@ const Search = ({ user }) => {
   }
 
   const searchUsers = (searchStr) => {
+
     var list = users.map((user) => {
       let found = user.username.toLowerCase().indexOf(searchStr.toLowerCase());
       if (found >= 0) {
@@ -96,7 +93,6 @@ const Search = ({ user }) => {
       }
     }).filter((item) => (item !== undefined));
 
-    console.log(list);
 
     if (searchStr === '') {
       setSearchedUsers([])
