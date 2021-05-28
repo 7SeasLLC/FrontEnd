@@ -51,14 +51,14 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
               <IonItemSliding
                 id={item.sessionId}
                 key={item.sessionId}
-                onClick={() => handleClick(item.sessionId)}
               >
                 <IonItemOptions side="end" >
                   <IonItemOption>
                     <IonButton
-                      icon-only
+                      expand="full"
                       className="listplaybtn"
-                      href={`/${isStreaming ? 'listen' : 'play'}/${item.sessionId}`}
+                      href={`/${isStreaming ? 'session' : 'play'}/${item.sessionId}`}
+                      onClick={() => {window.location.href = `/${isStreaming ? 'session' : 'play'}/${item.sessionId}`}}
                     >
                       <IonIcon icon={isStreaming ? headsetOutline : playOutline} />
                     </IonButton>
@@ -75,7 +75,7 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
                         />
                       </IonAvatar>
                     </a>
-                    <IonLabel>
+                    <IonLabel onClick={() => handleClick(item.sessionId)}>
                       <IonNote>
                         {item.Hosts}
                       </IonNote>
