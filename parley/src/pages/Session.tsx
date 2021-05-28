@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonContent, IonButton, IonCard, IonCardContent, IonItem, IonFab } from '@ionic/react';
 import { getRecording, updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
@@ -16,7 +16,7 @@ declare module 'axios' {
     "Content-Type": 'multipart/form-data';
   }
 }
-var mediaRecorder = {};
+var mediaRecorder;
 
 const Session = (props) => {
   const roomId = props.location.pathname.substring(9);
@@ -30,6 +30,7 @@ const Session = (props) => {
   const [startRecord, setStartRecord] = useState(0);
   const [recordDuration, setRecordDuration] = useState(null);
   const [sessionInfo, setSessionInfo] = useState({});
+  const [muted, setMuted] = useState(false);
 
   useEffect (() => {
     determineHost()
@@ -111,7 +112,15 @@ const Session = (props) => {
           audioBitsPerSecond : 128000,
           mimeType: 'audio/webm'
         }
-        mediaRecorder = new MediaRecorder(stream, options)
+        if (mediaRecorder === undefined) {
+          mediaRecorder = new MediaRecorder(stream, options)
+        }
+
+        if (muted) {
+          setMute(mediaRecorder.stream)
+        }
+
+        console.log(mediaRecorder)
         mediaRecorder.ondataavailable = (e) => {
           chunks.push(e.data);
         }
@@ -159,7 +168,7 @@ const Session = (props) => {
           socket.emit('join-room', roomId, userId);
       })
     }
-  }, [host])
+  }, [host, muted])
 
   const startRecording = () => {
     mediaRecorder.start();
@@ -171,6 +180,20 @@ const Session = (props) => {
     setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(false);
 
+  }
+
+  const mute = () => {
+    if (!muted) {
+      setMuted(true)
+    } else {
+      setMuted(false)
+    }
+  }
+
+  const setMute = (stream) => {
+    console.log(stream)
+    // stream.getTracks().forEach(track => track.enabled = !track.enabled);
+    console.log(stream)
   }
 
   const sendToServer = async (file) => {
@@ -254,12 +277,21 @@ const Session = (props) => {
               End Session
             </IonButton>
           ) : (
+          <Fragment>
+            <IonButton
+              className="centeredfab"
+              onClick={mute}
+            >
+              Mute
+            </IonButton>
             <IonButton
               className="centeredfab"
               onClick={startRecording}
             >
               Start Recording
             </IonButton>
+          </Fragment>
+
           )}
           </IonFab>
         ): null}
