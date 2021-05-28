@@ -14,6 +14,7 @@ import { getRecordings, getAllUsers } from './../Utils/Firestore';
 import userDummy from './../dummyData/userDummy.json';
 
 const Search = ({ user }) => {
+  const ownInfo = JSON.parse(window.localStorage.getItem('user'));
 
   const [searchText, setSearchText] = useState('');
   const [searchArray, setSearchArray] = useState([]);
@@ -35,7 +36,7 @@ const Search = ({ user }) => {
   }
 
 
-  const search = (searchParams, str) => {
+  const search = (searchParams, ...str) => {
     // Only search user if tags is string
     if (typeof str === 'string') {
       searchUsers(str)
@@ -147,7 +148,7 @@ const Search = ({ user }) => {
       <IonHeader>
         <IonToolbar>
           <Header
-            user={userDummy[0]}
+            user={ownInfo}
             HeaderRight={SearchHeaderRight}
             backBtn={true}
             handleThemeChange={null}

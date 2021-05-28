@@ -88,6 +88,9 @@ const App = () => {
             <Route exact path="/">
               <Redirect to="/feed" />
             </Route>
+            <Route exact path="/search">
+              <Search />
+            </Route>
             <Route exact path="/login">
               <Redirect to="/feed" />
             </Route>
