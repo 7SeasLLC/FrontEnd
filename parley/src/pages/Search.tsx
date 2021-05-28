@@ -102,35 +102,6 @@ const Search = ({ user }) => {
     }
   }
 
-  // function searchByTag(array) {
-
-  //   var recordsToShow = {}
-  //   var streamsToShow = {}
-  //   if (array.length > 0) {
-  //     records.map(record => {
-  //       var show = true;
-  //       var temp = record.Tags.join(',').toLowerCase()
-  //       temp = temp.split(',');
-
-  //       array.map(tag => {
-  //         if (!temp.includes(tag.toLowerCase())) {
-  //           show = false;
-  //         }
-  //       })
-  //       if (show) {
-  //         if (record.isStreaming) {
-  //           streamsToShow.sessionId = record;
-  //         } else {
-  //           recordsToShow.sessionId = record
-  //         }
-  //       }
-  //     })
-
-  //     setSearchedRecords(Object.values(recordsToShow))
-  //     setSearchedStreams(Object.values(streamsToShow));
-  //   }
-  // }
-
   useEffect(() => {
     getRecordings('recordings').then(res => {
       setRecords(res)
@@ -186,7 +157,7 @@ const Search = ({ user }) => {
       <IonContent fullscreen>
 
         <IonSearchbar
-          placeholder="Search for people and Records.."
+          placeholder="Search"
           color="primary"
           value={searchText}
           onIonChange={e => { handleSearchStrChange(e.target.value) }}
