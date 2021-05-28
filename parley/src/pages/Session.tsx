@@ -190,11 +190,8 @@ const Session = (props) => {
   }
 
   const addCallerAudio = async (audio, stream)=> {
-    const getHost = await determineHost()
-    if (getHost) {
       audio.srcObject = stream;
       audio.addEventListener('loadedmetadata',()=> {audio.play()});
-    }
     // document.getElementById('callGrid').append(audio);
   }
 
