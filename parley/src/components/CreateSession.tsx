@@ -65,7 +65,7 @@ const CreateSession = ({ user }) => {
         horizontal="center"
       >
         <IonButton
-          className="createsessionbtn"
+          className="centeredfab"
           onClick={() => setShowModal(true)}
         >
           Create Session

@@ -1,5 +1,5 @@
-import { Fragment, useState, useEffect} from 'react';
-import { IonPage, IonHeader, IonToolbar, IonContent, IonButton, IonCard, IonCardContent, IonItem } from '@ionic/react';
+import { useState, useEffect} from 'react';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonButton, IonCard, IonCardContent, IonItem, IonFab } from '@ionic/react';
 import { getRecording, updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
 import Peer from 'peerjs';
@@ -241,17 +241,27 @@ const Session = (props) => {
           />
         </IonContent>
         {host ? (
-          <>
+          <IonFab
+            slot="fixed"
+            vertical="bottom"
+            horizontal="center"
+          >
           {recording ? (
-            <IonButton onClick={stopRecording}>
+            <IonButton
+              className="centeredfab"
+              onClick={stopRecording}
+            >
               End Session
             </IonButton>
           ) : (
-            <IonButton onClick={startRecording}>
+            <IonButton
+              className="centeredfab"
+              onClick={startRecording}
+            >
               Start Recording
             </IonButton>
           )}
-          </>
+          </IonFab>
         ): null}
         </>
       ) : (
