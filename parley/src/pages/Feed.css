@@ -24,6 +24,17 @@ ion-header {
   transform: translateX(-50%);
 }
 
+ion-footer {
+  max-width: 580px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+audio {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
 /* ion-textarea {
   box-shadow:
     inset 0px -2px var(--ion-color-light-tint);

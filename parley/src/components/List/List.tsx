@@ -1,11 +1,9 @@
 import { IonList, IonItem, IonLabel, IonCard, IonButton, IonCardTitle, IonBadge, IonIcon, IonCardSubtitle, IonAvatar, IonItemSliding, IonItemOptions, IonItemOption, IonNote } from '@ionic/react';
 import { chevronDownOutline, chevronUpOutline, playOutline, headsetOutline } from 'ionicons/icons';
 
-import { useState, useEffect } from 'react';
-
 import './List.css';
 
-const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
+const List = ({ unfolded, audio, setFold, isStreaming, showTitle }) => {
   const string = isStreaming ? 'stream': 'recording';
 
   let count = 0;
@@ -60,8 +58,8 @@ const List = ({ unfolded, audio, setFold, isStreaming, user, showTitle }) => {
                     <IonButton
                       expand="full"
                       className="listplaybtn"
-                      href={`/${isStreaming ? 'session' : 'play'}/${item.sessionId}`}
-                      onClick={() => {window.location.href = `/${isStreaming ? 'session' : 'play'}/${item.sessionId}`}}
+                      href={`/${isStreaming ? 'session' : 'recording'}/${item.sessionId}`}
+                      onClick={() => {window.location.href = `/${isStreaming ? 'session' : 'recording'}/${item.sessionId}`}}
                     >
                       <IonIcon icon={isStreaming ? headsetOutline : playOutline} />
                     </IonButton>

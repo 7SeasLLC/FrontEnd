@@ -31,24 +31,20 @@ const Profile = ({ match, handleThemeChange }) => {
     if (userToGrab !== null) {
       const otherUserInfo = await getUser(userToGrab);
       setUserInfo(otherUserInfo);
+      updateRecords();
     }
   };
 
   const updateRecords = async () => {
-    const newRecords = await getUserRecordings(userInfo.authId);
+    const newRecords = await getUserRecordings(userToGrab);
     if (Array.isArray(newRecords)) {
-      const filteredRecords = newRecords.filter((item) => (item !== undefined))
-      setUserRecords(filteredRecords)
+      setUserRecords(newRecords);
     }
   }
 
   useEffect(() => {
     updateInfo();
   }, [])
-
-  useEffect(() => {
-    updateRecords()
-  }, [userInfo])
 
   return (
     <IonPage>
