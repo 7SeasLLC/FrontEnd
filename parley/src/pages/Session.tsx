@@ -165,7 +165,6 @@ const Session = (props) => {
       //   }
       // })
 
-
       myPeer.on('open', userId=>{
           socket.emit('join-room', roomId, userId);
       })
@@ -198,7 +197,7 @@ const Session = (props) => {
   }
 
   const sendToServer = async (file) => {
-    var recordingDuration = document.getElementById('recordUptime').innerText.substring(15)
+    var recordingDuration = document.getElementById('recordUptime').innerText
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
@@ -266,7 +265,8 @@ const Session = (props) => {
             hostPhoto={sessionInfo.Photos}
           />
         </IonContent>
-        {muted ? (<IonFab
+        {muted ? (
+          <IonFab
             slot="fixed"
             vertical="center"
             horizontal="center"
@@ -276,18 +276,21 @@ const Session = (props) => {
               onClick={mute}
             >
               Unmute
-            </IonButton></IonFab>) : (
-              <IonFab
-              slot="fixed"
-              vertical="center"
-              horizontal="center"
+            </IonButton>
+          </IonFab>
+          ) : (
+          <IonFab
+            slot="fixed"
+            vertical="center"
+            horizontal="center"
+          >
+            <IonButton
+            className="centeredfab"
+            onClick={mute}
             >
-              <IonButton
-              className="centeredfab"
-              onClick={mute}
-            >
-              Mute
-            </IonButton></IonFab>
+            Mute
+            </IonButton>
+          </IonFab>
             )}
         <Fragment>
         {host ? (

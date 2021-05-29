@@ -63,7 +63,7 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto, r
         <IonLabel>
           Record Uptime
         </IonLabel>
-        <IonBadge slot="end">
+        <IonBadge id='recordUptime' slot="end">
           {recordUptime}
         </IonBadge>
       </IonItem>
