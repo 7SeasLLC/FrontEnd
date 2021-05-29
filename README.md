@@ -4,18 +4,22 @@
 
 <img alt="Parley Pirate Gif" src="https://i.imgur.com/egXeXIx.gif">
 
-Parley is an application created with the intent of assisting in the flow of information. We set out to connect tech enthusiasts of all walks of life through a platform where knowledge can be shared. So - what can you do with Parley?
+Parley is an application created with the intent of assisting in the flow of information. We set out to connect tech enthusiasts of all walks of life through a platform where knowledge can be shared. Parley is a platform where users can speak - or listen - to anyone who wants to listen... or speak.
 
-* Give a talk
-<img alt ="Giving a talk in Parley" src="./parley/public/assets/gifs/new-stream.gif">
+Tech enthusiasts from all over the world use Parley to give talks on any and all things tech. Want to hear about the sleekest ways to use React hooks? Check. Got a burning passion for relational databases vs NoSQL? Come on by. Want to talk all day and night about jQuery? I guess, you do you. It's all possible with Parley.
+
+So - what can you do with Parley?
+
+* [Give a talk]("./parley/public/assets/gifs/new-stream.gif")
+
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
-* Search for talks
-<img alt ="Giving a talk in Parley" src="./parley/public/assets/gifs/search.gif">
+* [Search for talks](./parley/public/assets/gifs/search.gif)
+
 Parley comes equipped with a fully-functional search feature where users can search their favorite tags, talks, or even search for other users. If it's a hot tech trend - odds are you'll find plenty of people talking about it on Parley.
 
-* View recordings
-<img alt ="Giving a talk in Parley" src="./parley/public/assets/gifs/listen-to-recording.gif">
+* [View recordings](./parley/public/assets/gifs/listen-to-recording.gif)
+
 Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on theier profile, as well as the main feed.
 
 The front-end of Parley uses a combination of React and Ionic to render our app. We chose Ionic with the intention that anyone in any place could join a talk, therefore Parley should be a mobile-first experience.
