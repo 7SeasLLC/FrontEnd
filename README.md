@@ -10,7 +10,7 @@ Tech enthusiasts from all over the world use Parley to give talks on any and all
 
 So - what can you do with Parley?
 
-* [Give a talk](./parley/public/assets/gifs/new-stream.gif)
+* [Give a talk]("./parley/public/assets/gifs/new-stream.gif")
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
 * [Search for talks](./parley/public/assets/gifs/search.gif)
