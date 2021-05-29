@@ -10,16 +10,13 @@ Tech enthusiasts from all over the world use Parley to give talks on any and all
 
 So - what can you do with Parley?
 
-* [Give a talk]("./parley/public/assets/gifs/new-stream.gif")
-
+* [Give a talk](./parley/public/assets/gifs/new-stream.gif)
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
 * [Search for talks](./parley/public/assets/gifs/search.gif)
-
 Parley comes equipped with a fully-functional search feature where users can search their favorite tags, talks, or even search for other users. If it's a hot tech trend - odds are you'll find plenty of people talking about it on Parley.
 
 * [View recordings](./parley/public/assets/gifs/listen-to-recording.gif)
-
 Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on theier profile, as well as the main feed.
 
 The front-end of Parley uses a combination of React and Ionic to render our app. We chose Ionic with the intention that anyone in any place could join a talk, therefore Parley should be a mobile-first experience.
@@ -28,7 +25,7 @@ Our back-end was built with both speed and ease of use in mind. Our express serv
 
 # Setup
 
-## FrontEnd
+## Front-End
 
 To download the app, follow the following steps:
 
@@ -46,7 +43,7 @@ navigate into parley folder
 ionic serve
 ```
 
-## BackEnd
+## Back-End
 
 * Install PeerJS globaly
 ``` sh
@@ -77,7 +74,7 @@ npm run server
   * Create a new Web Application associated with your Firebase project. For more detailed instructions, follow this link: [](https://firebase.google.com/docs/web/setup)
 
   * During this Firebase app creation process you will create a Firebase Config file that looks like this:
-  ```
+  ``` sh
   const config = {
     apiKey: "AIzaSyB6JS0yOxTe2bFST-HYateROqYK_se3EzM",
     authDomain: "seas-f6fe3.firebaseapp.com",
@@ -133,22 +130,20 @@ Currently this application is using the WEB version of Firebase with plans to mi
   - Be sure to install the Firebase tools globally in order to deploy directly to Firebase ($ npm install -g firebase-tools)
   - Currently the front end will not deployed will not work whi`le deployed with Firebase because the deployed Back-End repo is using HTTP.  Currently in progress is creating a Production Back-End using HTTPS.
 
-## Future implimentations
+## Future implementations
 
-  Login Page:
-
+  - **Login Page:**
     - Add more auth methods including Email and Facebook
 
 
-  Profile Page:
-
+  - **Profile Page**
     - Allow users to be able to send and receive messages with other users.
 
     - Allow users to be able to subscribe to other users and content tags.
 
     - Provide a way for users to to shedule and rsvp to future sessions.
 
-  Feed Page:
+  - **Feed Page**
 
     - Increased Search capabilities including Search for Recording by username, search for Recordings by Tags, and Like a search for recording by name
 
@@ -160,10 +155,8 @@ Currently this application is using the WEB version of Firebase with plans to mi
 
     - Allow users to continue listening to the streams/records while navigating to other pages
 
-  Session Page:
-
+  - **Session Page**
     - Allow users to scroll the play bar to skip while they are listening to the records
 
-  Back End:
-
+  - **Back End**
     - Refactor Firebase Config to use a state management library (React Context)
