@@ -174,14 +174,13 @@ const Session = (props) => {
 
   const startRecording = () => {
     mediaRecorder.start();
+    setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(true);
   }
 
   const stopRecording = () => {
     mediaRecorder.stop();
-    setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(false);
-
   }
 
   const mute = () => {
@@ -199,6 +198,7 @@ const Session = (props) => {
   }
 
   const sendToServer = async (file) => {
+    var recordingDuration = document.getElementById('recordUptime').innerText.substring(15)
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
@@ -209,7 +209,7 @@ const Session = (props) => {
         isStreaming: false,
         EndTime: new Date(),
         S3URL: url,
-        Duration: recordDuration
+        Duration: recordingDuration
       })
       socket.emit('sessionEnded');
       window.location.replace("/feed");
@@ -262,9 +262,34 @@ const Session = (props) => {
             host={sessionInfo.Hosts}
             description = {sessionInfo.Description}
             uptime={duration}
+            recordUptime={recordDuration}
             hostPhoto={sessionInfo.Photos}
           />
         </IonContent>
+        {muted ? (<IonFab
+            slot="fixed"
+            vertical="center"
+            horizontal="center"
+          >
+            <IonButton
+              className="centeredfab"
+              onClick={mute}
+            >
+              Unmute
+            </IonButton></IonFab>) : (
+              <IonFab
+              slot="fixed"
+              vertical="center"
+              horizontal="center"
+            >
+              <IonButton
+              className="centeredfab"
+              onClick={mute}
+            >
+              Mute
+            </IonButton></IonFab>
+            )}
+        <Fragment>
         {host ? (
           <IonFab
             slot="fixed"
@@ -279,20 +304,6 @@ const Session = (props) => {
               End Session
             </IonButton>
           ) : (
-          <Fragment>
-            {muted ? (<IonButton
-              className="centeredfab"
-              onClick={mute}
-            >
-              Unmute
-            </IonButton>) : (
-              <IonButton
-              className="centeredfab"
-              onClick={mute}
-            >
-              Mute
-            </IonButton>
-            ) }
 
             <IonButton
               className="centeredfab"
@@ -300,11 +311,10 @@ const Session = (props) => {
             >
               Start Recording
             </IonButton>
-          </Fragment>
-
           )}
           </IonFab>
         ): null}
+        </Fragment>
         </>
       ) : (
       <IonContent>
