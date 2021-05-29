@@ -17,6 +17,7 @@ declare module 'axios' {
   }
 }
 var mediaRecorder;
+var global
 
 const Session = (props) => {
   const roomId = props.location.pathname.substring(9);
@@ -30,7 +31,7 @@ const Session = (props) => {
   const [startRecord, setStartRecord] = useState(0);
   const [recordDuration, setRecordDuration] = useState(null);
   const [sessionInfo, setSessionInfo] = useState({});
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   useEffect (() => {
     determineHost()
@@ -115,12 +116,11 @@ const Session = (props) => {
         if (mediaRecorder === undefined) {
           mediaRecorder = new MediaRecorder(stream, options)
         }
-
-        if (muted) {
-          setMute(mediaRecorder.stream)
+        if (global === undefined) {
+          global = stream
         }
+        setMute(global)
 
-        console.log(mediaRecorder)
         mediaRecorder.ondataavailable = (e) => {
           chunks.push(e.data);
         }
@@ -133,8 +133,10 @@ const Session = (props) => {
 
         myPeer.on('call', call => {
           console.log('received call');
-          call.answer(stream);
+          call.answer(global);
           var Audio = document.createElement('audio');
+          Audio.setAttribute("id", "thisAudio")
+          console.log(Audio)
           Audio.classList.add('callerAudio');
           call.on('stream', callerAudioStream =>{
             addCallerAudio(Audio, callerAudioStream);
@@ -168,7 +170,7 @@ const Session = (props) => {
           socket.emit('join-room', roomId, userId);
       })
     }
-  }, [host, muted])
+  }, [muted])
 
   const startRecording = () => {
     mediaRecorder.start();
@@ -191,9 +193,9 @@ const Session = (props) => {
   }
 
   const setMute = (stream) => {
-    console.log(stream)
-    // stream.getTracks().forEach(track => track.enabled = !track.enabled);
-    console.log(stream)
+    stream.getTracks().forEach(track => {
+      track.enabled = !track.enabled;
+    });
   }
 
   const sendToServer = async (file) => {
@@ -278,12 +280,20 @@ const Session = (props) => {
             </IonButton>
           ) : (
           <Fragment>
-            <IonButton
+            {muted ? (<IonButton
+              className="centeredfab"
+              onClick={mute}
+            >
+              Unmute
+            </IonButton>) : (
+              <IonButton
               className="centeredfab"
               onClick={mute}
             >
               Mute
             </IonButton>
+            ) }
+
             <IonButton
               className="centeredfab"
               onClick={startRecording}
