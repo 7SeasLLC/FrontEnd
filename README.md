@@ -11,16 +11,16 @@ Tech enthusiasts from all over the world use Parley to give talks on any and all
 So - what can you do with Parley?
 
 * Give a talk
-<img alt ="Giving a talk in Parley" src="https://imgur.com/IPrvLOV.gif">
+<img alt ="Giving a talk in Parley" src="https://imgur.com/g3km3kN.gif">
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
 * Search for talks
-<img alt ="Searching in Parley" src="https://imgur.com/EBwSYOP.gif">
+<img alt ="Searching in Parley" src="https://imgur.com/dSmNCO6.gif">
 Parley comes equipped with a fully-functional search feature where users can search their favorite tags, talks, or even search for other users. If it's a hot tech trend - odds are you'll find plenty of people talking about it on Parley.
 
 * View recordings
-<img alt ="Listening to a talk in Parley" src="https://imgur.com/bWsiDaF.gif">
-Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on theier profile, as well as the main feed.
+<img alt ="Listening to a talk in Parley" src="https://imgur.com/nLZO2ht.gif">
+Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on their profile, as well as the main feed.
 
 The front-end of Parley uses a combination of React and Ionic to render our app. We chose Ionic with the intention that anyone in any place could join a talk, therefore Parley should be a mobile-first experience.
 
@@ -90,26 +90,6 @@ npm run server
   ```
   - Be sure to add your new Firebase Config to parley/src/firebase.config.js (this file contains only Publicly available information)
 
-# Technologies Used
-
-## FrontEnd
-
--[React] (https://reactjs.org/)
-
--[Ionic] (https://ionicframework.com/)
-
-## Backend
-
-- [Node](https://nodejs.org/en/)
-- [Express](https://expressjs.com/)
-- [PeerJS](https://peerjs.com/)
-- [AWS S3](https://aws.amazon.com/s3/)
-- [Socket.io](https://socket.io/)
-
-## Works in progress
-  Session page:
-    - Allow users/host to mute when they are in the streaming session.
-
 ## Firebase :page_facing_up:
 
 Firebase is a Google cloud service that allows us to house authentication, deployment, data storage, and application metrics under a single container.  We specifically chose to use this tool for our project because it is compatible with Ionic, a mobile first React framework we are utilizing on the Front-End.
@@ -117,7 +97,7 @@ Firebase is a Google cloud service that allows us to house authentication, deplo
 Currently this application is using the WEB version of Firebase with plans to migrate to native IOS and Android in the future.  The following is how to set up the application utilizing the FirebaseSDK for WEB.
 
 - **Authentication**:
-  - Within in your Firebase project, select "Authentication". Then click on the "sign-in method" tab. From here select Google as a sign-in provider. Following instructions above will take you to a URL that looks like this: https://console.firebase.google.com/u/0/project/{YOUR-PROJECT-NAME-HERE}/authentication/providers
+  - Within your Firebase project, select "Authentication". Then click on the "sign-in method" tab. From here select Google as a sign-in provider. Following instructions above will take you to a URL that looks like this: ht<span>tps://<span>console.firebase.google.com/u/0/project/{YOUR-PROJECT-NAME-HERE}/authentication/providers
   - Here is where you will enable Google as a sign-in provider.  Upon completion, you will generate a web-client id which looks like this: "1049948883037-s816aa6j66iq4kmt7ene86ootda2em0r.apps.googleusercontent.com".  You will need to add this to the index.html of the project (in the Public folder).
   <meta name="google-signin-client_id" content="1049948883037-s816aa6j66iq4kmt7ene86ootda2em0r.apps.googleusercontent.com">
   - Within the same tab as above, scroll down and add authorized domains to your project to specify which domains will have access to your Firebase (ie: localhost, your deployed service URL etc...)
@@ -133,6 +113,25 @@ Currently this application is using the WEB version of Firebase with plans to mi
   - Be sure to install the Firebase tools globally in order to deploy directly to Firebase ($ npm install -g firebase-tools)
   - Currently the front end will not deployed will not work whi`le deployed with Firebase because the deployed Back-End repo is using HTTP.  Currently in progress is creating a Production Back-End using HTTPS.
 
+# Technologies Used
+
+## FrontEnd
+
+-[React](https://reactjs.org/)
+
+-[Ionic](https://ionicframework.com/)
+
+## Backend
+
+- [Node](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [PeerJS](https://peerjs.com/)
+- [AWS S3](https://aws.amazon.com/s3/)
+- [Socket.io](https://socket.io/)
+
+## Works in progress
+
+
 ## Future implementations
 
   - **Login Page:**
@@ -145,6 +144,10 @@ Currently this application is using the WEB version of Firebase with plans to mi
     - Allow users to be able to subscribe to other users and content tags.
 
     - Provide a way for users to to shedule and rsvp to future sessions.
+
+    - Allow users to remove and edit recordings.
+
+    - Allow users to edit photo and username.
 
   - **Feed Page**
 
@@ -160,6 +163,8 @@ Currently this application is using the WEB version of Firebase with plans to mi
 
   - **Session Page**
     - Allow users to scroll the play bar to skip while they are listening to the records
+
+    - Allow users to communicate via text.
 
   - **Back End**
     - Refactor Firebase Config to use a state management library (React Context)
