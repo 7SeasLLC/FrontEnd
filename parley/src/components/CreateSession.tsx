@@ -129,7 +129,13 @@ const CreateSession = ({ user }) => {
                   value={streamTags}
                   multiple={true}
                   onIonChange={e => setStreamTags(e.detail.value)}>
-                    {dbTags.map(tag => (
+                    {dbTags.sort((a, b) => {
+                      let index = 0;
+                      while (a.name[index].toLowerCase().charCodeAt() === b.name[index].toLowerCase().charCodeAt()) {
+                        index++
+                      }
+                      return a.name[index].toLowerCase().charCodeAt() - b.name[index].toLowerCase().charCodeAt();
+                    }).map(tag => (
                       <IonSelectOption
                         value={tag.name}
                         key={tag.id}

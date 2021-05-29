@@ -4,7 +4,7 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   --filter-hover: invert() grayscale(100%) brightness(0%);
-  --filter-invert: invert(0);
+  --filter-invert: brightness(0%);
   --ion-background-color: #cccccc;
   --ion-background-color-rgb: 255,255,255;
   --ion-item-background: transparent;
@@ -112,7 +112,7 @@ http://ionicframework.com/docs/theming/ */
 
 body.dark {
   --filter-hover: invert() grayscale(100%) brightness(300%);
-  --filter-invert: invert(100);
+  --filter-invert: invert(300%);
   --ion-background-color: #000000;
   --ion-background-color-rgb: 17,17,17;
 
