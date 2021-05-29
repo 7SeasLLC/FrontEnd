@@ -33,6 +33,7 @@ const Feed = () => {
   }
 
   const grabRecordings = async () => {
+    console.log('Grabbing recordings');
     let array = await getRecordings();
     setAudio(array);
   };
@@ -49,6 +50,7 @@ const Feed = () => {
             user={userInfo}
             HeaderRight={FeedHeaderRight}
             backBtn={false}
+            grabRecordings={grabRecordings}
           />
         </IonToolbar>
       </IonHeader>

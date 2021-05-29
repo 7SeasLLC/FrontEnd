@@ -1,10 +1,13 @@
 import { IonItem, IonAvatar, IonIcon, IonButton, IonChip } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
+import { searchOutline, reload } from 'ionicons/icons';
 
-const FeedHeaderRight = ({ user }) => {
+const FeedHeaderRight = ({ user, grabRecordings }) => {
 
   return (
     <>
+      <IonButton icon-only className="headerbtn" slot="end" onClick={grabRecordings}>
+        <IonIcon className="headericon" icon={reload}/>
+      </IonButton>
       <IonButton icon-only className="headerbtn" slot="end" href="/search">
         <IonIcon className="headericon" icon={searchOutline}/>
       </IonButton>
