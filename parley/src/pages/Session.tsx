@@ -15,9 +15,9 @@ declare module 'axios' {
   export interface AxiosRequestConfig {
     "Content-Type": 'multipart/form-data';
   }
-}
+};
 var mediaRecorder;
-var global
+var global;
 
 const Session = (props) => {
   const roomId = props.location.pathname.substring(9);
@@ -87,7 +87,8 @@ const Session = (props) => {
         setHost(true);
         return true;
       }
-      return false
+      setHost(false);
+      return false;
     }
   }
 
@@ -95,11 +96,9 @@ const Session = (props) => {
     determineHost();
   }, [])
 
-  const userInfo = JSON.parse(window.localStorage.getItem('user'));
-
   useEffect (() => {
     if (roomExists) {
-      let chunks = []
+      let chunks = [];
       socket.emit('rendered');
       var myAudio = document.createElement('audio');
       myAudio.id = 'myaudio';
@@ -114,12 +113,12 @@ const Session = (props) => {
           mimeType: 'audio/webm'
         }
         if (mediaRecorder === undefined) {
-          mediaRecorder = new MediaRecorder(stream, options)
+          mediaRecorder = new MediaRecorder(stream, options);
         }
         if (global === undefined) {
-          global = stream
+          global = stream;
         }
-        setMute(global)
+        setMute(global);
 
         mediaRecorder.ondataavailable = (e) => {
           chunks.push(e.data);
@@ -135,8 +134,6 @@ const Session = (props) => {
           console.log('received call');
           call.answer(global);
           var Audio = document.createElement('audio');
-          Audio.setAttribute("id", "thisAudio")
-          console.log(Audio)
           Audio.classList.add('callerAudio');
           call.on('stream', callerAudioStream =>{
             addCallerAudio(Audio, callerAudioStream);
@@ -159,12 +156,6 @@ const Session = (props) => {
       })
     })
 
-      // socket.on('user-disconnect', userId =>{
-      //   if (this.state[userId]){
-      //     this.state[userId].close();
-      //   }
-      // })
-
       myPeer.on('open', userId=>{
           socket.emit('join-room', roomId, userId);
       })
@@ -173,7 +164,7 @@ const Session = (props) => {
 
   const startRecording = () => {
     mediaRecorder.start();
-    setStartRecord(Math.floor((new Date().getTime() / 1000)))
+    setStartRecord(Math.floor((new Date().getTime() / 1000)));
     setRecording(true);
   }
 
@@ -184,9 +175,9 @@ const Session = (props) => {
 
   const mute = () => {
     if (!muted) {
-      setMuted(true)
+      setMuted(true);
     } else {
-      setMuted(false)
+      setMuted(false);
     }
   }
 
@@ -197,12 +188,12 @@ const Session = (props) => {
   }
 
   const sendToServer = async (file) => {
-    var recordingDuration = document.getElementById('recordUptime').innerText
+    var recordingDuration = document.getElementById('recordUptime').innerText;
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
-      const data = await axios.post('http://54.193.3.132/addAudio', bodyFormData)
-      const url = data.data
+      const data = await axios.post('http://54.193.3.132/addAudio', bodyFormData);
+      const url = data.data;
       await updateRecording ({
         sessionId: roomId,
         isStreaming: false,
@@ -220,7 +211,6 @@ const Session = (props) => {
   const addCallerAudio = async (audio, stream)=> {
       audio.srcObject = stream;
       audio.addEventListener('loadedmetadata',()=> {audio.play()});
-    // document.getElementById('callGrid').append(audio);
   }
 
   const connectToNewUser = (userId, stream) => {
@@ -230,16 +220,9 @@ const Session = (props) => {
     call.on('stream', newUserAudioStream =>{
       addCallerAudio(audio, newUserAudioStream);
     })
-    // call.on('close', ()=> {
-    //   audio.remove();
-    //   var obj = {};
-    //   obj[userId]= undefined;
-    //   this.setState(obj);
-    // })
-    // var obj = {}
-    // obj[userId]= call;
-    // this.setState(obj);
   }
+
+  const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   return (
     <IonPage>
@@ -251,7 +234,6 @@ const Session = (props) => {
           />
         </IonToolbar>
       </IonHeader>
-
       {roomExists ? (
         <>
         <IonContent>
@@ -332,7 +314,6 @@ const Session = (props) => {
       )}
     </IonPage>
   );
-
 }
 
 export default Session;
