@@ -1,4 +1,4 @@
-<img alt="Parley App Logo" src="https://github.com/7SeasLLC/FrontEnd/blob/1f7c3d571e8baa0d7450f17bd4091bc622b98830/logo.png">
+<img alt="Parley App Logo" src="https://i.imgur.com/z2Rn2b7.png">
 
 # What is Parley?
 
@@ -11,7 +11,7 @@ Tech enthusiasts from all over the world use Parley to give talks on any and all
 So - what can you do with Parley?
 
 * Give a talk
-<img alt ="Giving a talk in Parley" src="https://imgur.com/PoJhAQw.gif">
+<img alt ="Giving a talk in Parley" src="hhttps://imgur.com/0HnLYm2.gif">
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
 * Search for talks
