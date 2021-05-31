@@ -1,4 +1,6 @@
-<img alt="Parley App Logo" src="https://github.com/7SeasLLC/FrontEnd/blob/dfce5ca40efe3ea8a56f67022b70a0f206b7c98b/parley/public/assets/logo-cropped.png">
+<p align="center">
+  <img alt="Parley App Logo" width: 50% src="https://github.com/7SeasLLC/FrontEnd/blob/dfce5ca40efe3ea8a56f67022b70a0f206b7c98b/parley/public/assets/logo-cropped.png">
+</p>
 
 # What is Parley?
 
