@@ -99,10 +99,10 @@ Firebase is a Google cloud service that allows us to house authentication, deplo
 Currently this application is using the WEB version of Firebase with plans to migrate to native IOS and Android in the future.  The following is how to set up the application utilizing the FirebaseSDK for WEB.
 
 - **Authentication**:
-  - Within your Firebase project, select "Authentication". Then click on the "sign-in method" tab. From here select Google as a sign-in provider. Following instructions above will take you to a URL that looks like this: ht<span>tps://<span>console.firebase.google.com/u/0/project/{YOUR-PROJECT-NAME-HERE}/authentication/providers
+  - Within your Firebase project, select "Authentication". Then click on the "sign-in method" tab. From here select Google as a sign-in provider. Following instructions above will take you to a URL that looks like this: ht<span>tps://<span>console.firebase.google.com/u/0/project/{YOUR-PROJECT-NAME-HERE}/authentication/providers.
   - Here is where you will enable Google as a sign-in provider.  Upon completion, you will generate a web-client id which looks like this: "1049948883037-s816aa6j66iq4kmt7ene86ootda2em0r.apps.googleusercontent.com".  You will need to add this to the index.html of the project (in the Public folder).
   <meta name="google-signin-client_id" content="1049948883037-s816aa6j66iq4kmt7ene86ootda2em0r.apps.googleusercontent.com">
-  - Within the same tab as above, scroll down and add authorized domains to your project to specify which domains will have access to your Firebase (ie: localhost, your deployed service URL etc...)
+  - Within the same tab as above, scroll down and add authorized domains to your project to specify which domains will have access to your Firebase (ie: localhost, your deployed service URL etc...).
 
 - **FireStore**:
   - This project utilizes the Firebase Firestore
@@ -112,7 +112,7 @@ Currently this application is using the WEB version of Firebase with plans to mi
     - Recordings fields: Comments: String[], Description: String, Duration: String, EndTime: TimeStamp, Host: String[], Likes: Number, MaxLive: Number, Photos: String[], Plays: Number, S3URL: String, StartTime: TimeStamp, Tags: String[], isStreaming: Boolean, sessionId: String, title: String
 
 - **Hosting/Deployment**
-  - Be sure to install the Firebase tools globally in order to deploy directly to Firebase ($ npm install -g firebase-tools)
+  - Be sure to install the Firebase tools globally in order to deploy directly to Firebase ($ npm install -g firebase-tools).
   - Currently the front end will not deployed will not work whi`le deployed with Firebase because the deployed Back-End repo is using HTTP.  Currently in progress is creating a Production Back-End using HTTPS.
 
 # Technologies Used
@@ -141,15 +141,15 @@ Currently this application is using the WEB version of Firebase with plans to mi
 
 
   - **Profile Page**
-    - Allow users to be able to send and receive messages with other users.
+    - Allow users to be able to send and receive messages with other users
 
-    - Allow users to be able to subscribe to other users and content tags.
+    - Allow users to be able to subscribe to other users and content tags
 
-    - Provide a way for users to to shedule and rsvp to future sessions.
+    - Provide a way for users to to shedule and rsvp to future sessions
 
-    - Allow users to remove and edit recordings.
+    - Allow users to remove and edit recordings
 
-    - Allow users to edit photo and username.
+    - Allow users to edit photo and username
 
   - **Feed Page**
 
@@ -166,7 +166,7 @@ Currently this application is using the WEB version of Firebase with plans to mi
   - **Session Page**
     - Allow users to scroll the play bar to skip while they are listening to the records
 
-    - Allow users to communicate via text.
+    - Allow users to communicate via text
 
   - **Back End**
     - Refactor Firebase Config to use a state management library (React Context)
