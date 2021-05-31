@@ -4,14 +4,14 @@
 
 # What is Parley?
 
-<img alt="Parley Pirate Gif" src="https://i.imgur.com/egXeXIx.gif">
+<img align="left" alt="Parley Pirate Gif" src="https://i.imgur.com/egXeXIx.gif">
 
 Parley is an application created with the intent of assisting in the flow of information. We set out to connect tech enthusiasts of all walks of life through a platform where knowledge can be shared. Parley is a platform where users can speak - or listen - to anyone who wants to listen... or speak.
 
 Tech enthusiasts from all over the world use Parley to give talks on any and all things tech. Want to hear about the sleekest ways to use React hooks? Check. Got a burning passion for relational databases vs NoSQL? Come on by. Want to talk all day and night about jQuery? I guess, you do you. It's all possible with Parley.
 
 So - what can you do with Parley?
-
+<br clear="right"/>
 
 * Give a talk  
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.  
