@@ -1,4 +1,4 @@
-<img alt="Parley App Logo" src="https://i.imgur.com/z2Rn2b7.png">
+<img alt="Parley App Logo" src="https://github.com/7SeasLLC/FrontEnd/blob/dfce5ca40efe3ea8a56f67022b70a0f206b7c98b/parley/public/assets/logo-cropped.png">
 
 # What is Parley?
 
@@ -11,15 +11,15 @@ Tech enthusiasts from all over the world use Parley to give talks on any and all
 So - what can you do with Parley?
 
 * Give a talk
-<img alt ="Giving a talk in Parley" src="https://imgur.com/CJj66uD.gif">
+<img alt ="Giving a talk in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/new-stream(host).gif">
 Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
 * Search for talks
-<img alt ="Searching in Parley" src="https://imgur.com/dSmNCO6.gif">
+<img alt ="Searching in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/search.giff">
 Parley comes equipped with a fully-functional search feature where users can search their favorite tags, talks, or even search for other users. If it's a hot tech trend - odds are you'll find plenty of people talking about it on Parley.
 
 * View recordings
-<img alt ="Listening to a talk in Parley" src="https://imgur.com/nLZO2ht.gif">
+<img alt ="Listening to a talk in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/listen-to-recording.gif">
 Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on their profile, as well as the main feed.
 
 The front-end of Parley uses a combination of React and Ionic to render our app. We chose Ionic with the intention that anyone in any place could join a talk, therefore Parley should be a mobile-first experience.
