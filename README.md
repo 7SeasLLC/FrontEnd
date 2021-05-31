@@ -13,39 +13,28 @@ Tech enthusiasts from all over the world use Parley to give talks on any and all
 So - what can you do with Parley?
 
 
-<p>
-<img align="right" alt="Giving a talk in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/4fcf792015e3144bae38f3d2918cfecef98a22ac/parley/public/assets/gifs/new-stream.gif">
+* Give a talk  
+Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.  
+<p align="center">
+<img alt="Giving a talk in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/4fcf792015e3144bae38f3d2918cfecef98a22ac/parley/public/assets/gifs/new-stream.gif">
 </p>
-<b>Give a talk</b> 
-<br><br>
-Thought leaders, enthusiasts... anyone can give a talk on Parley. It's as simple as creating an account with Google and choosing a title, description, and some tags. Users can live-stream their talks and even record them for future use.
 
-
-<br clear="right"/> 
-<br><br>
-<p>
-<img align="right" alt ="Searching in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/search.gif">
+* Search for talks  
+Parley comes equipped with a fully-functional search feature where users can search their favorite tags, talks, or even search for other users. If it's a hot tech trend - odds are you'll find plenty of people talking about it on Parley.  
+<p align="center">
+<img alt ="Searching in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/search.gif">
 </p>
-<b>Search for talks</b>  
-<br><br>
-Parley comes equipped with a fully-functional search feature where users can search their favorite tags, talks, or even search for other users. If it's a hot tech trend - odds are you'll find plenty of people talking about it on Parley.
 
 
-<br clear="right"/>
-<br><br>
-<p>
-<img align="right" alt ="Listening to a talk in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/listen-to-recording.gif">
+* View recordings  
+Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on their profile, as well as the main feed.  
+<p align="center">
+<img alt ="Listening to a talk in Parley" src="https://github.com/7SeasLLC/FrontEnd/blob/0525d41f05298042abbb1817d32ac712e2aec62e/parley/public/assets/gifs/listen-to-recording.gif">
 </p>
-<b>View recordings</b>  
-<br><br>
-Miss the start of an engaging talk? No problem! If a user so chooses, their talks can become archived and viewable on their profile, as well as the main feed.
 
 
-<br clear="right"/>
-<br><br>
-<p>
 The front-end of Parley uses a combination of React and Ionic to render our app. We chose Ionic with the intention that anyone in any place could join a talk, therefore Parley should be a mobile-first experience.
-</p>
+
 Our back-end was built with both speed and ease of use in mind. Our express server uses Websockets and uploads audio recordings to AWS S3.
 
 # Setup
