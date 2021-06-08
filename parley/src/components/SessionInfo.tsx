@@ -1,6 +1,6 @@
 import { IonCard, IonCardHeader, IonAvatar, IonCardTitle, IonCardContent, IonItem, IonItemDivider, IonCardSubtitle, IonLabel, IonBadge, IonItemGroup, IonNote } from '@ionic/react';
 
-const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto }) => {
+const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto, recordUptime }) => {
   var firstHost;
   var allHosts;
   if (host) {
@@ -57,6 +57,14 @@ const SessionInfo = ({ listeners, title, host, description, uptime, hostPhoto })
         </IonLabel>
         <IonBadge slot="end">
           {uptime}
+        </IonBadge>
+      </IonItem>
+      <IonItem lines="none">
+        <IonLabel>
+          Record Uptime
+        </IonLabel>
+        <IonBadge id='recordUptime' slot="end">
+          {recordUptime}
         </IonBadge>
       </IonItem>
     </IonCardContent>

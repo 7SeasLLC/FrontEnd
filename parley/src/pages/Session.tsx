@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonContent, IonButton, IonCard, IonCardContent, IonItem, IonFab } from '@ionic/react';
 import { getRecording, updateRecording } from '../Utils/Firestore';
 import openSocket from 'socket.io-client';
@@ -15,8 +15,9 @@ declare module 'axios' {
   export interface AxiosRequestConfig {
     "Content-Type": 'multipart/form-data';
   }
-}
-var mediaRecorder = {};
+};
+var mediaRecorder;
+var global;
 
 const Session = (props) => {
   const roomId = props.location.pathname.substring(9);
@@ -30,6 +31,7 @@ const Session = (props) => {
   const [startRecord, setStartRecord] = useState(0);
   const [recordDuration, setRecordDuration] = useState(null);
   const [sessionInfo, setSessionInfo] = useState({});
+  const [muted, setMuted] = useState(true);
 
   useEffect (() => {
     determineHost()
@@ -85,7 +87,8 @@ const Session = (props) => {
         setHost(true);
         return true;
       }
-      return false
+      setHost(false);
+      return false;
     }
   }
 
@@ -93,11 +96,9 @@ const Session = (props) => {
     determineHost();
   }, [])
 
-  const userInfo = JSON.parse(window.localStorage.getItem('user'));
-
   useEffect (() => {
     if (roomExists) {
-      let chunks = []
+      let chunks = [];
       socket.emit('rendered');
       var myAudio = document.createElement('audio');
       myAudio.id = 'myaudio';
@@ -111,7 +112,14 @@ const Session = (props) => {
           audioBitsPerSecond : 128000,
           mimeType: 'audio/webm'
         }
-        mediaRecorder = new MediaRecorder(stream, options)
+        if (mediaRecorder === undefined) {
+          mediaRecorder = new MediaRecorder(stream, options);
+        }
+        if (global === undefined) {
+          global = stream;
+        }
+        setMute(global);
+
         mediaRecorder.ondataavailable = (e) => {
           chunks.push(e.data);
         }
@@ -124,7 +132,7 @@ const Session = (props) => {
 
         myPeer.on('call', call => {
           console.log('received call');
-          call.answer(stream);
+          call.answer(global);
           var Audio = document.createElement('audio');
           Audio.classList.add('callerAudio');
           call.on('stream', callerAudioStream =>{
@@ -148,43 +156,50 @@ const Session = (props) => {
       })
     })
 
-      // socket.on('user-disconnect', userId =>{
-      //   if (this.state[userId]){
-      //     this.state[userId].close();
-      //   }
-      // })
-
-
       myPeer.on('open', userId=>{
           socket.emit('join-room', roomId, userId);
       })
     }
-  }, [host])
+  }, [muted])
 
   const startRecording = () => {
     mediaRecorder.start();
+    setStartRecord(Math.floor((new Date().getTime() / 1000)));
     setRecording(true);
   }
 
   const stopRecording = () => {
     mediaRecorder.stop();
-    setStartRecord(Math.floor((new Date().getTime() / 1000)))
     setRecording(false);
+  }
 
+  const mute = () => {
+    if (!muted) {
+      setMuted(true);
+    } else {
+      setMuted(false);
+    }
+  }
+
+  const setMute = (stream) => {
+    stream.getTracks().forEach(track => {
+      track.enabled = !track.enabled;
+    });
   }
 
   const sendToServer = async (file) => {
+    var recordingDuration = document.getElementById('recordUptime').innerText;
     var bodyFormData = new FormData();
     bodyFormData.append('audio', file);
     try {
-      const data = await axios.post('http://54.193.3.132/addAudio', bodyFormData)
-      const url = data.data
+      const data = await axios.post('http://54.193.3.132/addAudio', bodyFormData);
+      const url = data.data;
       await updateRecording ({
         sessionId: roomId,
         isStreaming: false,
         EndTime: new Date(),
         S3URL: url,
-        Duration: recordDuration
+        Duration: recordingDuration
       })
       socket.emit('sessionEnded');
       window.location.replace("/feed");
@@ -196,7 +211,6 @@ const Session = (props) => {
   const addCallerAudio = async (audio, stream)=> {
       audio.srcObject = stream;
       audio.addEventListener('loadedmetadata',()=> {audio.play()});
-    // document.getElementById('callGrid').append(audio);
   }
 
   const connectToNewUser = (userId, stream) => {
@@ -206,16 +220,9 @@ const Session = (props) => {
     call.on('stream', newUserAudioStream =>{
       addCallerAudio(audio, newUserAudioStream);
     })
-    // call.on('close', ()=> {
-    //   audio.remove();
-    //   var obj = {};
-    //   obj[userId]= undefined;
-    //   this.setState(obj);
-    // })
-    // var obj = {}
-    // obj[userId]= call;
-    // this.setState(obj);
   }
+
+  const userInfo = JSON.parse(window.localStorage.getItem('user'));
 
   return (
     <IonPage>
@@ -227,7 +234,6 @@ const Session = (props) => {
           />
         </IonToolbar>
       </IonHeader>
-
       {roomExists ? (
         <>
         <IonContent>
@@ -237,9 +243,38 @@ const Session = (props) => {
             host={sessionInfo.Hosts}
             description = {sessionInfo.Description}
             uptime={duration}
+            recordUptime={recordDuration}
             hostPhoto={sessionInfo.Photos}
           />
         </IonContent>
+        {muted ? (
+          <IonFab
+            slot="fixed"
+            vertical="center"
+            horizontal="center"
+          >
+            <IonButton
+              className="centeredfab"
+              onClick={mute}
+            >
+              Unmute
+            </IonButton>
+          </IonFab>
+          ) : (
+          <IonFab
+            slot="fixed"
+            vertical="center"
+            horizontal="center"
+          >
+            <IonButton
+            className="centeredfab"
+            onClick={mute}
+            >
+            Mute
+            </IonButton>
+          </IonFab>
+            )}
+        <Fragment>
         {host ? (
           <IonFab
             slot="fixed"
@@ -254,6 +289,7 @@ const Session = (props) => {
               End Session
             </IonButton>
           ) : (
+
             <IonButton
               className="centeredfab"
               onClick={startRecording}
@@ -263,6 +299,7 @@ const Session = (props) => {
           )}
           </IonFab>
         ): null}
+        </Fragment>
         </>
       ) : (
       <IonContent>
@@ -277,7 +314,6 @@ const Session = (props) => {
       )}
     </IonPage>
   );
-
 }
 
 export default Session;
